@@ -1,4 +1,30 @@
 <h1>
   student works!
 </h1>
+<form [formGroup]="questionForm" novalidate>
+
+  <div class="form-gourp">
+    <label for="content">
+      <textarea class="form-control" formControlName="content" name="content" [(ngModel)]="content" placeholder="Question"></textarea>
+    </label>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="questionForm.controls['content'].invalid && (questionForm.controls['content'].dirty || questionForm.controls['content'].touched)"
+    class="alert alert-danger">
+    <div *ngIf="questionForm.controls['content'].errors.required">
+      Question content is required.
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+
+  <div class="form-group">
+    <button type="submit" [disabled]="questionForm.pristine || questionForm.invalid" class="btn btn-success" (click)="onQuestionSubmit(content)">
+      Submit
+    </button>
+  </div>
+
+</form>
+
 <app-logout></app-logout>

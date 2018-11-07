@@ -13,6 +13,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { AfterComponent } from './professor/after/after.component';
 import { StartComponent } from './professor/start/start.component';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   // Set root to login page
@@ -27,6 +28,9 @@ const routes: Routes = [
   { path: 'courses', component: CoursesComponent },
   { path: 'sidebar', component: SidebarComponent },
   { path: 'navigation', component: NavigationComponent },
+  // Experimental features
+  { path: 'test', component: TestComponent },
+
 ];
 
 @NgModule({

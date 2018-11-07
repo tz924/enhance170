@@ -1,10 +1,42 @@
 import { Component, OnInit, Query } from '@angular/core';
+import { FeedbackService } from '../feedback.service';
+
+import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-professor',
   templateUrl: './professor.component.html',
-  styleUrls: ['./professor.component.css']
+  styleUrls: ['./professor.component.css'],
+  animations: [
+    trigger('popOverState', [
+
+      // Animation States
+      state('move', style({
+        opacity: 1
+      })),
+
+      state('moved', style({
+        opacity: 1
+      })),
+
+      // Transition Definition
+      transition('moved => move',
+        animate('1500ms', keyframes([
+          style({ opacity: 1 }),
+          style({ opacity: 0 }),
+          style({ opacity: 1 }),
+        ]))),
+
+      transition('move => moved',
+        animate('1500ms', keyframes([
+          style({ opacity: 1 }),
+          style({ opacity: 0 }),
+          style({ opacity: 1 }),
+        ]))),
+
+    ])]
 })
+
 export class ProfessorComponent implements OnInit {
 
   questions: Question[];
@@ -15,7 +47,22 @@ export class ProfessorComponent implements OnInit {
   showChecked: boolean;
   showDeleted: boolean;
 
-  constructor() { }
+  questionState: string;
+
+  constructor(private feedbackService: FeedbackService) {
+    this.feedbackService.questionSubmitted.subscribe(
+      (question: string) => {
+        this.onNewQuestion();
+        this.questions.push({
+          index: this.questions.length,
+          content: question,
+          duration: 0,
+          nbrAnswers: 0,
+          nbrLikes: 0
+        });
+      }
+    );
+  }
 
   ngOnInit() {
     // Initialize necessary objects
@@ -25,6 +72,8 @@ export class ProfessorComponent implements OnInit {
     this.showQuestions = true;
     this.showChecked = false;
     this.showDeleted = false;
+
+    this.questionState = '';
 
     this.lecture = {
       title: 'Lecture 1',
@@ -118,7 +167,7 @@ export class ProfessorComponent implements OnInit {
   }
 
   showNormalQuestions() {
-    this.showQuestions = true;
+    this.showQuestions = !this.showQuestions;
     this.showChecked = false;
     this.showDeleted = false;
   }
@@ -149,6 +198,11 @@ export class ProfessorComponent implements OnInit {
       nbrAnswers: Math.floor(Math.random()),
       nbrLikes: Math.floor(Math.random() * 10) + Math.floor(Math.random()),
     });
+  }
+
+  // New question
+  onNewQuestion() {
+    this.questionState = (this.questionState === 'move' ? 'moved' : 'move');
   }
 
 }

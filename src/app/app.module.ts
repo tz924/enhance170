@@ -5,7 +5,8 @@ import { NgModule } from '@angular/core';
 // Custom Import Angular Module (In imports)
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /* Component */
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { CoursesComponent } from './courses/courses.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { StartComponent } from './professor/start/start.component';
 import { AfterComponent } from './professor/after/after.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   /* Component Injection */
@@ -34,7 +36,8 @@ import { AfterComponent } from './professor/after/after.component';
     CoursesComponent,
     SidebarComponent,
     StartComponent,
-    AfterComponent
+    AfterComponent,
+    TestComponent
   ],
   /* Module Injection */
   imports: [
@@ -42,7 +45,9 @@ import { AfterComponent } from './professor/after/after.component';
     // Custom
     AppRoutingModule,
     NgbModule.forRoot(),    // ng-bootstrap
-    FormsModule,   // Forms data binding,
+    FormsModule,            // Forms data binding,
+    BrowserAnimationsModule, // For image animations
+    ReactiveFormsModule
   ],
   /* Service Injection */
   providers: [],
