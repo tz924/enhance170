@@ -22,7 +22,7 @@ export class ProfessorComponent implements OnInit {
     this.questions = [];
     this.checked = [];
     this.deleted = [];
-    this.showQuestions = true;
+    this.showQuestions = false;
     this.showChecked = false;
     this.showDeleted = false;
 
@@ -118,7 +118,7 @@ export class ProfessorComponent implements OnInit {
   }
 
   showNormalQuestions() {
-    this.showQuestions = true;
+    this.showQuestions = !this.showQuestions;
     this.showChecked = false;
     this.showDeleted = false;
   }
