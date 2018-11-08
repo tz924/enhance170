@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FeedbackService } from '../feedback.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,7 +6,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
-  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./student.component.css']
 })
 export class StudentComponent implements OnInit {
@@ -106,6 +105,11 @@ export class StudentComponent implements OnInit {
 
   }
 
+  // Modal
+  openVerticallyCentered(qModal) {
+    this.modalService.open(qModal, { centered: true });
+  }
+
   checkQuestion(index: number) {
     let question: Question;
     for (let i = 0; i < this.questions.length; i++) {
@@ -172,11 +176,6 @@ export class StudentComponent implements OnInit {
   onQuestionSubmit(content: string) {
     this.feedbackService.questionSubmitted.emit(content);
     this.questionForm.reset();
-  }
-
-  // Modal
-  openVerticallyCentered(content) {
-    this.modalService.open(content, { centered: true });
   }
 
 }

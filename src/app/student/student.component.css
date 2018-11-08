@@ -207,3 +207,21 @@ hr {
 .light-blue-backdrop {
   background-color: #5cb3fd;
 }
+
+/* Modal */
+#question-modal {
+  text-align: center;
+}
+
+#question-modal form {
+  margin: auto;
+  width: 80%;
+}
+
+#question-modal textarea {
+  min-height: 100px;
+}
+
+#submit-button {
+  margin-top: 20px;
+}
