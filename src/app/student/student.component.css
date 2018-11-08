@@ -1,8 +1,14 @@
 .container {
   min-width: 1200px;
   padding-top: 5vh;
-  height: 90vh;
+  min-height: 80vh;
   background-color: white;
+}
+
+.default-button {
+  padding: none;
+  background: none;
+  border: none;
 }
 
 .truncate {
@@ -47,21 +53,6 @@
 
 .row#course-status {
   min-height: 5vh;
-}
-
-#hand-div {
-  text-align: center;
-  min-height: 12vh;
-}
-
-#hand-div img {
-  max-width: 80px;
-  display: block;
-}
-
-#hand-div button {
-  margin: auto;
-  display: block;
 }
 
 #questions {
@@ -110,13 +101,6 @@ h1 {
 
 .question-duration {
   display: inline;
-}
-
-button,
-input {
-  background: none;
-  border: none;
-  padding: none;
 }
 
 #more {

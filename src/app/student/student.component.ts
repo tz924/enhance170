@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FeedbackService } from '../feedback.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-student',
@@ -21,6 +19,7 @@ export class StudentComponent implements OnInit {
 
   questionForm: FormGroup;
   content: string;
+  questionModal: NgbModalRef;
 
   constructor(
     private feedbackService: FeedbackService,   // Service for questions
@@ -108,7 +107,7 @@ export class StudentComponent implements OnInit {
 
   // Modal
   openVerticallyCentered(qModal) {
-    this.modalService.open(qModal, { centered: true });
+    this.questionModal = this.modalService.open(qModal, { centered: true });
   }
 
   checkQuestion(index: number) {
@@ -133,28 +132,6 @@ export class StudentComponent implements OnInit {
     this.deleted.push(question);
   }
 
-  showNormalQuestions() {
-    this.showQuestions = !this.showQuestions;
-    this.showChecked = false;
-    this.showDeleted = false;
-  }
-
-  showCheckedQuestions() {
-    this.showChecked = true;
-    this.showDeleted = false;
-    this.showQuestions = false;
-  }
-
-  showDeletedQuestions() {
-    this.showDeleted = true;
-    this.showChecked = false;
-    this.showQuestions = false;
-  }
-
-  onQuestionClick() {
-    // Change it to expanded
-  }
-
   onMoreClick() {
     this.questions.push({
       index: Math.floor(Math.random()),
@@ -170,6 +147,7 @@ export class StudentComponent implements OnInit {
   // Form handlers
   createForm() {
     this.questionForm = this.formBuilder.group({
+      // content: ['', Validators.required]
       content: ['', Validators.required]
     });
   }
@@ -177,23 +155,11 @@ export class StudentComponent implements OnInit {
   onQuestionSubmit(content: string) {
     this.feedbackService.questionSubmitted.emit(content);
     this.questionForm.reset();
+    this.questionModal.close();
   }
 
 }
 
-interface Question {
-  index: number;
-  content: string;
-  duration: number;
-  nbrAnswers: number;
-  nbrLikes: number;
-}
-
-interface Lecture {
-  title: string;
-  time: Date;
-  nbrOnline: number;
-}
 interface Question {
   index: number;
   content: string;
