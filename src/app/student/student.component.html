@@ -40,7 +40,7 @@
       <div *ngIf="showQuestions" class="row">
 
         <!-- Question Item -->
-        <div *ngFor="let question of questions | slice:0:4" class="row question">
+        <div *ngFor="let question of questions | slice:0:4" class="row question question-item">
           <!-- Question -->
           <div class="col-md-10">
 
@@ -264,7 +264,7 @@
 
   <div class="modal-body" id="question-modal">
 
-    <div *ngFor="let answer of answers | slice:0:4" class="row">
+    <div *ngFor="let answer of answers | slice:0:4" class="row answer-item">
       <div class="col-md-2">
         <button class="default-button" *ngIf="answer.index < 10">A0{{answer.index}}</button>
         <button class="default-button" *ngIf="answer.index >= 10">A{{answer.index}}</button>
