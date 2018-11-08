@@ -10,6 +10,7 @@ h6 {
 }
 
 body {
+  min-height: 80vh;
   margin: auto;
   padding: 0;
   margin-top: 0;
@@ -21,8 +22,12 @@ body {
 }
 
 footer {
+  position: relative;
+  max-width: 1400px;
   background-color: teal;
   color: white;
   text-align: center;
   padding: auto;
+  margin: auto;
+  margin-bottom: 0;
 }

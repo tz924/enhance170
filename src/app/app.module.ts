@@ -44,7 +44,7 @@ import { TestComponent } from './test/test.component';
     BrowserModule,
     // Custom
     AppRoutingModule,
-    NgbModule.forRoot(),    // ng-bootstrap
+    NgbModule,    // ng-bootstrap
     FormsModule,            // Forms data binding,
     BrowserAnimationsModule, // For image animations
     ReactiveFormsModule

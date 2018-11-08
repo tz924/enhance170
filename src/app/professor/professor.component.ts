@@ -69,7 +69,7 @@ export class ProfessorComponent implements OnInit {
     this.questions = [];
     this.checked = [];
     this.deleted = [];
-    this.showQuestions = true;
+    this.showQuestions = false;
     this.showChecked = false;
     this.showDeleted = false;
 
@@ -220,4 +220,3 @@ interface Lecture {
   time: Date;
   nbrOnline: number;
 }
-

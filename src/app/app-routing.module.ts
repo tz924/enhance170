@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'sidebar', component: SidebarComponent },
   { path: 'navigation', component: NavigationComponent },
   // Experimental features
-  { path: 'test', component: TestComponent },
+  { path: 'demo', component: TestComponent },
 
 ];
 
