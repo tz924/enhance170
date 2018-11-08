@@ -1,6 +1,252 @@
-<h1>
-  student works!
-</h1>
+<div class="container">
+
+  <h1>Questions</h1>
+  <div class="row">
+
+    <div class="col-md-8" id="left">
+
+      <div id="custom-search-input">
+        <div class="input-group col-md-12">
+
+          <!-- Search Box -->
+          <input type="text" class="search-query form-control" placeholder="Search" />
+
+          <span class="input-group-btn">
+            <button class="btn btn-danger" type="button">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>
+
+        </div>
+      </div>
+
+      <!-- Search Button -->
+      <div class="inline">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"
+          data-whatever="@mdo">
+          <img id="reduced" src="assets/post.png">
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Questions -->
+  <div id="moveTo">
+
+    <div id="questions">
+
+      <!-- Question List -->
+      <div *ngIf="showQuestions" class="row">
+
+        <!-- Question Item -->
+        <div *ngFor="let question of questions | slice:0:4" class="row question" (click)="onQuestionClick()">
+          <!-- Question -->
+          <div class="col-md-10">
+
+            <!-- Content -->
+            <div class="row">
+              <div class="col-md-2">
+                <button *ngIf="question.index < 10">Q0{{question.index}}</button>
+                <button *ngIf="question.index >= 10">Q{{question.index}}</button>
+              </div>
+              <div class="col-md-10">
+                <p class="truncate-question question-content">{{question.content}}</p>
+              </div>
+            </div>
+
+            <!-- Status -->
+            <div class="row">
+              <!-- Duration -->
+              <div class="col-md-4 question-duration">
+                <p *ngIf="question.duration <= 1" class="truncate">
+                  <img src="assets/clock.png" width="25" height="25" alt="clock">Now
+
+                  <p *ngIf="question.duration > 1" class="truncate">
+                    <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
+              </div>
+
+              <!-- Answers -->
+              <div class="col-md-4">
+                <p class="truncate">
+                  <img src="assets/answer.png" width="20" height="20" alt="answer">
+                  {{question.nbrAnswers}}
+                </p>
+              </div>
+
+              <!-- Likes -->
+              <div class="col-md-4">
+                <p class="truncate">
+                  <img src="assets/thumbup.png" width="20" height="20" alt="likes">
+                  {{question.nbrLikes}}
+                </p>
+              </div>
+            </div>
+            <hr>
+          </div>
+
+          <!-- Vertical check/delete -->
+          <div class="col-md-2">
+
+            <!-- Check Button -->
+            <div class="row" id="check">
+              <button (click)="checkQuestion(question.index)">
+                <img src="assets/checkblackg.png" width="30" height="30" alt="check">
+              </button>
+            </div>
+
+            <!-- Delete Button -->
+            <div class="row">
+              <button (click)="deleteQuestion(question.index)">
+                <img src="assets/xblackr.png" width="30" height="30" alt="delete">
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <!-- Checked List -->
+      <div *ngIf="showChecked" class="row">
+
+        <!-- Question Item -->
+        <div *ngFor="let question of checked | slice:0:4" class="row question">
+
+          <!-- Question -->
+          <!-- Content -->
+          <div class="row">
+            <div class="col-md-2">
+              <button *ngIf="question.index < 10">Q0{{question.index}}</button>
+              <button *ngIf="question.index >= 10">Q{{question.index}}</button>
+            </div>
+            <div class="col-md-10">
+              <p class="truncate-question">{{question.content}}</p>
+            </div>
+
+          </div>
+
+          <!-- Status -->
+          <div class="row status">
+            <!-- Duration -->
+            <div class="col-md-4">
+              <p *ngIf="question.duration <= 1" class="truncate">
+                <img src="assets/clock.png" width="25" height="25" alt="clock">Now
+
+                <p *ngIf="question.duration > 1" class="truncate">
+                  <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
+            </div>
+
+            <!-- Answers -->
+            <div class="col-md-4">
+              <p class="truncate">
+                <img src="assets/answer.png" width="20" height="20" alt="answer">
+                {{question.nbrAnswers}}
+              </p>
+            </div>
+
+            <!-- Likes -->
+            <div class="col-md-4">
+              <p class="truncate">
+                <img src="assets/thumbup.png" width="20" height="20" alt="likes">
+                {{question.nbrLikes}}
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Deleted List -->
+      <div *ngIf="showDeleted" class="row">
+
+        <!-- Question Item -->
+        <div *ngFor="let question of deleted | slice:0:4" class="row question">
+
+          <!-- Question -->
+          <!-- Content -->
+          <div class="row">
+            <div class="col-md-2">
+              <button *ngIf="question.index < 10">Q0{{question.index}}</button>
+              <button *ngIf="question.index >= 10">Q{{question.index}}</button>
+            </div>
+            <div class="col-md-10">
+              <p class="truncate-question">{{question.content}}</p>
+            </div>
+
+          </div>
+
+          <!-- Status -->
+          <div class="row status">
+            <!-- Duration -->
+            <div class="col-md-4">
+              <p *ngIf="question.duration <= 1" class="truncate">
+                <img src="assets/clock.png" width="25" height="25" alt="clock">Now
+
+                <p *ngIf="question.duration > 1" class="truncate">
+                  <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
+            </div>
+
+            <!-- Answers -->
+            <div class="col-md-4">
+              <p class="truncate">
+                <img src="assets/answer.png" width="20" height="20" alt="answer">
+                {{question.nbrAnswers}}
+              </p>
+            </div>
+
+            <!-- Likes -->
+            <div class="col-md-4">
+              <p class="truncate">
+                <img src="assets/thumbup.png" width="20" height="20" alt="likes">
+                {{question.nbrLikes}}
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="row" id="center">
+      <app-logout></app-logout>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Modal -->
+<!-- <ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>One fine body&hellip;</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template> -->
+
+
+
+
+
+<div class="form-group">
+  <button type="submit" [disabled]="questionForm.pristine || questionForm.invalid" class="btn btn-success" (click)="onQuestionSubmit(content)">
+    Submit
+  </button>
+</div>
+
 <form [formGroup]="questionForm" novalidate>
 
   <div class="form-gourp">
@@ -19,12 +265,4 @@
 
   <!-- Submit Button -->
 
-  <div class="form-group">
-    <button type="submit" [disabled]="questionForm.pristine || questionForm.invalid" class="btn btn-success" (click)="onQuestionSubmit(content)">
-      Submit
-    </button>
-  </div>
-
 </form>
-
-<app-logout></app-logout>
