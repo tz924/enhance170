@@ -112,7 +112,7 @@ h1 {
   margin: 0;
   margin-top: 10px;
   padding: 0;
-  margin-right:-43px;
+  margin-right: -43px;
 }
 
 #custom-search-input .search-query {
@@ -150,8 +150,8 @@ h1 {
 
 #left {
   display: inline-flex;
-  height:60px;
-  margin-left:155px;
+  height: 60px;
+  margin-left: 155px;
 }
 
 #reduced {
@@ -178,7 +178,7 @@ hr {
 #center {
   margin-top: 10px;
   margin-left: 900px;
-  padding-bottom:20px;
+  padding-bottom: 20px;
 }
 
 /* Modal */
@@ -213,7 +213,22 @@ hr {
   margin-top: 20px;
 }
 
-#streatch{
-width:800px;
+#streatch {
+  width: 800px;
+}
 
+#answer-button {
+  text-align: left;
+}
+
+.answer-content {
+  text-align: left;
+}
+
+#answer-form textarea {
+  width: 70%;
+}
+
+#answer-form button {
+  margin-left: 30px;
 }

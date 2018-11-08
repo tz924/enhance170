@@ -22,7 +22,7 @@
 
       <!-- Question Button -->
       <div class="inline">
-        <button type="button" class="btn btn-primary" (click)="openVerticallyCentered(qModal)">
+        <button type="button" class="btn btn-primary" (click)="openQModal(qModal)">
           <img id="reduced" src="assets/post.png">
         </button>
       </div>
@@ -68,11 +68,12 @@
 
               <!-- Answers -->
               <div class="col-md-4">
-                <p class="truncate">
+                <button (click)="openAModal(aModal)" class="truncate default-button" id="answer-button">
                   <img src="assets/answer.png" width="20" height="20" alt="answer">
                   {{question.nbrAnswers}}
-                </p>
+                </button>
               </div>
+
               <!-- Likes -->
               <div class="col-md-4">
                 <p class="truncate">
@@ -212,6 +213,7 @@
   </div>
 </div>
 
+<!-- Question Modal -->
 <ng-template #qModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title">New Question</h4>
@@ -242,6 +244,44 @@
           Submit
         </button>
       </div>
+    </form>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<!-- Answer Modal -->
+<ng-template #aModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Answers</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body" id="question-modal">
+
+    <div *ngFor="let answer of answers | slice:0:4" class="row">
+      <div class="col-md-2">
+        <button class="default-button" *ngIf="answer.index < 10">A0{{answer.index}}</button>
+        <button class="default-button" *ngIf="answer.index >= 10">A{{answer.index}}</button>
+      </div>
+      <div class="col-md-10">
+        <p class="truncate-question answer-content">{{answer.content}}</p>
+      </div>
+    </div>
+
+    <form (ngSubmit)="onAnswerSubmit(answerContent.value)" class="form-inline" id="answer-form">
+
+      <textarea class="form-control" [formControl]="answerContent" name="answerContent" placeholder="Question"></textarea>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-success">
+        Submit
+      </button>
     </form>
 
   </div>
