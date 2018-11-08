@@ -112,6 +112,7 @@ h1 {
   margin: 0;
   margin-top: 10px;
   padding: 0;
+  margin-right:-43px;
 }
 
 #custom-search-input .search-query {
@@ -148,8 +149,9 @@ h1 {
 }
 
 #left {
-  margin: auto;
   display: inline-flex;
+  height:60px;
+  margin-left:155px;
 }
 
 #reduced {
@@ -174,8 +176,9 @@ hr {
 }
 
 #center {
-  margin-top: 20px;
-  margin-left: 400px;
+  margin-top: 10px;
+  margin-left: 900px;
+  padding-bottom:20px;
 }
 
 /* Modal */
@@ -208,4 +211,9 @@ hr {
 
 #submit-button {
   margin-top: 20px;
+}
+
+#streatch{
+width:800px;
+
 }
