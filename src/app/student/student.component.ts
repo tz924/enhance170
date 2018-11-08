@@ -3,6 +3,8 @@ import { FeedbackService } from '../feedback.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+
+
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
@@ -102,7 +104,6 @@ export class StudentComponent implements OnInit {
       nbrAnswers: 1,
       nbrLikes: 10,
     });
-
   }
 
   // Modal
@@ -193,8 +194,16 @@ interface Lecture {
   time: Date;
   nbrOnline: number;
 }
+interface Question {
+  index: number;
+  content: string;
+  duration: number;
+  nbrAnswers: number;
+  nbrLikes: number;
+}
 
-
-
-
-
+interface Lecture {
+  title: string;
+  time: Date;
+  nbrOnline: number;
+}
