@@ -50,7 +50,7 @@ export class StudentComponent implements OnInit {
       apartments. Dear so sing when in find read of call. As distrusts \
       behaviour abilities defective is. Never at water me might.',
       duration: 13,
-      nbrAnswers: 2,
+      nbrAnswers: 12,
       nbrLikes: 10,
     });
 
