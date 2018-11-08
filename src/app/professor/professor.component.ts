@@ -220,4 +220,3 @@ interface Lecture {
   time: Date;
   nbrOnline: number;
 }
-
