@@ -39,7 +39,8 @@
 
       <!-- Hand -->
       <div class="row" id="hand-div">
-        <button (click)="showNormalQuestions()"><img src="assets/handraiseb.png" alt="raise hand" class="mx-auto" id="hand">
+        <button [@myAwesomeAnimation]='questionState' (click)="showNormalQuestions()"><img src="assets/handraiseb.png"
+            alt="raise hand" class="mx-auto" id="hand">
         </button>
       </div>
 

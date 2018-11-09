@@ -8,7 +8,7 @@ import { trigger, state, style, animate, transition, keyframes } from '@angular/
   templateUrl: './professor.component.html',
   styleUrls: ['./professor.component.css'],
   animations: [
-    trigger('popOverState', [
+    trigger('myAwesomeAnimation', [
 
       // Animation States
       state('move', style({

@@ -606,10 +606,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-@angular/animations
+ng2-pdf-viewer
 MIT
 
-ng2-pdf-viewer
+@angular/animations
 MIT
 
 zone.js
