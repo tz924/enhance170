@@ -60,7 +60,7 @@
             <!-- Status -->
             <div class="row">
               <!-- Duration -->
-              <div class="col-md-4 question-duration">
+              <div class="col-md-2 question-duration">
                 <p *ngIf="question.duration <= 1" class="truncate">
                   <img src="assets/clock.png" width="25" height="25" alt="clock">Now
 
@@ -69,14 +69,14 @@
               </div>
 
               <!-- Answers -->
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <p class="truncate">
                   <img src="assets/answer.png" width="20" height="20" alt="answer">
                   {{question.nbrAnswers}}
                 </p>
               </div>
               <!-- Likes -->
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <p class="truncate">
                   <img src="assets/thumbup.png" width="20" height="20" alt="likes">
                   {{question.nbrLikes}}
@@ -126,7 +126,7 @@
           </div>
 
           <!-- Status -->
-          <div class="row status">
+          <div class="rowstatus">
             <!-- Duration -->
             <div class="col-md-4">
               <p *ngIf="question.duration <= 1" class="truncate">

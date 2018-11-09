@@ -66,9 +66,10 @@
   width: 100%;
 }
 
-.row.status {
+.rowstatus {
   padding-left: 20px;
   width: 100%;
+  background-color: blue; 
 }
 
 #check {
