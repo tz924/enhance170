@@ -14,6 +14,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { AfterComponent } from './professor/after/after.component';
 import { StartComponent } from './professor/start/start.component';
 import { TestComponent } from './test/test.component';
+import { DemoComponent } from './demo/demo.component';
 
 const routes: Routes = [
   // Set root to login page
@@ -28,8 +29,10 @@ const routes: Routes = [
   { path: 'courses', component: CoursesComponent },
   { path: 'sidebar', component: SidebarComponent },
   { path: 'navigation', component: NavigationComponent },
+  // Demo features
+  { path: 'demo', component: DemoComponent },
   // Experimental features
-  { path: 'demo', component: TestComponent },
+  { path: 'test', component: TestComponent },
 
 ];
 

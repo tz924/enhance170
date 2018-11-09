@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 /* Component */
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { StartComponent } from './professor/start/start.component';
 import { AfterComponent } from './professor/after/after.component';
 import { TestComponent } from './test/test.component';
+import { DemoComponent } from './demo/demo.component';
 
 @NgModule({
   /* Component Injection */
@@ -37,7 +39,8 @@ import { TestComponent } from './test/test.component';
     SidebarComponent,
     StartComponent,
     AfterComponent,
-    TestComponent
+    TestComponent,
+    DemoComponent
   ],
   /* Module Injection */
   imports: [
@@ -47,7 +50,8 @@ import { TestComponent } from './test/test.component';
     NgbModule,    // ng-bootstrap
     FormsModule,            // Forms data binding,
     BrowserAnimationsModule, // For image animations
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PdfViewerModule
   ],
   /* Service Injection */
   providers: [],
