@@ -17,8 +17,8 @@ export class SidebarComponent implements OnInit {
     this.courses = [];
 
     this.courses.push({ department: 'CSE', id: 138, attendence: 123 });
-    this.courses.push({ department: 'MGT', id: 160, attendence: 45 });
-    this.courses.push({ department: 'COGS', id: 120, attendence: 60 });
+    this.courses.push({ department: 'CSE', id: 160, attendence: 45 });
+    this.courses.push({ department: 'CSE', id: 120, attendence: 60 });
   }
 
   onCourseClick(course: Course) {
