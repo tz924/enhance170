@@ -1,8 +1,11 @@
 <div class="container">
 
+  <div class="row" id="center">
+    <app-logout></app-logout>
+  </div>
+
   <h1>Questions</h1>
   <div class="row">
-
     <div class="col-md-8" id="left">
 
       <div id="custom-search-input">
@@ -10,7 +13,6 @@
 
           <!-- Search Box -->
           <input type="text" class="search-query form-control" placeholder="Search" />
-
           <span class="input-group-btn">
             <button class="btn btn-danger" type="button">
               <span class="glyphicon glyphicon-search"></span>
@@ -90,14 +92,14 @@
             <!-- Check Button -->
             <div class="row" id="check">
               <button class="default-button" (click)="checkQuestion(question.index)">
-                <img src="assets/checkblackg.png" width="30" height="30" alt="check">
+                <img src="assets/checkblack.png" width="30" height="30" alt="check">
               </button>
             </div>
 
             <!-- Delete Button -->
             <div class="row">
               <button class="default-button" (click)="deleteQuestion(question.index)">
-                <img src="assets/xblackr.png" width="30" height="30" alt="delete">
+                <img src="assets/trashcan.png" width="30" height="30" alt="delete">
               </button>
             </div>
           </div>
@@ -204,10 +206,7 @@
 
       </div>
 
-    </div>
-    <div class="row" id="center">
-      <app-logout></app-logout>
-    </div>
+
 
   </div>
 </div>
