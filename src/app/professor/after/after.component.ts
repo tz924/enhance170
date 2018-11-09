@@ -2,6 +2,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent, Course } from '../../app.component';
+import { CourseService } from 'src/app/course.service';
 @Component({
   selector: 'app-after',
   templateUrl: './after.component.html',
@@ -10,7 +11,17 @@ import { AppComponent, Course } from '../../app.component';
 export class AfterComponent implements OnInit {
   course: Course;
 
-  constructor(private router: Router, private app: AppComponent) { }
+  constructor(private router: Router,
+    private app: AppComponent,
+    private courseService: CourseService) {
+
+      this.courseService.currentCourse.subscribe(
+        (course: Course) => {
+          this.course = course;
+        }
+      );
+
+    }
 
   ngOnInit() {
     this.course = this.app.currentCourse;
@@ -19,6 +30,5 @@ export class AfterComponent implements OnInit {
   onStart() {
     this.router.navigateByUrl('/professor');
   }
-
 
 }
