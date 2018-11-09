@@ -73,7 +73,7 @@ export class ProfessorComponent implements OnInit {
     this.showChecked = false;
     this.showDeleted = false;
 
-    this.questionState = '';
+    this.questionState = 'move';
 
     this.lecture = {
       title: 'Lecture 1',
