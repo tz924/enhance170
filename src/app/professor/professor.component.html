@@ -7,7 +7,6 @@
         <h1 class="mx-auto">CSE 170</h1>
       </div>
 
-
       <div class="row" id="course-status">
         <div class="col-md-4">
           <h2>Time: {{lecture.time.getHours()}}:{{lecture.time.getMinutes()}}</h2>
@@ -25,11 +24,12 @@
           width="800" height="600" frameborder="0" scrolling="auto">
         </iframe>
       </div>
-      <br />
+      <br/>
       <div class="row">
-        <button type="button" class="btn btn-success mx-auto" routerLink="/prof-after">Done</button>
+        <button id="done" type="button" class="btn btn-success mx-auto" routerLink="/prof-after">Done</button>
       </div>
     </div>
+
 
     <!-- Questions -->
     <div class="col-md-3" id="questions">
