@@ -69,7 +69,7 @@ export class ProfessorComponent implements OnInit {
     this.questions = [];
     this.checked = [];
     this.deleted = [];
-    this.showQuestions = false;
+    this.showQuestions = true;
     this.showChecked = false;
     this.showDeleted = false;
 
@@ -164,6 +164,10 @@ export class ProfessorComponent implements OnInit {
     }
 
     this.deleted.push(question);
+  }
+
+  onLikeClick(question: Question) {
+    question.nbrLikes++;
   }
 
   showNormalQuestions() {

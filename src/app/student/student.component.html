@@ -47,8 +47,8 @@
             <!-- Content -->
             <div class="row">
               <div class="col-md-2">
-                <button class="default-button" *ngIf="question.index < 10">Q0{{question.index}}</button>
-                <button class="default-button" *ngIf="question.index >= 10">Q{{question.index}}</button>
+                <button class="default-button question-index" *ngIf="question.index < 10">Q0{{question.index}}</button>
+                <button class="default-button question-index" *ngIf="question.index >= 10">Q{{question.index}}</button>
               </div>
               <div class="col-md-10">
                 <p class="truncate-question question-content">{{question.content}}</p>
@@ -76,7 +76,7 @@
 
               <!-- Likes -->
               <div class="col-md-2">
-                <p class="truncate">
+                <p class="truncate" (click)="onLikeClick(question)">
                   <img src="assets/thumbup.png" width="20" height="20" alt="likes">
                   {{question.nbrLikes}}
                 </p>
@@ -114,8 +114,8 @@
           <!-- Content -->
           <div class="row">
             <div class="col-md-2">
-              <button *ngIf="question.index < 10">Q0{{question.index}}</button>
-              <button *ngIf="question.index >= 10">Q{{question.index}}</button>
+              <button *ngIf="question.index < 10" class="default-button question-index">Q0{{question.index}}</button>
+              <button *ngIf="question.index >= 10" class="default-button question-index">Q{{question.index}}</button>
             </div>
             <div class="col-md-10">
               <p class="truncate-question">{{question.content}}</p>
@@ -144,7 +144,7 @@
 
             <!-- Likes -->
             <div class="col-md-2">
-              <p class="truncate">
+              <p class="truncate" (click)="onLikeClick(question)">
                 <img src="assets/thumbup.png" width="20" height="20" alt="likes">
                 {{question.nbrLikes}}
               </p>
@@ -164,8 +164,8 @@
           <!-- Content -->
           <div class="row">
             <div class="col-md-2">
-              <button *ngIf="question.index < 10">Q0{{question.index}}</button>
-              <button *ngIf="question.index >= 10">Q{{question.index}}</button>
+              <button *ngIf="question.index < 10" class="default-button question-index">Q0{{question.index}}</button>
+              <button *ngIf="question.index >= 10" class="default-button question-index">Q{{question.index}}</button>
             </div>
             <div class="col-md-10">
               <p class="truncate-question">{{question.content}}</p>
@@ -194,7 +194,7 @@
 
             <!-- Likes -->
             <div class="col-md-2">
-              <p class="truncate">
+              <p class="truncate" (click)="onLikeClick(question)">
                 <img src="assets/thumbup.png" width="20" height="20" alt="likes">
                 {{question.nbrLikes}}
               </p>
@@ -210,101 +210,101 @@
         <div class="col-md-4">
           <p>Select to View</p>
         </div>
-      
+
         <div class="col-md-1" id="check-view">
-          <button (click)="showCheckedQuestions()"><img src="assets/checkblack.png" width="30" height="30" alt="check"></button>
+          <button (click)="showCheckedQuestions()" class="default-button"><img src="assets/checkblack.png" width="30"
+              height="30" alt="check"></button>
         </div>
-      
+
         <div class="col-md-1" id="delete-view">
-          <button (click)="showDeletedQuestions()"><img src="assets/trashcan.png" width="30" height="30" alt="delete"></button>
+          <button (click)="showDeletedQuestions()" class="default-button"><img src="assets/trashcan.png" width="30"
+              height="30" alt="delete"></button>
         </div>
-      
-      
+
+
         <!-- Question View-->
-        <div class="col-md-2" id="back-view">
+        <div class="col-md-2" id="back-view" class="default-button">
           <button (click)="showNormalQuestions()">Back</button>
         </div>
 
       </div>
-
-
-  </div>
-</div>
-
-<!-- Question Modal -->
-<ng-template #qModal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">New Question</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    </div>
   </div>
 
-  <div class="modal-body" id="question-modal">
-    <form [formGroup]="questionForm" novalidate>
+  <!-- Question Modal -->
+  <ng-template #qModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">New Question</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
 
-      <div class="form-gourp">
-        <textarea class="form-control" formControlName="content" name="content" [(ngModel)]="content" placeholder="Question"></textarea>
-      </div>
+    <div class="modal-body" id="question-modal">
+      <form [formGroup]="questionForm" novalidate>
 
-      <!-- Error Message -->
-      <div *ngIf="questionForm.controls['content'].invalid && (questionForm.controls['content'].dirty || questionForm.controls['content'].touched)"
-        class="alert alert-danger">
-        <div *ngIf="questionForm.controls['content'].errors.required">
-          Question content is required.
+        <div class="form-gourp">
+          <textarea class="form-control" formControlName="content" name="content" [(ngModel)]="content" placeholder="Question"></textarea>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="questionForm.controls['content'].invalid && (questionForm.controls['content'].dirty || questionForm.controls['content'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="questionForm.controls['content'].errors.required">
+            Question content is required.
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group" id="submit-button">
+          <button type="submit" class="btn btn-success" [disabled]="questionForm.pristine || questionForm.invalid"
+            (click)="onQuestionSubmit(content)">
+            Submit
+          </button>
+        </div>
+      </form>
+
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+
+  <!-- Answer Modal -->
+  <ng-template #aModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Answers</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body" id="question-modal">
+
+      <div *ngFor="let answer of answers | slice:0:4" class="row answer-item">
+        <div class="col-md-2">
+          <button class="default-button" *ngIf="answer.index < 10">A0{{answer.index}}</button>
+          <button class="default-button" *ngIf="answer.index >= 10">A{{answer.index}}</button>
+        </div>
+        <div class="col-md-10">
+          <p class="truncate-question answer-content">{{answer.content}}</p>
         </div>
       </div>
 
-      <!-- Submit Button -->
-      <div class="form-group" id="submit-button">
-        <button type="submit" class="btn btn-success" [disabled]="questionForm.pristine || questionForm.invalid"
-          (click)="onQuestionSubmit(content)">
+      <form (ngSubmit)="onAnswerSubmit(answerContent.value)" class="form-inline" id="answer-form">
+
+        <textarea class="form-control" [formControl]="answerContent" name="answerContent" placeholder="Question"></textarea>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-success">
           Submit
         </button>
-      </div>
-    </form>
+      </form>
 
-  </div>
-
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-  </div>
-</ng-template>
-
-<!-- Answer Modal -->
-<ng-template #aModal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">Answers</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-
-  <div class="modal-body" id="question-modal">
-
-    <div *ngFor="let answer of answers | slice:0:4" class="row answer-item">
-      <div class="col-md-2">
-        <button class="default-button" *ngIf="answer.index < 10">A0{{answer.index}}</button>
-        <button class="default-button" *ngIf="answer.index >= 10">A{{answer.index}}</button>
-      </div>
-      <div class="col-md-10">
-        <p class="truncate-question answer-content">{{answer.content}}</p>
-      </div>
     </div>
 
-    <form (ngSubmit)="onAnswerSubmit(answerContent.value)" class="form-inline" id="answer-form">
-
-      <textarea class="form-control" [formControl]="answerContent" name="answerContent" placeholder="Question"></textarea>
-
-      <!-- Submit Button -->
-      <button type="submit" class="btn btn-success">
-        Submit
-      </button>
-    </form>
-
-  </div>
-
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-  </div>
-</ng-template>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>

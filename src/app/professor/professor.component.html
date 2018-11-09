@@ -11,11 +11,14 @@
         <div class="col-md-4">
           <h2>Time: {{lecture.time.getHours()}}:{{lecture.time.getMinutes()}}</h2>
         </div>
-      <div class="col-md-4" id="lecture">
+        <div class="col-md-4" id="lecture">
           <p>{{lecture.title}}</p>
         </div>
         <div class="col-md-4">
-          <h3>Online: {{lecture.nbrOnline}}</h3>
+          <div class="row">
+            <div class="col-md-6"></div>
+            <h3>Online: {{lecture.nbrOnline}}</h3>
+          </div>
         </div>
       </div>
 
@@ -24,7 +27,7 @@
           width="800" height="600" frameborder="0" scrolling="auto">
         </iframe>
       </div>
-      <br/>
+      <br />
       <div class="row">
         <button id="done" type="button" class="btn btn-success mx-auto" routerLink="/prof-after">Done</button>
       </div>
@@ -36,8 +39,7 @@
 
       <!-- Hand -->
       <div class="row" id="hand-div">
-        <button (click)="showNormalQuestions()"><img src="assets/handraiseb.png" alt="raise hand" class="mx-auto"
-            id="hand">
+        <button (click)="showNormalQuestions()"><img src="assets/handraiseb.png" alt="raise hand" class="mx-auto" id="hand">
         </button>
       </div>
 
@@ -52,8 +54,8 @@
             <!-- Content -->
             <div class="row">
               <div class="col-md-2">
-                <button *ngIf="question.index < 10">Q0{{question.index}}</button>
-                <button *ngIf="question.index >= 10">Q{{question.index}}</button>
+                <button *ngIf="question.index < 10" class="question-index">Q0{{question.index}}</button>
+                <button *ngIf="question.index >= 10" class="question-index">Q{{question.index}}</button>
               </div>
               <div class="col-md-10">
                 <p class="truncate-question">{{question.content}}</p>
@@ -82,12 +84,14 @@
 
               <!-- Likes -->
               <div class="col-md-4">
-                <p class="truncate">
+                <p class="truncate" (click)="onLikeClick(question)">
                   <img src="assets/thumbup.png" width="20" height="20" alt="likes">
                   {{question.nbrLikes}}
                 </p>
               </div>
             </div>
+
+            <hr>
           </div>
 
           <!-- Vertical check/delete -->
@@ -113,7 +117,7 @@
 
         <!-- More -->
         <div class="row mx-auto">
-          <button id="more">More</button>
+          <button id="more" (click)="onMoreClick()">More</button>
         </div>
 
       </div>
@@ -128,8 +132,8 @@
           <!-- Content -->
           <div class="row">
             <div class="col-md-2">
-              <button *ngIf="question.index < 10">Q0{{question.index}}</button>
-              <button *ngIf="question.index >= 10">Q{{question.index}}</button>
+              <button *ngIf="question.index < 10" class="question-index">Q0{{question.index}}</button>
+              <button *ngIf="question.index >= 10" class="question-index">Q{{question.index}}</button>
             </div>
             <div class="col-md-10">
               <p class="truncate-question">{{question.content}}</p>
@@ -158,7 +162,7 @@
 
             <!-- Likes -->
             <div class="col-md-4">
-              <p class="truncate">
+              <p class="truncate" (click)="onLikeClick(question)">
                 <img src="assets/thumbup.png" width="20" height="20" alt="likes">
                 {{question.nbrLikes}}
               </p>
@@ -178,8 +182,8 @@
           <!-- Content -->
           <div class="row">
             <div class="col-md-2">
-              <button *ngIf="question.index < 10">Q0{{question.index}}</button>
-              <button *ngIf="question.index >= 10">Q{{question.index}}</button>
+              <button *ngIf="question.index < 10" class="question-index">Q0{{question.index}}</button>
+              <button *ngIf="question.index >= 10" class="question-index">Q{{question.index}}</button>
             </div>
             <div class="col-md-10">
               <p class="truncate-question">{{question.content}}</p>
@@ -208,7 +212,7 @@
 
             <!-- Likes -->
             <div class="col-md-4">
-              <p class="truncate">
+              <p class="truncate" (click)="onLikeClick(question)">
                 <img src="assets/thumbup.png" width="20" height="20" alt="likes">
                 {{question.nbrLikes}}
               </p>
@@ -222,15 +226,15 @@
       <!-- Change View -->
       <div class="row" id="change-view">
 
-        <div class="col-md-4">
-          <p>Select to View</p>
+        <div class="col-md-3">
+          <p>Select View</p>
         </div>
 
-        <div class="col-md-1" id="check-view">
+        <div class="col-md-2" id="check-view">
           <button (click)="showCheckedQuestions()"><img src="assets/checkblack.png" width="30" height="30" alt="check"></button>
         </div>
 
-        <div class="col-md-1" id="delete-view">
+        <div class="col-md-2" id="delete-view">
           <button (click)="showDeletedQuestions()"><img src="assets/trashcan.png" width="30" height="30" alt="delete"></button>
         </div>
 

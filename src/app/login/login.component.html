@@ -1,6 +1,6 @@
 <app-navigation></app-navigation>
 
-<div class="container main-div">
+<div class="main-div">
 
   <h1 class="center">Login Page</h1>
 
@@ -10,7 +10,7 @@
 
       <div class="row">
         <div class="col-md-4 col-sm-4 col-xs-12 form-group">
-          <div class="form-check-inline">
+          <div class="form-check-inline" id="user-option">
 
             <!-- Professor Radio -->
             <label class="customradio"><span class="radiotextsty">Professor</span>
@@ -21,6 +21,12 @@
             <!-- Student Radio -->
             <label class="customradio"><span class="radiotextsty">Student</span>
               <input type="radio" [(ngModel)]="userType" name="userType" value="student">
+              <span class="checkmark"></span>
+            </label>
+
+            <!-- TA Radio -->
+            <label class="customradio"><span class="radiotextsty">TA</span>
+              <input type="radio" [(ngModel)]="userType" name="userType" value="TA">
               <span class="checkmark"></span>
             </label>
 

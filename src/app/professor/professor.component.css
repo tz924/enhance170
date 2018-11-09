@@ -40,10 +40,11 @@
 .row#course-title {
   min-height: 7vh;
 }
+
 #course-title h1 {
   font-size: 48px;
   font-weight: bold;
-  color:black;
+  color: black;
 }
 
 #lecture {
@@ -60,6 +61,7 @@
 }
 
 #hand-div img {
+  border-radius: 50%;
   max-width: 80px;
   display: block;
 }
@@ -132,6 +134,18 @@ input {
 }
 
 #done {
-  background: green; 
-  margin: 30px; 
+  background: green;
+  margin: 30px;
+  min-height: 50px;
+  min-width: 75px;
+}
+
+/* #code {
+  color: gray;
+  font-weight: bold;
+} */
+
+.question-index {
+  font-weight: bold;
+  background: gray;
 }

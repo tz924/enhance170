@@ -136,6 +136,28 @@ export class StudentComponent implements OnInit {
     this.answerModal = this.modalService.open(aModal, { centered: true });
   }
 
+  onLikeClick(question: Question) {
+    question.nbrLikes++;
+  }
+
+  showNormalQuestions() {
+    this.showQuestions = !this.showQuestions;
+    this.showChecked = false;
+    this.showDeleted = false;
+  }
+
+  showCheckedQuestions() {
+    this.showChecked = true;
+    this.showDeleted = false;
+    this.showQuestions = false;
+  }
+
+  showDeletedQuestions() {
+    this.showDeleted = true;
+    this.showChecked = false;
+    this.showQuestions = false;
+  }
+
   checkQuestion(index: number) {
     let question: Question;
     for (let i = 0; i < this.questions.length; i++) {
@@ -180,6 +202,13 @@ export class StudentComponent implements OnInit {
 
   onQuestionSubmit(content: string) {
     this.feedbackService.questionSubmitted.emit(content);
+    this.questions.push({
+      index: this.questions.length + 1,
+      content: content,
+      duration: 0,
+      nbrAnswers: 0,
+      nbrLikes: 0
+    });
     this.questionForm.reset();
     this.questionModal.close();
   }
