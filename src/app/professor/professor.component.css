@@ -130,3 +130,8 @@ input {
   background-color: darkgray;
   font-weight: bold;
 }
+
+#done {
+  background: green; 
+  margin: 30px; 
+}
