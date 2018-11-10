@@ -12,7 +12,7 @@ export class TestComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.pdfSrc = '../../assets/test.pdf';
+    this.pdfSrc = 'assets/test.pdf';
   }
 
 }
