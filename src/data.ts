@@ -33,9 +33,9 @@ var studentData = [
 
 export class App implements OnInit {
 
-  questions: Question[];
+  /*questions: Question[];
   checked: Question[];
-  deleted: Question[];
+  deleted: Question[];*/
   lecture: Lecture;
   showQuestions: boolean;
   showChecked: boolean;
@@ -135,3 +135,4 @@ export class App implements OnInit {
         },
       ];
   }
+}
