@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+/*import {Component, OnInit} from '@angular/core';
 
 
 /** Course Information */
-var courseData = [
+/*var courseData = [
     {'name': 'CSE 138', 'size': '125'},
     {'name': 'CSE 160', 'size': '75'},
     {'name': 'CSE 120', 'size': '230'},
@@ -16,7 +16,7 @@ var courseData = [
 
 
 /** Student Information */
-var studentData = [
+/*var studentData = [
     {'PID': 'A92111691', 'name': 'Peter Wang', 'time': '13:51 PM', 'questions': '0'},
     {'PID': 'A27818929', 'name': 'Jenna Larson', 'time': '13:55 PM', 'questions': '2'},
     {'PID': 'A73629289', 'name': 'Dave Ross', 'time': '13:57 PM', 'questions': '1'},
@@ -35,7 +35,7 @@ export class App implements OnInit {
 
   /*questions: Question[];
   checked: Question[];
-  deleted: Question[];*/
+  deleted: Question[];
   lecture: Lecture;
   showQuestions: boolean;
   showChecked: boolean;
@@ -43,10 +43,10 @@ export class App implements OnInit {
   questionState: string;
   answers: Answers[];
 
-  constructor () {
-  }
+/* constructor () {
+  }*/
 
-  ngOnInit() {
+  /*ngOnInit() {
     // Initialize necessary objects
     this.questions = [];
     this.checked = [];
@@ -64,7 +64,7 @@ export class App implements OnInit {
     };
 
     /** Question Information */
-    this.questions.push({
+    /*this.questions.push({
       index: 1,
       content: 'Where can I find the course syllabus? \
       Is it on the course website, and if so where?',
@@ -119,7 +119,7 @@ export class App implements OnInit {
     });
 
     /** Answer Information */
-    this.answers = [
+    /*this.answers = [
         {
           index: 1,
           content: 'The syllabus is on the website underneath the labs.',
@@ -135,4 +135,4 @@ export class App implements OnInit {
         },
       ];
   }
-}
+}*/

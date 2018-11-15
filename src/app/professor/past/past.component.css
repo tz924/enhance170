@@ -1,0 +1,54 @@
+.container {
+    background-color: #fff;
+    padding: 8%;
+    min-height: 80vh;
+    padding-top: 24px;
+  }
+  
+  .class-title {
+    font-style: bolder;
+    font-size: 48px;
+    margin-right: 25px;
+  }
+  
+  .students-box {
+    position: relative;
+    width: 150px;
+  }
+  
+  .students {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 24px;
+  }
+  
+  .form-row {
+    padding-top: 10vh;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  #start-button {
+    font-size: 24px;
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  input[type="text"],
+  textarea {
+    background: #d1d1d1;
+  }
+
+  #center{
+      text-align:center;
+      font-weight:bold;
+  }
+
+  #ps1{
+    text-align:center;
+  }
