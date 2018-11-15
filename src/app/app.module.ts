@@ -23,6 +23,7 @@ import { StartComponent } from './professor/start/start.component';
 import { AfterComponent } from './professor/after/after.component';
 import { TestComponent } from './test/test.component';
 import { DemoComponent } from './demo/demo.component';
+import { PastComponent } from './professor/past/past.component';
 
 @NgModule({
   /* Component Injection */
@@ -40,7 +41,8 @@ import { DemoComponent } from './demo/demo.component';
     StartComponent,
     AfterComponent,
     TestComponent,
-    DemoComponent
+    DemoComponent,
+    PastComponent
   ],
   /* Module Injection */
   imports: [

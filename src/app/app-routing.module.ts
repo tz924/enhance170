@@ -13,6 +13,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { AfterComponent } from './professor/after/after.component';
 import { StartComponent } from './professor/start/start.component';
+import { PastComponent } from './professor/past/past.component';
 import { TestComponent } from './test/test.component';
 import { DemoComponent } from './demo/demo.component';
 
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'courses', component: CoursesComponent },
   { path: 'sidebar', component: SidebarComponent },
   { path: 'navigation', component: NavigationComponent },
+  { path: 'prof-past', component: PastComponent },
   // Demo features
   { path: 'demo', component: DemoComponent },
   // Experimental features
