@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppComponent, Course } from '../../app.component';
+import { CourseService } from 'src/app/course.service';
 
 @Component({
   selector: 'app-profile',
