@@ -8,6 +8,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+
 
 /* Component */
 import { AppComponent } from './app.component';
@@ -23,6 +25,10 @@ import { StartComponent } from './professor/start/start.component';
 import { AfterComponent } from './professor/after/after.component';
 import { TestComponent } from './test/test.component';
 import { DemoComponent } from './demo/demo.component';
+import { PastComponent } from './professor/past/past.component';
+import { TaComponent } from './ta/ta.component';
+
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   /* Component Injection */
@@ -40,7 +46,10 @@ import { DemoComponent } from './demo/demo.component';
     StartComponent,
     AfterComponent,
     TestComponent,
-    DemoComponent
+    DemoComponent,
+    PastComponent,
+    TaComponent,
+    FilterPipe
   ],
   /* Module Injection */
   imports: [
@@ -51,7 +60,8 @@ import { DemoComponent } from './demo/demo.component';
     FormsModule,            // Forms data binding,
     BrowserAnimationsModule, // For image animations
     ReactiveFormsModule,
-    PdfViewerModule
+    PdfViewerModule,
+    NgxWebstorageModule.forRoot()  // For local storage
   ],
   /* Service Injection */
   providers: [],

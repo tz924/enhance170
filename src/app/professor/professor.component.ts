@@ -1,7 +1,10 @@
-import { Component, OnInit, Query } from '@angular/core';
+import { Component, OnInit, Query, Injectable, Inject } from '@angular/core';
+import { Question, Lecture, Course } from '../app.component';
 import { FeedbackService } from '../feedback.service';
 
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
+import { LocalStorageService } from 'ngx-webstorage';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-professor',
@@ -37,19 +40,24 @@ import { trigger, state, style, animate, transition, keyframes } from '@angular/
     ])]
 })
 
+@Injectable()
 export class ProfessorComponent implements OnInit {
 
   questions: Question[];
   checked: Question[];
   deleted: Question[];
   lecture: Lecture;
-  showQuestions: boolean;
+  currentCourse: Course;
+  showQs: boolean;
   showChecked: boolean;
   showDeleted: boolean;
-
   questionState: string;
 
-  constructor(private feedbackService: FeedbackService) {
+  constructor(
+    private feedbackService: FeedbackService,
+    private data: DataService,
+    private storage: LocalStorageService,
+  ) {
     this.feedbackService.questionSubmitted.subscribe(
       (question: string) => {
         this.onNewQuestion();
@@ -66,82 +74,32 @@ export class ProfessorComponent implements OnInit {
 
   ngOnInit() {
     // Initialize necessary objects
-    this.questions = [];
-    this.checked = [];
-    this.deleted = [];
-    this.showQuestions = true;
+    this.checked = this.data.initChecked();
+    this.deleted = this.data.initDeleted();
+    this.showQs = true;
     this.showChecked = false;
     this.showDeleted = false;
-
     this.questionState = 'move';
 
-    this.lecture = {
-      title: 'Lecture 1',
-      time: new Date(2018, 10, 24, 10, 33, 30, 0),
-      nbrOnline: 121
-    };
+    this.lecture = this.data.initLecture();
+    this.currentCourse = this.data.initCurrentCourse();
 
-    // Make up some fake datas
-    this.questions.push({
-      index: 1,
-      content: 'Compliment interested discretion estimating on stimulated \
-      apartments. Dear so sing when in find read of call. As distrusts \
-      behaviour abilities defective is. Never at water me might.',
-      duration: 13,
-      nbrAnswers: 12,
-      nbrLikes: 10,
+    // Update questions
+    this.questions = this.data.initQuestions();
+
+    // Update local storage on Change
+    this.storage.observe('questions').subscribe(e => {
+      this.questions = this.storage.retrieve('questions');
+      this.onNewQuestion();
     });
 
-    this.questions.push({
-      index: 2,
-      content: 'Compliment interested discretion estimating on stimulated \
-      apartments oh. Dear so sing when in find read of call. As distrusts \
-      behaviour abilities defective is. Never at water me might.',
-      duration: 4,
-      nbrAnswers: 1,
-      nbrLikes: 10,
+    this.storage.observe('deleted').subscribe(e => {
+      this.deleted = this.storage.retrieve('deleted');
     });
 
-    this.questions.push({
-      index: 3,
-      content: 'Compliment interested discretion estimating on stimulated \
-      apartments oh. Dear so sing when in find read of call. As distrusts \
-      behaviour abilities defective is. Never at water me might.',
-      duration: 1,
-      nbrAnswers: 1,
-      nbrLikes: 10,
+    this.storage.observe('checked').subscribe(e => {
+      this.checked = this.storage.retrieve('checked');
     });
-
-    this.questions.push({
-      index: 3,
-      content: 'Compliment interested discretion estimating on stimulated \
-      apartments oh. Dear so sing when in find read of call. As distrusts \
-      behaviour abilities defective is. Never at water me might.',
-      duration: 1,
-      nbrAnswers: 1,
-      nbrLikes: 10,
-    });
-
-    this.questions.push({
-      index: 3,
-      content: 'Compliment interested discretion estimating on stimulated \
-      apartments oh. Dear so sing when in find read of call. As distrusts \
-      behaviour abilities defective is. Never at water me might.',
-      duration: 1,
-      nbrAnswers: 1,
-      nbrLikes: 10,
-    });
-
-    this.questions.push({
-      index: 11,
-      content: 'Compliment interested discretion estimating on stimulated \
-      apartments oh. Dear so sing when in find read of call. As distrusts \
-      behaviour abilities defective is. Never at water me might.',
-      duration: 1,
-      nbrAnswers: 1,
-      nbrLikes: 10,
-    });
-
   }
 
   checkQuestion(index: number) {
@@ -149,10 +107,12 @@ export class ProfessorComponent implements OnInit {
     for (let i = 0; i < this.questions.length; i++) {
       if (this.questions[i].index === index) {
         question = this.questions.splice(i, 1)[0];
+        this.data.updateQuestions(this.questions);
       }
     }
 
     this.checked.push(question);
+    this.data.updateChecked(this.checked);
   }
 
   deleteQuestion(index: number) {
@@ -160,18 +120,20 @@ export class ProfessorComponent implements OnInit {
     for (let i = 0; i < this.questions.length; i++) {
       if (this.questions[i].index === index) {
         question = this.questions.splice(i, 1)[0];
+        this.data.updateQuestions(this.questions);
       }
     }
 
     this.deleted.push(question);
+    this.data.updateDeleted(this.deleted);
   }
 
   onLikeClick(question: Question) {
     question.nbrLikes++;
   }
 
-  showNormalQuestions() {
-    this.showQuestions = !this.showQuestions;
+  showQuestions() {
+    this.showQs = !this.showQs;
     this.showChecked = false;
     this.showDeleted = false;
   }
@@ -179,13 +141,13 @@ export class ProfessorComponent implements OnInit {
   showCheckedQuestions() {
     this.showChecked = true;
     this.showDeleted = false;
-    this.showQuestions = false;
+    this.showQs = false;
   }
 
   showDeletedQuestions() {
     this.showDeleted = true;
     this.showChecked = false;
-    this.showQuestions = false;
+    this.showQs = false;
   }
 
   onQuestionClick() {
@@ -195,9 +157,7 @@ export class ProfessorComponent implements OnInit {
   onMoreClick() {
     this.questions.push({
       index: Math.floor(Math.random()),
-      content: 'Compliment interested discretion estimating on stimulated \
-      apartments oh. Dear so sing when in find read of call. As distrusts \
-      behaviour abilities defective is. Never at water me might.',
+      content: 'New question',
       duration: Math.floor(Math.random() * 10) + Math.floor(Math.random()),
       nbrAnswers: Math.floor(Math.random()),
       nbrLikes: Math.floor(Math.random() * 10) + Math.floor(Math.random()),
@@ -209,18 +169,4 @@ export class ProfessorComponent implements OnInit {
     this.questionState = (this.questionState === 'move' ? 'moved' : 'move');
   }
 
-}
-
-interface Question {
-  index: number;
-  content: string;
-  duration: number;
-  nbrAnswers: number;
-  nbrLikes: number;
-}
-
-interface Lecture {
-  title: string;
-  time: Date;
-  nbrOnline: number;
 }

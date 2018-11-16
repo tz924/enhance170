@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Inject, Injectable, Component, OnInit } from '@angular/core';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+
 
 @Component({
   selector: 'app-courses',
@@ -7,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(@Inject(LOCAL_STORAGE) private storage: StorageService) {
 
   }
+
+  ngOnInit() {
+  }
+
 
 }

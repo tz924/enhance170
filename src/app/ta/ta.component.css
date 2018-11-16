@@ -1,0 +1,258 @@
+.container {
+  min-width: 1200px;
+  padding-top: 5vh;
+  min-height: 80vh;
+  background-color: white;
+}
+
+.default-button {
+  padding: none;
+  background: none;
+  border: none;
+}
+
+.truncate {
+  position: relative;
+  width: 115%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-question {
+  display: block;
+
+  /* Fallback for non-webkit */
+  display: -webkit-box;
+  max-width: 100%;
+  height: 60px;
+
+  /* Fallback for non-webkit */
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 1.2;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row#course-title {
+  min-height: 7vh;
+}
+
+#course-title h1 {
+  font-size: 48px;
+  font-weight: bold;
+  color: black;
+}
+
+#lecture {
+  font-size: 24px;
+}
+
+.row#course-status {
+  min-height: 5vh;
+}
+
+#questions {
+  padding: 0;
+  margin-left: 2vw;
+  margin-right: -2vw;
+  width: 900px;
+}
+
+.question {
+  width: 100%;
+}
+
+.row.status {
+  padding-left: 20px;
+  width: 100%;
+}
+
+#check {
+  margin-bottom: 12px;
+  color: #36EA9E;
+}
+
+#change-view {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+#back-view button {
+  min-height: 30px;
+  background: darkgray;
+  font-weight: bold;
+}
+
+h1 {
+  font-family: montserrat;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+
+}
+
+
+.question-content {
+  padding-left: 12px;
+}
+
+.question-duration {
+  display: inline;
+}
+
+#more {
+  background-color: darkgray;
+  font-weight: bold;
+}
+
+#custom-search-input {
+  margin: 0;
+  margin-top: 10px;
+  padding: 0;
+  margin-right: -43px;
+}
+
+#custom-search-input .search-query {
+  padding-right: 3px;
+  padding-right: 4px \9;
+  padding-left: 3px;
+  padding-left: 4px \9;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+
+  margin-bottom: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+#custom-search-input button {
+  border: 0;
+  background: none;
+  /** belows styles are working good */
+  padding: 2px 5px;
+  margin-top: 2px;
+  position: relative;
+  left: -28px;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+  margin-bottom: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: #D9230F;
+}
+
+.search-query:focus+button {
+  z-index: 3;
+}
+
+#left {
+  display: inline-flex;
+  height: 60px;
+  margin-left: 155px;
+}
+
+#reduced {
+  width: 36px;
+  height: 36px;
+}
+
+.inline {
+  display: inline-flex;
+}
+
+#moveTo {
+  margin-top: 30px;
+  margin-left: 150px;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#center {
+  margin-top: 10px;
+  margin-left: 900px;
+  padding-bottom: 20px;
+}
+
+/* Modal */
+.dark-modal .modal-content {
+  background-color: #292b2c;
+  color: white;
+}
+
+.dark-modal .close {
+  color: white;
+}
+
+.light-blue-backdrop {
+  background-color: #5cb3fd;
+}
+
+/* Modal */
+#question-modal {
+  text-align: center;
+}
+
+#question-modal form {
+  margin: auto;
+  width: 80%;
+}
+
+#question-modal textarea {
+  min-height: 100px;
+}
+
+#submit-button {
+  margin-top: 20px;
+}
+
+#streatch {
+  width: 800px;
+}
+
+#answer-button {
+  text-align: left;
+}
+
+.answer-content {
+  text-align: left;
+}
+
+#answer-form textarea {
+  width: 70%;
+}
+
+#answer-form button {
+  margin-left: 30px;
+}
+
+.answer-item {
+  margin: 8px;
+  margin-bottom: 15px;
+  border-style: solid;
+  border-width: medium;
+}
+
+.question-item {
+  padding: 8px;
+  padding-top: 15px;
+  margin: 8px;
+  margin-bottom: 15px;
+  border-style: solid;
+  border-width: thin;
+  width: 800px;
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+}
+
+.question-index {
+  background: gray;
+  font-weight: bold;
+}

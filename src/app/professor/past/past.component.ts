@@ -1,23 +1,24 @@
-
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Course } from '../../app.component';
 import { DataService } from 'src/app/data.service';
 import { LocalStorageService } from 'ngx-webstorage';
 @Component({
-  selector: 'app-after',
-  templateUrl: './after.component.html',
-  styleUrls: ['./after.component.css']
+  selector: 'app-past',
+  templateUrl: './past.component.html',
+  styleUrls: ['./past.component.css']
 })
-export class AfterComponent implements OnInit {
+export class PastComponent implements OnInit {
+
   course: Course;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private data: DataService,
-    private storage: LocalStorageService) {
+    private storage: LocalStorageService
+  ) {
     this.course = this.data.initCurrentCourse();
   }
-
   ngOnInit() {
     this.storage.observe('currentCourse')
       .subscribe((course: Course) => this.course = course);
