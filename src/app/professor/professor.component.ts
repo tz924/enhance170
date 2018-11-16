@@ -1,5 +1,5 @@
 import { Component, OnInit, Query, Injectable, Inject } from '@angular/core';
-import { Question, Lecture } from '../app.component';
+import { Question, Lecture, Course } from '../app.component';
 import { FeedbackService } from '../feedback.service';
 
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
@@ -48,6 +48,7 @@ export class ProfessorComponent implements OnInit {
   checked: Question[];
   deleted: Question[];
   lecture: Lecture;
+  currentCourse: Course;
   showQs: boolean;
   showChecked: boolean;
   showDeleted: boolean;
@@ -82,11 +83,8 @@ export class ProfessorComponent implements OnInit {
     this.showDeleted = false;
     this.questionState = 'move';
 
-    this.lecture = {
-      title: 'Lecture 1',
-      time: new Date(2018, 10, 24, 10, 33, 30, 0),
-      nbrOnline: 121
-    };
+    this.lecture = this.data.initLecture();
+    this.currentCourse = this.data.initCurrentCourse();
 
     this.defaultQuestions = [
       {

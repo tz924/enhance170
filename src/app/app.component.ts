@@ -27,3 +27,10 @@ export interface Lecture {
   time: Date;
   nbrOnline: number;
 }
+
+export interface Answer {
+  index: number;
+  content: string;
+  duration: number;
+  nbrLikes: number;
+}

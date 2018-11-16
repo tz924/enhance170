@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LocalStorage } from '@ngx-pwa/local-storage';
-import { Question, Course } from './app.component';
+import { Question, Course, Lecture, Answer } from './app.component';
 import { LocalStorageService } from 'ngx-webstorage';
 
 @Injectable({
@@ -8,6 +7,16 @@ import { LocalStorageService } from 'ngx-webstorage';
 })
 export class DataService {
 
+  // Lecture
+  defaultLecture: Lecture = {
+    title: 'Lecture 1',
+    time: new Date(2018, 10, 24, 10, 33, 30, 0),
+    nbrOnline: 121
+  };
+
+  lecture: Lecture;
+
+  // Questions
   defaultQuestions: Question[] = [
     {
       index: 1,
@@ -79,8 +88,43 @@ export class DataService {
   // Current course
   currentCourse: Course;
 
+  // Answers
+  defaultAnswers: Answer[] = [
+    {
+      index: 1,
+      content: 'The syllabus is on the website underneath the labs.',
+      duration: 3,
+      nbrLikes: 10,
+    },
+    {
+      index: 2,
+      content: 'You are allowed to be excused from maximum two labs, if \
+      you have good reasons for it.',
+      duration: 16,
+      nbrLikes: 10,
+    },
+  ];
+
+  answers: Answer[];
+
+  // Students
+  students = [
+    { 'PID': 'A92111691', 'name': 'Peter Wang', 'time': '13:51 PM', 'questions': '0' },
+    { 'PID': 'A27818929', 'name': 'Jenna Larson', 'time': '13:55 PM', 'questions': '2' },
+    { 'PID': 'A73629289', 'name': 'Dave Ross', 'time': '13:57 PM', 'questions': '1' },
+    { 'PID': 'A17382999', 'name': 'Jody Bird', 'time': '13:59 PM', 'questions': '0' },
+    { 'PID': 'A16253423', 'name': 'Manny McKenzie', 'time': '14:00 PM', 'questions': '3' },
+    { 'PID': 'A98987625', 'name': 'Jonathan Ohlson', 'time': '14:00 PM', 'questions': '1' },
+    { 'PID': 'A92731691', 'name': 'Clara Waltz', 'time': '14:01 PM', 'questions': '6' },
+    { 'PID': 'A92823711', 'name': 'Anna Finnigan', 'time': '14:01 PM', 'questions': '2' },
+    { 'PID': 'A15263772', 'name': 'Sophia Kageman', 'time': '14:04 PM', 'questions': '0' },
+    { 'PID': 'A88372613', 'name': 'Sara Webber', 'time': '14:05 PM', 'questions': '1' },
+    { 'PID': 'A33546278', 'name': 'Kirsty Larsson', 'time': '14:11 PM', 'questions': '0' }
+  ];
+
   constructor(private storage: LocalStorageService) { }
 
+  // Question API
   initQuestions() {
     const questionsData = this.storage.retrieve('questions');
 
@@ -98,6 +142,7 @@ export class DataService {
     this.storage.store('questions', questions);
   }
 
+  // Course API
   initCourses() {
     const coursesData = this.storage.retrieve('courses');
 
@@ -128,4 +173,35 @@ export class DataService {
     return this.currentCourse;
   }
 
+  // Lecture API
+  initLecture() {
+    // const lectureData = this.storage.retrieve('lecture');
+
+    // if (!lectureData) {
+    //   this.lecture = this.defaultLecture;
+    //   this.storage.store('lecture', this.lecture);
+    // } else {
+    //   this.lecture = lectureData;
+    // }
+
+    return this.defaultLecture;
+  }
+
+  // Answers API
+  initAnswers() {
+    const answersData = this.storage.retrieve('answers');
+
+    if (!answersData) {
+      this.storage.store('answers', this.defaultAnswers);
+      this.answers = this.defaultAnswers;
+    } else {
+      this.answers = answersData;
+    }
+
+    return this.answers;
+  }
+
+  updateAnswers(answers: Question[]) {
+    this.storage.store('answers', answers);
+  }
 }

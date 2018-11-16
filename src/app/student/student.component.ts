@@ -4,6 +4,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { LocalStorageService } from 'ngx-webstorage';
 import { DataService } from '../data.service';
+import { Question, Lecture, Answer } from '../app.component';
 
 @Component({
   selector: 'app-student',
@@ -12,10 +13,11 @@ import { DataService } from '../data.service';
 })
 export class StudentComponent implements OnInit {
   questions: Question[];
-  answers: Question[];
+  answers: Answer[];
   checked: Question[];
   deleted: Question[];
   lecture: Lecture;
+
   showQuestions: boolean;
   showChecked: boolean;
   showDeleted: boolean;
@@ -45,32 +47,13 @@ export class StudentComponent implements OnInit {
     this.showDeleted = false;
     this.answerContent = new FormControl('');
 
-    this.lecture = {
-      title: 'Lecture 1',
-      time: new Date(2018, 10, 24, 10, 33, 30, 0),
-      nbrOnline: 121
-    };
+    this.lecture = this.data.initLecture();
 
     // Make up some fake datas
     this.questions = this.data.initQuestions();
 
     // Fake data for answers
-    this.answers = [
-      {
-        index: 1,
-        content: 'The answer to this question is Never at water me might.',
-        duration: 1,
-        nbrAnswers: 1,
-        nbrLikes: 10,
-      },
-      {
-        index: 2,
-        content: 'The answer to this question is Compliment interested discretion estimating.',
-        duration: 1,
-        nbrAnswers: 1,
-        nbrLikes: 10,
-      },
-    ];
+    this.answers = this.data.initAnswers();
   }
 
   // Modal
@@ -109,6 +92,7 @@ export class StudentComponent implements OnInit {
     for (let i = 0; i < this.questions.length; i++) {
       if (this.questions[i].index === index) {
         question = this.questions.splice(i, 1)[0];
+        this.data.updateQuestions(this.questions);
       }
     }
 
@@ -120,6 +104,7 @@ export class StudentComponent implements OnInit {
     for (let i = 0; i < this.questions.length; i++) {
       if (this.questions[i].index === index) {
         question = this.questions.splice(i, 1)[0];
+        this.data.updateQuestions(this.questions);
       }
     }
 
@@ -129,9 +114,7 @@ export class StudentComponent implements OnInit {
   onMoreClick() {
     this.questions.push({
       index: Math.floor(Math.random()),
-      content: 'Compliment interested discretion estimating on stimulated \
-      apartments oh. Dear so sing when in find read of call. As distrusts \
-      behaviour abilities defective is. Never at water me might.',
+      content: 'new questions',
       duration: Math.floor(Math.random() * 10) + Math.floor(Math.random()),
       nbrAnswers: Math.floor(Math.random()),
       nbrLikes: Math.floor(Math.random() * 10) + Math.floor(Math.random()),
@@ -141,13 +124,13 @@ export class StudentComponent implements OnInit {
   // Form handlers
   createQuestionForm() {
     this.questionForm = this.formBuilder.group({
-      // content: ['', Validators.required]
       content: ['', Validators.required]
     });
   }
 
   onQuestionSubmit(content: string) {
     this.feedbackService.questionSubmitted.emit(content);
+
     this.questions.push({
       index: this.questions.length + 1,
       content: content,
@@ -155,33 +138,19 @@ export class StudentComponent implements OnInit {
       nbrAnswers: 0,
       nbrLikes: 0
     });
+    this.data.updateQuestions(this.questions);
+
     this.questionForm.reset();
     this.questionModal.close();
   }
-
 
   onAnswerSubmit(answerContent: string) {
     this.answers.push({
       index: this.answers.length + 1,
       content: answerContent,
       duration: 1,
-      nbrAnswers: 0,
       nbrLikes: 0
     });
   }
 
-}
-
-interface Question {
-  index: number;
-  content: string;
-  duration: number;
-  nbrAnswers: number;
-  nbrLikes: number;
-}
-
-interface Lecture {
-  title: string;
-  time: Date;
-  nbrOnline: number;
 }
