@@ -122,6 +122,10 @@ export class DataService {
     { 'PID': 'A33546278', 'name': 'Kirsty Larsson', 'time': '14:11 PM', 'questions': '0' }
   ];
 
+  // Special questions
+  deleted: Question[];
+  checked: Question[];
+
   constructor(private storage: LocalStorageService) { }
 
   // Question API
@@ -204,4 +208,39 @@ export class DataService {
   updateAnswers(answers: Question[]) {
     this.storage.store('answers', answers);
   }
+
+  // Special List
+    initDeleted() {
+      const deletedData = this.storage.retrieve('deleted');
+
+      if (!deletedData) {
+        this.deleted = [];
+        this.storage.store('deleted', this.deleted);
+      } else {
+        this.deleted = deletedData;
+      }
+
+      return this.deleted;
+    }
+
+    updateDeleted(deleted: Question[]) {
+      this.storage.store('deleted', deleted);
+    }
+
+    initChecked() {
+      const checkedData = this.storage.retrieve('checked');
+
+      if (!checkedData) {
+        this.checked = [];
+        this.storage.store('checked', this.checked);
+      } else {
+        this.checked = checkedData;
+      }
+
+      return this.checked;
+    }
+
+    updateChecked(checked: Question[]) {
+      this.storage.store('checked', checked);
+    }
 }

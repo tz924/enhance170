@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 
+
 /* Component */
 import { AppComponent } from './app.component';
 import { ProfessorComponent } from './professor/professor.component';
@@ -25,6 +26,9 @@ import { AfterComponent } from './professor/after/after.component';
 import { TestComponent } from './test/test.component';
 import { DemoComponent } from './demo/demo.component';
 import { PastComponent } from './professor/past/past.component';
+import { TaComponent } from './ta/ta.component';
+
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   /* Component Injection */
@@ -43,7 +47,9 @@ import { PastComponent } from './professor/past/past.component';
     AfterComponent,
     TestComponent,
     DemoComponent,
-    PastComponent
+    PastComponent,
+    TaComponent,
+    FilterPipe
   ],
   /* Module Injection */
   imports: [

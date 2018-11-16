@@ -74,9 +74,8 @@ export class ProfessorComponent implements OnInit {
 
   ngOnInit() {
     // Initialize necessary objects
-
-    this.checked = [];
-    this.deleted = [];
+    this.checked = this.data.initChecked();
+    this.deleted = this.data.initDeleted();
     this.showQs = true;
     this.showChecked = false;
     this.showDeleted = false;
@@ -93,6 +92,14 @@ export class ProfessorComponent implements OnInit {
       this.questions = this.storage.retrieve('questions');
       this.onNewQuestion();
     });
+
+    this.storage.observe('deleted').subscribe(e => {
+      this.deleted = this.storage.retrieve('deleted');
+    });
+
+    this.storage.observe('checked').subscribe(e => {
+      this.checked = this.storage.retrieve('checked');
+    });
   }
 
   checkQuestion(index: number) {
@@ -105,6 +112,7 @@ export class ProfessorComponent implements OnInit {
     }
 
     this.checked.push(question);
+    this.data.updateChecked(this.checked);
   }
 
   deleteQuestion(index: number) {
@@ -117,6 +125,7 @@ export class ProfessorComponent implements OnInit {
     }
 
     this.deleted.push(question);
+    this.data.updateDeleted(this.deleted);
   }
 
   onLikeClick(question: Question) {

@@ -5,13 +5,12 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { LocalStorageService } from 'ngx-webstorage';
 import { DataService } from '../data.service';
 import { Question, Lecture, Answer } from '../app.component';
-
 @Component({
-  selector: 'app-student',
-  templateUrl: './student.component.html',
-  styleUrls: ['./student.component.css']
+  selector: 'app-ta',
+  templateUrl: './ta.component.html',
+  styleUrls: ['./ta.component.css']
 })
-export class StudentComponent implements OnInit {
+export class TaComponent implements OnInit {
   questions: Question[];
   answers: Answer[];
   checked: Question[];
@@ -41,9 +40,8 @@ export class StudentComponent implements OnInit {
 
   ngOnInit() {
     // Initialize necessary objects
-    this.questions = [];
-    this.checked = [];
-    this.deleted = [];
+    this.checked = this.data.initChecked();
+    this.deleted = this.data.initDeleted();
     this.showQuestions = true;
     this.showChecked = false;
     this.showDeleted = false;
@@ -60,6 +58,14 @@ export class StudentComponent implements OnInit {
     // Sync with local storage
     this.storage.observe('questions').subscribe(e => {
       this.questions = this.storage.retrieve('questions');
+    });
+
+    this.storage.observe('deleted').subscribe(e => {
+      this.deleted = this.storage.retrieve('deleted');
+    });
+
+    this.storage.observe('checked').subscribe(e => {
+      this.checked = this.storage.retrieve('checked');
     });
   }
 
@@ -104,6 +110,7 @@ export class StudentComponent implements OnInit {
     }
 
     this.checked.push(question);
+    this.data.updateChecked(this.checked);
   }
 
   deleteQuestion(index: number) {
@@ -116,16 +123,7 @@ export class StudentComponent implements OnInit {
     }
 
     this.deleted.push(question);
-  }
-
-  onMoreClick() {
-    this.questions.push({
-      index: Math.floor(Math.random()),
-      content: 'new questions',
-      duration: Math.floor(Math.random() * 10) + Math.floor(Math.random()),
-      nbrAnswers: Math.floor(Math.random()),
-      nbrLikes: Math.floor(Math.random() * 10) + Math.floor(Math.random()),
-    });
+    this.data.updateDeleted(this.deleted);
   }
 
   // Form handlers

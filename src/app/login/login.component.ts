@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     } else if (this.userType === 'student') {
       this.router.navigateByUrl('/student');
     } else if (this.userType === 'TA') {
-      this.router.navigateByUrl('/professor');
+      this.router.navigateByUrl('/ta');
     }
   }
 
