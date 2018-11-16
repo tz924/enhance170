@@ -54,6 +54,11 @@ export class StudentComponent implements OnInit {
 
     // Fake data for answers
     this.answers = this.data.initAnswers();
+
+    // Sync with local storage
+    this.storage.observe('questions').subscribe(e => {
+      this.questions = this.storage.retrieve('questions');
+    });
   }
 
   // Modal

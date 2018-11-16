@@ -43,7 +43,6 @@ import { DataService } from '../data.service';
 @Injectable()
 export class ProfessorComponent implements OnInit {
 
-  defaultQuestions: Question[];
   questions: Question[];
   checked: Question[];
   deleted: Question[];
@@ -86,64 +85,14 @@ export class ProfessorComponent implements OnInit {
     this.lecture = this.data.initLecture();
     this.currentCourse = this.data.initCurrentCourse();
 
-    this.defaultQuestions = [
-      {
-        index: 1,
-        content: 'Where can I find the course syllabus? \
-        Is it on the course website, and if so where?',
-        duration: 13,
-        nbrAnswers: 3,
-        nbrLikes: 10,
-      },
-      {
-        index: 2,
-        content: 'Is attendance being taken at the labs? What if we need to \
-        miss a lab? Can we be excused?',
-        duration: 4,
-        nbrAnswers: 1,
-        nbrLikes: 5,
-      },
-      {
-        index: 3,
-        content: 'Considering the various types of questions to avoid, what \
-      if there is a necessity to find out about that data, say how often \
-      they spend time watching TV?',
-        duration: 1,
-        nbrAnswers: 7,
-        nbrLikes: 3,
-      },
-      {
-        index: 3,
-        content: 'What sort of consent form should we send out if we do \
-        want to conduct an audio or video recording?',
-        duration: 1,
-        nbrAnswers: 2,
-        nbrLikes: 3,
-      },
-      {
-        index: 4,
-        content: 'Is the point of view only talking about the problems \
-      or does it suggest some sort of broad solution?',
-        duration: 1,
-        nbrAnswers: 0,
-        nbrLikes: 1,
-      },
-      {
-        index: 11,
-        content: 'What are some strategies to finding a good team?',
-        duration: 1,
-        nbrAnswers: 1,
-        nbrLikes: 0,
-      }
-    ];
-
     // Update questions
     this.questions = this.data.initQuestions();
 
     // Update local storage on Change
-    this.storage.observe('questions').subscribe(
-      this.questions = this.storage.retrieve('questions')
-    );
+    this.storage.observe('questions').subscribe(e => {
+      this.questions = this.storage.retrieve('questions');
+      this.onNewQuestion();
+    });
   }
 
   checkQuestion(index: number) {
