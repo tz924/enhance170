@@ -1,8 +1,9 @@
 
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppComponent, Course } from '../../app.component';
-import { CourseService } from 'src/app/course.service';
+import { Course } from '../../app.component';
+import { DataService } from 'src/app/data.service';
+import { LocalStorageService } from 'ngx-webstorage';
 @Component({
   selector: 'app-after',
   templateUrl: './after.component.html',
@@ -12,19 +13,14 @@ export class AfterComponent implements OnInit {
   course: Course;
 
   constructor(private router: Router,
-    private app: AppComponent,
-    private courseService: CourseService) {
-
-      this.courseService.currentCourse.subscribe(
-        (course: Course) => {
-          this.course = course;
-        }
-      );
-
-    }
+    private data: DataService,
+    private storage: LocalStorageService) {
+    this.course = this.data.initCurrentCourse();
+  }
 
   ngOnInit() {
-    this.course = this.app.currentCourse;
+    this.storage.observe('currentCourse')
+      .subscribe((course: Course) => this.course = course);
   }
 
   onStart() {

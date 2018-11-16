@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'professor', component: ProfessorComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'student', component: StudentComponent },
+
   // Debug Route
   { path: 'prof-start', component: StartComponent },
   { path: 'prof-after', component: AfterComponent },
@@ -31,11 +32,12 @@ const routes: Routes = [
   { path: 'sidebar', component: SidebarComponent },
   { path: 'navigation', component: NavigationComponent },
   { path: 'prof-past', component: PastComponent },
+
   // Demo features
   { path: 'demo', component: DemoComponent },
+
   // Experimental features
   { path: 'test', component: TestComponent },
-
 ];
 
 @NgModule({

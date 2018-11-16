@@ -39,13 +39,13 @@
 
       <!-- Hand -->
       <div class="row" id="hand-div">
-        <button [@myAwesomeAnimation]='questionState' (click)="showNormalQuestions()"><img src="assets/handraiseb.png"
-            alt="raise hand" class="mx-auto" id="hand">
+        <button [@myAwesomeAnimation]='questionState' (click)="showQuestions()"><img src="assets/handraiseb.png" alt="raise hand"
+            class="mx-auto" id="hand">
         </button>
       </div>
 
       <!-- Question List -->
-      <div *ngIf="showQuestions" class="row">
+      <div *ngIf="showQs" class="row">
 
         <!-- Question Item -->
         <div *ngFor="let question of questions | slice:0:4" class="row question" (click)="onQuestionClick()">

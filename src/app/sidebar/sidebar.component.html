@@ -2,7 +2,7 @@
 
   <div class="col-md-3">
     <div class="center">
-      <br /> 
+      <br />
       <!-- Profile Image -->
       <div class="profile-img">
         <img src="assets/blueuser.png" alt="">
@@ -19,7 +19,7 @@
       <div class="menu">
         <ul>
           <!-- Courses -->
-          <li *ngFor="let course of courses" (click)="onCourseClick(course)">{{course.department}} {{course.id}}</li>
+          <li *ngFor="let course of courses" (click)="onCourseClick(course)">{{course.name}}</li>
         </ul>
       </div>
       <!-- Sidebar Menu -->

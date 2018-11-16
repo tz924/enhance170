@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 /* Component */
 import { AppComponent } from './app.component';
@@ -53,7 +54,8 @@ import { PastComponent } from './professor/past/past.component';
     FormsModule,            // Forms data binding,
     BrowserAnimationsModule, // For image animations
     ReactiveFormsModule,
-    PdfViewerModule
+    PdfViewerModule,
+    NgxWebstorageModule.forRoot()  // For local storage
   ],
   /* Service Injection */
   providers: [],

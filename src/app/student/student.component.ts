@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FeedbackService } from '../feedback.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { LocalStorageService } from 'ngx-webstorage';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-student',
@@ -27,7 +29,9 @@ export class StudentComponent implements OnInit {
   constructor(
     private feedbackService: FeedbackService,   // Service for questions
     private formBuilder: FormBuilder,
-    private modalService: NgbModal) {
+    private modalService: NgbModal,
+    private storage: LocalStorageService,
+    private data: DataService) {
     this.createQuestionForm();
   }
 
@@ -48,65 +52,7 @@ export class StudentComponent implements OnInit {
     };
 
     // Make up some fake datas
-    this.questions.push({
-      index: 1,
-      content: 'Compliment interested discretion estimating on stimulated \
-      apartments. Dear so sing when in find read of call. As distrusts \
-      behaviour abilities defective is. Never at water me might.',
-      duration: 13,
-      nbrAnswers: 12,
-      nbrLikes: 10,
-    });
-
-    this.questions.push({
-      index: 2,
-      content: 'Compliment interested discretion estimating on stimulated \
-      apartments oh. Dear so sing when in find read of call. As distrusts \
-      behaviour abilities defective is. Never at water me might.',
-      duration: 4,
-      nbrAnswers: 1,
-      nbrLikes: 10,
-    });
-
-    this.questions.push({
-      index: 3,
-      content: 'Compliment interested discretion estimating on stimulated \
-      apartments oh. Dear so sing when in find read of call. As distrusts \
-      behaviour abilities defective is. Never at water me might.',
-      duration: 1,
-      nbrAnswers: 1,
-      nbrLikes: 10,
-    });
-
-    this.questions.push({
-      index: 3,
-      content: 'Compliment interested discretion estimating on stimulated \
-      apartments oh. Dear so sing when in find read of call. As distrusts \
-      behaviour abilities defective is. Never at water me might.',
-      duration: 1,
-      nbrAnswers: 1,
-      nbrLikes: 10,
-    });
-
-    this.questions.push({
-      index: 3,
-      content: 'Compliment interested discretion estimating on stimulated \
-      apartments oh. Dear so sing when in find read of call. As distrusts \
-      behaviour abilities defective is. Never at water me might.',
-      duration: 1,
-      nbrAnswers: 1,
-      nbrLikes: 10,
-    });
-
-    this.questions.push({
-      index: 11,
-      content: 'Compliment interested discretion estimating on stimulated \
-      apartments oh. Dear so sing when in find read of call. As distrusts \
-      behaviour abilities defective is. Never at water me might.',
-      duration: 1,
-      nbrAnswers: 1,
-      nbrLikes: 10,
-    });
+    this.questions = this.data.initQuestions();
 
     // Fake data for answers
     this.answers = [
