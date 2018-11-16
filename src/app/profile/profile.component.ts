@@ -1,4 +1,7 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LocalStorageService } from 'ngx-webstorage';
+import { DataService } from '../data.service';
+import { Course } from '../app.component';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +10,17 @@ import { Component, OnInit, HostListener } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  course: Course;
+
+  constructor(
+    private storage: LocalStorageService,
+    private data: DataService
+  ) { }
 
   ngOnInit() {
+    this.course = this.data.initCurrentCourse();
+    this.storage.observe('currentCourse')
+      .subscribe((course: Course) => this.course = course);
   }
 
 }

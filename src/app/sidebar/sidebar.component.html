@@ -1,11 +1,11 @@
 <div class="row">
 
-  <div class="col-md-3">
+  <div class="col-3">
     <div class="center">
       <br />
       <!-- Profile Image -->
       <div class="profile-img">
-        <img src="assets/blueuser.png" alt="">
+        <img routerLink="/profile" src="assets/blueuser.png" alt="">
       </div>
       <!-- END Profile Image -->
 
@@ -21,14 +21,14 @@
           <!-- Courses -->
           <li *ngFor="let course of courses" (click)="onCourseClick(course)">{{course.name}}</li>
         </ul>
+        <div id="add"><img (click)="onCourseSubmit()" src="assets/add.png"></div>
       </div>
       <!-- Sidebar Menu -->
     </div>
   </div>
 
   <!-- Content -->
-  <div class="col-md-9">
+  <div class="col-9">
     <ng-content></ng-content>
   </div>
-
 </div>

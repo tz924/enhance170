@@ -1,8 +1,8 @@
 import { Inject, Injectable, Component, OnInit } from '@angular/core';
 import { AppComponent, Course } from '../app.component';
-import { CourseService } from '../course.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { DataService } from '../data.service';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,6 +16,9 @@ export class SidebarComponent implements OnInit {
   defaultCourses: Course[];
   courses: Course[];
   currentCourse: Course;
+  name: string;
+  size: number;
+  courseModal: NgbModalRef;
 
   constructor(private app: AppComponent,
     private storage: LocalStorageService,
@@ -33,10 +36,10 @@ export class SidebarComponent implements OnInit {
     // console.log(this.currentCourse);
 
     this.storage.observe('courses')
-      .subscribe((courses) => console.log('new courses', courses));
+      .subscribe(courses => this.courses = courses);
 
     this.storage.observe('currentCourse')
-      .subscribe((course) => console.log('new current course', course));
+      .subscribe(currentCourse => this.currentCourse = currentCourse);
   }
 
   // Change the course
@@ -46,4 +49,8 @@ export class SidebarComponent implements OnInit {
     this.storage.store('currentCourse', this.currentCourse);
   }
 
+  onCourseSubmit() {
+    this.courses.push({ name: 'CSE 100', size: 50 });
+    this.data.updateCourses(this.courses);
+  }
 }
