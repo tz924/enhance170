@@ -1,10 +1,8 @@
 import { Inject, Injectable, Component, OnInit } from '@angular/core';
 import { AppComponent, Course } from '../app.component';
 import { CourseService } from '../course.service';
-import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
-
-// TODO change
-const STORAGE_KEY = 'pure-awesomeness';
+import { LocalStorageService } from 'ngx-webstorage';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,30 +13,37 @@ const STORAGE_KEY = 'pure-awesomeness';
 @Injectable()
 export class SidebarComponent implements OnInit {
 
+  defaultCourses: Course[];
   courses: Course[];
+  currentCourse: Course;
 
   constructor(private app: AppComponent,
-    private courseService: CourseService,
-    @Inject(LOCAL_STORAGE) private storage: StorageService) { }
+    private storage: LocalStorageService,
+    private data: DataService) { }
 
   ngOnInit() {
-    this.courses = [];
-    const defaultCourse = { department: 'CSE', id: 138, attendence: 123 };
+    // Set up courses
+    this.courses = this.data.initCourses();
 
-    this.courses.push(defaultCourse);
-    this.courses.push({ department: 'CSE', id: 160, attendence: 45 });
-    this.courses.push({ department: 'CSE', id: 120, attendence: 60 });
-    this.courseService.currentCourse.emit(defaultCourse);
+    // this.courses.forEach(x => console.log(x));
+
+    // Set up current course
+    this.currentCourse = this.data.initCurrentCourse();
+
+    // console.log(this.currentCourse);
+
+    this.storage.observe('courses')
+      .subscribe((courses) => console.log('new courses', courses));
+
+    this.storage.observe('currentCourse')
+      .subscribe((course) => console.log('new current course', course));
   }
 
+  // Change the course
   onCourseClick(course: Course) {
-    this.courseService.currentCourse.emit(course);
-
-    // Test
-    const awesomenessLevel: number = this.storage.get(STORAGE_KEY) || 1337;
-    this.storage.set(STORAGE_KEY, awesomenessLevel + 1);
+    // Update course
+    this.currentCourse = course;
+    this.storage.store('currentCourse', this.currentCourse);
   }
-
-
 
 }

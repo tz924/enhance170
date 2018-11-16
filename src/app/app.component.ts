@@ -7,11 +7,23 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'enhance170';
-  currentCourse: Course = { department: 'CSE', id: 138, attendence: 123 };
 }
 
 export interface Course {
-  department: string;
-  id: number;
-  attendence: number;
+  name: string;
+  size: number;
+}
+
+export interface Question {
+  index: number;
+  content: string;
+  duration: number;
+  nbrAnswers: number;
+  nbrLikes: number;
+}
+
+export interface Lecture {
+  title: string;
+  time: Date;
+  nbrOnline: number;
 }
