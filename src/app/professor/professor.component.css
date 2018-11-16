@@ -149,3 +149,13 @@ input {
   font-weight: bold;
   background: gray;
 }
+
+.content-box {
+  align-self: left;
+}
+
+.content-box button {
+  color: black;
+}
+
+.content-index {}
