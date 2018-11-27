@@ -41,11 +41,13 @@ export class Student2Component implements OnInit {
     private storage: LocalStorageService,
     private data: DataService,
     private reversePipe: ReversePipe) {
-    this.createQuestionForm();
-    this.course = this.data.initCurrentCourse();
   }
 
   ngOnInit() {
+    this.createQuestionForm();
+    this.data.initCourses();
+    this.course = this.data.initCurrentCourse();
+
     // Initialize necessary objects
     this.questions = [];
     this.checked = [];
