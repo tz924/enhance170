@@ -47,6 +47,7 @@ export class Student2Component implements OnInit {
     this.createQuestionForm();
     this.data.initCourses();
     this.course = this.data.initCurrentCourse();
+    this.data.updateUserType('student');
 
     // Initialize necessary objects
     this.questions = [];

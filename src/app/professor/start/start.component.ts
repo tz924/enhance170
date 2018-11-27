@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AppComponent, Course } from '../../app.component';
 import { CourseService } from 'src/app/course.service';
 import { LocalStorageService } from 'ngx-webstorage';
+import { DataService } from 'src/app/data.service';
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
@@ -13,7 +14,9 @@ export class StartComponent implements OnInit {
   course: Course;
 
   constructor(
-    private router: Router, private app: AppComponent,
+    private data: DataService,
+    private router: Router,
+    private app: AppComponent,
     private storage: LocalStorageService
   ) {
     this.course = this.storage.retrieve('currentCourse');
@@ -22,6 +25,7 @@ export class StartComponent implements OnInit {
   ngOnInit() {
     this.storage.observe('currentCourse')
       .subscribe((course: Course) => this.course = course);
+    this.data.updateUserType('professor');
   }
 
   onStart() {
