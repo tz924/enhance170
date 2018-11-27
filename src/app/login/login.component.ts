@@ -23,6 +23,16 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
+    if (!this.password) {
+      alert('Please enter your password!');
+      return;
+    }
+
+    if (!this.email) {
+      alert('Please enter your email!');
+      return;
+    }
+
     if (this.password === 'clear') {
       this.storage.clear();
     }
