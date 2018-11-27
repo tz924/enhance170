@@ -29,6 +29,7 @@ import { PastComponent } from './professor/past/past.component';
 import { TaComponent } from './ta/ta.component';
 
 import { FilterPipe } from './filter.pipe';
+import { Student2Component } from './student2/student2.component';
 
 @NgModule({
   /* Component Injection */
@@ -49,7 +50,8 @@ import { FilterPipe } from './filter.pipe';
     DemoComponent,
     PastComponent,
     TaComponent,
-    FilterPipe
+    FilterPipe,
+    Student2Component
   ],
   /* Module Injection */
   imports: [

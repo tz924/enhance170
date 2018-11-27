@@ -210,37 +210,37 @@ export class DataService {
   }
 
   // Special List
-    initDeleted() {
-      const deletedData = this.storage.retrieve('deleted');
+  initDeleted() {
+    const deletedData = this.storage.retrieve('deleted');
 
-      if (!deletedData) {
-        this.deleted = [];
-        this.storage.store('deleted', this.deleted);
-      } else {
-        this.deleted = deletedData;
-      }
-
-      return this.deleted;
+    if (!deletedData) {
+      this.deleted = [];
+      this.storage.store('deleted', this.deleted);
+    } else {
+      this.deleted = deletedData;
     }
 
-    updateDeleted(deleted: Question[]) {
-      this.storage.store('deleted', deleted);
+    return this.deleted;
+  }
+
+  updateDeleted(deleted: Question[]) {
+    this.storage.store('deleted', deleted);
+  }
+
+  initChecked() {
+    const checkedData = this.storage.retrieve('checked');
+
+    if (!checkedData) {
+      this.checked = [];
+      this.storage.store('checked', this.checked);
+    } else {
+      this.checked = checkedData;
     }
 
-    initChecked() {
-      const checkedData = this.storage.retrieve('checked');
+    return this.checked;
+  }
 
-      if (!checkedData) {
-        this.checked = [];
-        this.storage.store('checked', this.checked);
-      } else {
-        this.checked = checkedData;
-      }
-
-      return this.checked;
-    }
-
-    updateChecked(checked: Question[]) {
-      this.storage.store('checked', checked);
-    }
+  updateChecked(checked: Question[]) {
+    this.storage.store('checked', checked);
+  }
 }

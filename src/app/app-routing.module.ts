@@ -17,6 +17,7 @@ import { PastComponent } from './professor/past/past.component';
 import { TestComponent } from './test/test.component';
 import { DemoComponent } from './demo/demo.component';
 import { TaComponent } from './ta/ta.component';
+import { Student2Component } from './student2/student2.component';
 
 const routes: Routes = [
   // Set root to login page
@@ -25,6 +26,8 @@ const routes: Routes = [
   { path: 'professor', component: ProfessorComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'student', component: StudentComponent },
+  // Re-designed
+  { path: 'student-ui', component: Student2Component },
 
   // Debug Route
   { path: 'prof-start', component: StartComponent },

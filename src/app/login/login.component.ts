@@ -23,7 +23,12 @@ export class LoginComponent implements OnInit {
     if (this.userType === 'professor') {
       this.router.navigateByUrl('/prof-start');
     } else if (this.userType === 'student') {
-      this.router.navigateByUrl('/student');
+      if (this.password.toLowerCase() === 'relcom') {
+        // Redesigned
+        this.router.navigateByUrl('/student-ui');
+      } else {
+        this.router.navigateByUrl('/student');
+      }
     } else if (this.userType === 'TA') {
       this.router.navigateByUrl('/ta');
     }
