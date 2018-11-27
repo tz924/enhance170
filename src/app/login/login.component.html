@@ -6,7 +6,7 @@
 
   <div class="login-form">
 
-    <form id="Login">
+    <form name="form" (ngSubmit)="onLogin()" #f="ngForm" novalidate id="login">
 
       <div class="row">
         <div class="col-md-4 col-sm-4 col-xs-12 form-group">
@@ -36,10 +36,10 @@
       </div>
 
       <!-- Email -->
-
-      <div class="form-group">
+     <div class="form-group">
         <label for="email"></label>
-        <input type="email" class="form-control" [(ngModel)]="email" name="email" placeholder="Email Address">
+        <input type="email" class="form-control" [(ngModel)]="email" name="email" placeholder="Email Address" ngModel
+          email>
       </div>
 
       <!-- Password -->
@@ -54,7 +54,7 @@
       </div>
 
       <!-- Login Button -->
-      <button type="submit" class="btn btn-primary" (click)="onLogin()" id="login-button">Login</button>
+      <button type="submit" class="btn btn-primary" id="login-button">Login</button>
 
     </form>
 

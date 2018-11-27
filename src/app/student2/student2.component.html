@@ -4,7 +4,7 @@
   <div class="container">
 
     <div class="row">
-      <div class="col-2"></div>
+      <div class="col-1"></div>
       <div class="col-3">
         <p class="class-title">{{course.name}} : {{course.size}} students</p>
       </div>
@@ -48,7 +48,6 @@
         <!-- Question List -->
         <div *ngIf="showQuestions" class="row">
 
-
           <!-- Question Item -->
           <div *ngFor="let question of questions | slice:0:4 | filter: searchText" class="row question question-item">
             <!-- Question -->
@@ -73,7 +72,7 @@
                     <img src="assets/clock.png" width="25" height="25" alt="clock">Now
 
                     <p *ngIf="question.duration > 1" class="truncate">
-                      <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
+                      <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}min</p>
                 </div>
 
                 <!-- Answers -->
@@ -113,55 +112,57 @@
             </div>
           </div>
 
-
         </div>
 
         <!-- Checked List -->
         <div *ngIf="showChecked" class="row">
 
           <!-- Question Item -->
-          <div *ngFor="let question of checked | slice:0:4" class="row question">
+          <div *ngFor="let question of checked | slice:0:4 | filter: searchText" class="row question question-item">
 
             <!-- Question -->
-            <!-- Content -->
-            <div class="row">
-              <div class="col-md-2">
-                <button *ngIf="question.index < 10" class="default-button question-index">Q0{{question.index}}</button>
-                <button *ngIf="question.index >= 10" class="default-button question-index">Q{{question.index}}</button>
-              </div>
-              <div class="col-md-10">
-                <p class="truncate-question">{{question.content}}</p>
+            <div class="col-md-10">
+
+              <!-- Content -->
+              <div class="row">
+                <div class="col-md-2">
+                  <button class="default-button question-index" *ngIf="question.index < 10">Q0{{question.index}}</button>
+                  <button class="default-button question-index" *ngIf="question.index >= 10">Q{{question.index}}</button>
+                </div>
+                <div class="col-md-10">
+                  <p class="truncate-question question-content">{{question.content}}</p>
+                </div>
               </div>
 
+              <!-- Status -->
+              <div class="row">
+                <!-- Duration -->
+                <div class="col-md-2 question-duration">
+                  <p *ngIf="question.duration <= 1" class="truncate">
+                    <img src="assets/clock.png" width="25" height="25" alt="clock">Now
+
+                    <p *ngIf="question.duration > 1" class="truncate">
+                      <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}min</p>
+                </div>
+
+                <!-- Answers -->
+                <div class="col-md-2">
+                  <button (click)="openAModal(aModal)" class="truncate default-button" id="answer-button">
+                    <img src="assets/answer.png" width="20" height="20" alt="answer">
+                    {{question.nbrAnswers}}
+                  </button>
+                </div>
+
+                <!-- Likes -->
+                <div class="col-md-2">
+                  <p class="truncate" (click)="onLikeClick(question)">
+                    <img src="assets/thumbup.png" width="20" height="20" alt="likes">
+                    {{question.nbrLikes}}
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <!-- Status -->
-            <div class="row status">
-              <!-- Duration -->
-              <div class="col-md-2">
-                <p *ngIf="question.duration <= 1" class="truncate">
-                  <img src="assets/clock.png" width="25" height="25" alt="clock">Now
-
-                  <p *ngIf="question.duration > 1" class="truncate">
-                    <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
-              </div>
-
-              <!-- Answers -->
-              <div class="col-md-2">
-                <p class="truncate">
-                  <img src="assets/answer.png" width="20" height="20" alt="answer">
-                  {{question.nbrAnswers}}
-                </p>
-              </div>
-
-              <!-- Likes -->
-              <div class="col-md-2">
-                <p class="truncate" (click)="onLikeClick(question)">
-                  <img src="assets/thumbup.png" width="20" height="20" alt="likes">
-                  {{question.nbrLikes}}
-                </p>
-              </div>
-            </div>
           </div>
 
         </div>
@@ -170,48 +171,51 @@
         <div *ngIf="showDeleted" class="row">
 
           <!-- Question Item -->
-          <div *ngFor="let question of deleted | slice:0:4" class="row question">
+          <div *ngFor="let question of deleted | slice:0:4 | filter: searchText" class="row question question-item">
 
             <!-- Question -->
-            <!-- Content -->
-            <div class="row">
-              <div class="col-md-2">
-                <button *ngIf="question.index < 10" class="default-button question-index">Q0{{question.index}}</button>
-                <button *ngIf="question.index >= 10" class="default-button question-index">Q{{question.index}}</button>
-              </div>
-              <div class="col-md-10">
-                <p class="truncate-question">{{question.content}}</p>
+            <div class="col-md-10">
+
+              <!-- Content -->
+              <div class="row">
+                <div class="col-md-2">
+                  <button class="default-button question-index" *ngIf="question.index < 10">Q0{{question.index}}</button>
+                  <button class="default-button question-index" *ngIf="question.index >= 10">Q{{question.index}}</button>
+                </div>
+                <div class="col-md-10">
+                  <p class="truncate-question question-content">{{question.content}}</p>
+                </div>
               </div>
 
+              <!-- Status -->
+              <div class="row">
+                <!-- Duration -->
+                <div class="col-md-2 question-duration">
+                  <p *ngIf="question.duration <= 1" class="truncate">
+                    <img src="assets/clock.png" width="25" height="25" alt="clock">Now
+
+                    <p *ngIf="question.duration > 1" class="truncate">
+                      <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}min</p>
+                </div>
+
+                <!-- Answers -->
+                <div class="col-md-2">
+                  <button (click)="openAModal(aModal)" class="truncate default-button" id="answer-button">
+                    <img src="assets/answer.png" width="20" height="20" alt="answer">
+                    {{question.nbrAnswers}}
+                  </button>
+                </div>
+
+                <!-- Likes -->
+                <div class="col-md-2">
+                  <p class="truncate" (click)="onLikeClick(question)">
+                    <img src="assets/thumbup.png" width="20" height="20" alt="likes">
+                    {{question.nbrLikes}}
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <!-- Status -->
-            <div class="row status">
-              <!-- Duration -->
-              <div class="col-md-2">
-                <p *ngIf="question.duration <= 1" class="truncate">
-                  <img src="assets/clock.png" width="25" height="25" alt="clock">Now
-
-                  <p *ngIf="question.duration > 1" class="truncate">
-                    <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
-              </div>
-
-              <!-- Answers -->
-              <div class="col-md-2">
-                <p class="truncate">
-                  <img src="assets/answer.png" width="20" height="20" alt="answer">
-                  {{question.nbrAnswers}}
-                </p>
-              </div>
-
-              <!-- Likes -->
-              <div class="col-md-2">
-                <p class="truncate" (click)="onLikeClick(question)">
-                  <img src="assets/thumbup.png" width="20" height="20" alt="likes">
-                  {{question.nbrLikes}}
-                </p>
-              </div>
-            </div>
           </div>
 
         </div>

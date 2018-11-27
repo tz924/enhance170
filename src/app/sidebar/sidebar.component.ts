@@ -85,4 +85,10 @@ export class SidebarComponent implements OnInit {
   openCModal(cModal) {
     this.courseModal = this.modalService.open(cModal, { centered: true });
   }
+
+  // Handle add button
+  showAdd(): boolean {
+    return this.data.getUserType() !== 'student';
+  }
+
 }

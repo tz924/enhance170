@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-login',
@@ -16,15 +17,17 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private storage: LocalStorageService
+    private storage: LocalStorageService,
+    private data: DataService
   ) { }
 
   ngOnInit() {
   }
 
   onLogin() {
-    if (!this.password) {
-      alert('Please enter your password!');
+
+    if (!this.userType) {
+      alert('Please select your user type!');
       return;
     }
 
@@ -33,8 +36,8 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    if (!this.userType) {
-      alert('Please select your user type!');
+    if (!this.password) {
+      alert('Please enter your password!');
       return;
     }
 
@@ -42,6 +45,10 @@ export class LoginComponent implements OnInit {
       this.storage.clear();
     }
 
+    // Initialize the user type
+    this.data.initUserType(this.userType);
+
+    // Handle Routing
     if (this.userType === 'professor') {
       // Professor
       this.router.navigateByUrl('/prof-start');

@@ -126,6 +126,8 @@ export class DataService {
   deleted: Question[];
   checked: Question[];
 
+  userType: string;
+
   constructor(private storage: LocalStorageService) { }
 
   // Question API
@@ -243,4 +245,27 @@ export class DataService {
   updateChecked(checked: Question[]) {
     this.storage.store('checked', checked);
   }
+
+  // User Type API
+  initUserType(userType: string) {
+    const userTypeData = this.storage.retrieve('userType');
+
+    if (!userTypeData) {
+      this.userType = userType;
+      this.storage.store('userType', this.userType);
+    } else {
+      this.userType = userTypeData;
+    }
+
+    return this.userType;
+  }
+
+  getUserType() {
+    return this.storage.retrieve('userType');
+  }
+
+  updateUserType(userType: string) {
+    this.storage.store('userType', userType);
+  }
+
 }
