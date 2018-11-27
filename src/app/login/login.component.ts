@@ -20,20 +20,37 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.storage.clear();
   }
 
   onLogin() {
+    if (this.password === 'clear') {
+      this.storage.clear();
+    }
+
     if (this.userType === 'professor') {
+      // Professor
       this.router.navigateByUrl('/prof-start');
+
     } else if (this.userType === 'student') {
+
+      // Student
       if (this.password.toLowerCase() === 'relcom') {
         // Redesigned
         this.router.navigateByUrl('/student-ui');
       } else {
-        this.router.navigateByUrl('/student');
+
+        // Randomized 50:50
+        const dice = Math.random();
+        if (dice >= 0.5) {
+          this.router.navigateByUrl('/student-ui');
+        } else {
+          this.router.navigateByUrl('/student');
+        }
+
       }
+
     } else if (this.userType === 'TA') {
+      // TA
       this.router.navigateByUrl('/ta');
     }
   }
