@@ -1,65 +1,144 @@
 <app-navigation></app-navigation>
 
-<div class="container">
+<app-sidebar>
+  <div class="container">
 
-  <h1>Questions</h1>
-  <div class="row">
-    <div class="col-md-8" id="left">
-
-      <div id="custom-search-input">
-        <div class="col-11" id="streatch">
-
-          <!-- Search Box -->
-          <input [(ngModel)]="searchText" type="text" class="search-query form-control" placeholder="Search Term" />
-
-          <span class="input-group-btn">
-            <button class="btn btn-danger" type="button">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-          </span>
-
-        </div>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-3">
+        <p class="class-title">{{course.name}} : {{course.size}} students</p>
       </div>
+      <h1>Questions</h1>
+    </div>
 
-      <!-- Question Button -->
-      <div class="inline">
-        <button type="button" class="btn btn-primary" (click)="openQModal(qModal)">
-          <img id="reduced" src="assets/post.png">
-        </button>
+    <div class="row">
+      <div class="col-md-8" id="left">
+
+        <div id="custom-search-input">
+          <div class="col-11" id="streatch">
+
+            <!-- Search Box -->
+            <input [(ngModel)]="searchText" type="text" class="search-query form-control" placeholder="Search Term" />
+
+            <span class="input-group-btn">
+              <button class="btn btn-danger" type="button">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
+
+          </div>
+        </div>
+
+        <!-- Question Button -->
+        <div class="inline">
+          <button type="button" class="btn btn-primary" (click)="openQModal(qModal)">
+            <img id="reduced" src="assets/post.png">
+          </button>
+        </div>
+
       </div>
 
     </div>
 
-  </div>
+    <!-- Questions -->
+    <div id="moveTo">
 
-  <!-- Questions -->
-  <div id="moveTo">
+      <div id="questions">
 
-    <div id="questions">
+        <!-- Question List -->
+        <div *ngIf="showQuestions" class="row">
 
-      <!-- Question List -->
-      <div *ngIf="showQuestions" class="row">
 
-        <!-- Question Item -->
-        <div *ngFor="let question of questions | slice:0:4 | filter: searchText" class="row question question-item">
-          <!-- Question -->
-          <div class="col-md-10">
+          <!-- Question Item -->
+          <div *ngFor="let question of questions | slice:0:4 | filter: searchText" class="row question question-item">
+            <!-- Question -->
+            <div class="col-md-10">
 
-            <!-- Content -->
-            <div class="row">
-              <div class="col-md-2">
-                <button class="default-button question-index" *ngIf="question.index < 10">Q0{{question.index}}</button>
-                <button class="default-button question-index" *ngIf="question.index >= 10">Q{{question.index}}</button>
+              <!-- Content -->
+              <div class="row">
+                <div class="col-md-2">
+                  <button class="default-button question-index" *ngIf="question.index < 10">Q0{{question.index}}</button>
+                  <button class="default-button question-index" *ngIf="question.index >= 10">Q{{question.index}}</button>
+                </div>
+                <div class="col-md-10">
+                  <p class="truncate-question question-content">{{question.content}}</p>
+                </div>
               </div>
-              <div class="col-md-10">
-                <p class="truncate-question question-content">{{question.content}}</p>
+
+              <!-- Status -->
+              <div class="row">
+                <!-- Duration -->
+                <div class="col-md-2 question-duration">
+                  <p *ngIf="question.duration <= 1" class="truncate">
+                    <img src="assets/clock.png" width="25" height="25" alt="clock">Now
+
+                    <p *ngIf="question.duration > 1" class="truncate">
+                      <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
+                </div>
+
+                <!-- Answers -->
+                <div class="col-md-2">
+                  <button (click)="openAModal(aModal)" class="truncate default-button" id="answer-button">
+                    <img src="assets/answer.png" width="20" height="20" alt="answer">
+                    {{question.nbrAnswers}}
+                  </button>
+                </div>
+
+                <!-- Likes -->
+                <div class="col-md-2">
+                  <p class="truncate" (click)="onLikeClick(question)">
+                    <img src="assets/thumbup.png" width="20" height="20" alt="likes">
+                    {{question.nbrLikes}}
+                  </p>
+                </div>
               </div>
             </div>
 
-            <!-- Status -->
+            <!-- Vertical check/delete -->
+            <div class="col-md-2">
+
+              <!-- Check Button -->
+              <div class="row" id="check">
+                <button class="default-button" (click)="checkQuestion(question.index)">
+                  <img src="assets/checkblack.png" width="30" height="30" alt="check">
+                </button>
+              </div>
+
+              <!-- Delete Button -->
+              <div class="row">
+                <button class="default-button" (click)="deleteQuestion(question.index)">
+                  <img src="assets/trashcan.png" width="30" height="30" alt="delete">
+                </button>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <!-- Checked List -->
+        <div *ngIf="showChecked" class="row">
+
+          <!-- Question Item -->
+          <div *ngFor="let question of checked | slice:0:4" class="row question">
+
+            <!-- Question -->
+            <!-- Content -->
             <div class="row">
+              <div class="col-md-2">
+                <button *ngIf="question.index < 10" class="default-button question-index">Q0{{question.index}}</button>
+                <button *ngIf="question.index >= 10" class="default-button question-index">Q{{question.index}}</button>
+              </div>
+              <div class="col-md-10">
+                <p class="truncate-question">{{question.content}}</p>
+              </div>
+
+            </div>
+
+            <!-- Status -->
+            <div class="row status">
               <!-- Duration -->
-              <div class="col-md-2 question-duration">
+              <div class="col-md-2">
                 <p *ngIf="question.duration <= 1" class="truncate">
                   <img src="assets/clock.png" width="25" height="25" alt="clock">Now
 
@@ -69,10 +148,10 @@
 
               <!-- Answers -->
               <div class="col-md-2">
-                <button (click)="openAModal(aModal)" class="truncate default-button" id="answer-button">
+                <p class="truncate">
                   <img src="assets/answer.png" width="20" height="20" alt="answer">
                   {{question.nbrAnswers}}
-                </button>
+                </p>
               </div>
 
               <!-- Likes -->
@@ -85,153 +164,90 @@
             </div>
           </div>
 
-          <!-- Vertical check/delete -->
-          <div class="col-md-2">
+        </div>
 
-            <!-- Check Button -->
-            <div class="row" id="check">
-              <button class="default-button" (click)="checkQuestion(question.index)">
-                <img src="assets/checkblack.png" width="30" height="30" alt="check">
-              </button>
-            </div>
+        <!-- Deleted List -->
+        <div *ngIf="showDeleted" class="row">
 
-            <!-- Delete Button -->
+          <!-- Question Item -->
+          <div *ngFor="let question of deleted | slice:0:4" class="row question">
+
+            <!-- Question -->
+            <!-- Content -->
             <div class="row">
-              <button class="default-button" (click)="deleteQuestion(question.index)">
-                <img src="assets/trashcan.png" width="30" height="30" alt="delete">
-              </button>
+              <div class="col-md-2">
+                <button *ngIf="question.index < 10" class="default-button question-index">Q0{{question.index}}</button>
+                <button *ngIf="question.index >= 10" class="default-button question-index">Q{{question.index}}</button>
+              </div>
+              <div class="col-md-10">
+                <p class="truncate-question">{{question.content}}</p>
+              </div>
+
+            </div>
+
+            <!-- Status -->
+            <div class="row status">
+              <!-- Duration -->
+              <div class="col-md-2">
+                <p *ngIf="question.duration <= 1" class="truncate">
+                  <img src="assets/clock.png" width="25" height="25" alt="clock">Now
+
+                  <p *ngIf="question.duration > 1" class="truncate">
+                    <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
+              </div>
+
+              <!-- Answers -->
+              <div class="col-md-2">
+                <p class="truncate">
+                  <img src="assets/answer.png" width="20" height="20" alt="answer">
+                  {{question.nbrAnswers}}
+                </p>
+              </div>
+
+              <!-- Likes -->
+              <div class="col-md-2">
+                <p class="truncate" (click)="onLikeClick(question)">
+                  <img src="assets/thumbup.png" width="20" height="20" alt="likes">
+                  {{question.nbrLikes}}
+                </p>
+              </div>
             </div>
           </div>
+
         </div>
-      </div>
 
-      <!-- Checked List -->
-      <div *ngIf="showChecked" class="row">
+        <!-- Change View -->
+        <div class="row" id="change-view">
 
-        <!-- Question Item -->
-        <div *ngFor="let question of checked | slice:0:4" class="row question">
-
-          <!-- Question -->
-          <!-- Content -->
-          <div class="row">
-            <div class="col-md-2">
-              <button *ngIf="question.index < 10" class="default-button question-index">Q0{{question.index}}</button>
-              <button *ngIf="question.index >= 10" class="default-button question-index">Q{{question.index}}</button>
-            </div>
-            <div class="col-md-10">
-              <p class="truncate-question">{{question.content}}</p>
-            </div>
-
+          <div class="col-md-3">
+            <p>Select to View</p>
           </div>
 
-          <!-- Status -->
-          <div class="row status">
-            <!-- Duration -->
-            <div class="col-md-2">
-              <p *ngIf="question.duration <= 1" class="truncate">
-                <img src="assets/clock.png" width="25" height="25" alt="clock">Now
-
-                <p *ngIf="question.duration > 1" class="truncate">
-                  <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
-            </div>
-
-            <!-- Answers -->
-            <div class="col-md-2">
-              <p class="truncate">
-                <img src="assets/answer.png" width="20" height="20" alt="answer">
-                {{question.nbrAnswers}}
-              </p>
-            </div>
-
-            <!-- Likes -->
-            <div class="col-md-2">
-              <p class="truncate" (click)="onLikeClick(question)">
-                <img src="assets/thumbup.png" width="20" height="20" alt="likes">
-                {{question.nbrLikes}}
-              </p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Deleted List -->
-      <div *ngIf="showDeleted" class="row">
-
-        <!-- Question Item -->
-        <div *ngFor="let question of deleted | slice:0:4" class="row question">
-
-          <!-- Question -->
-          <!-- Content -->
-          <div class="row">
-            <div class="col-md-2">
-              <button *ngIf="question.index < 10" class="default-button question-index">Q0{{question.index}}</button>
-              <button *ngIf="question.index >= 10" class="default-button question-index">Q{{question.index}}</button>
-            </div>
-            <div class="col-md-10">
-              <p class="truncate-question">{{question.content}}</p>
-            </div>
-
+          <!-- Question View-->
+          <div class="col-md-1" id="back-view" class="default-button">
+            <button (click)="showNormalQuestions()">Default</button>
           </div>
 
-          <!-- Status -->
-          <div class="row status">
-            <!-- Duration -->
-            <div class="col-md-2">
-              <p *ngIf="question.duration <= 1" class="truncate">
-                <img src="assets/clock.png" width="25" height="25" alt="clock">Now
-
-                <p *ngIf="question.duration > 1" class="truncate">
-                  <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
-            </div>
-
-            <!-- Answers -->
-            <div class="col-md-2">
-              <p class="truncate">
-                <img src="assets/answer.png" width="20" height="20" alt="answer">
-                {{question.nbrAnswers}}
-              </p>
-            </div>
-
-            <!-- Likes -->
-            <div class="col-md-2">
-              <p class="truncate" (click)="onLikeClick(question)">
-                <img src="assets/thumbup.png" width="20" height="20" alt="likes">
-                {{question.nbrLikes}}
-              </p>
-            </div>
+          <div class="col-md-1" id="check-view">
+            <button (click)="showCheckedQuestions()" class="default-button"><img src="assets/checkblack.png" width="30"
+                height="30" alt="check"></button>
           </div>
+
+          <div class="col-md-1" id="delete-view">
+            <button (click)="showDeletedQuestions()" class="default-button"><img src="assets/trashcan.png" width="30"
+                height="30" alt="delete"></button>
+          </div>
+
+          <!-- Question View-->
+          <div class="col-md-1" id="back-view" class="default-button">
+            <button (click)="openQLModal(QLModal)">View All</button>
+          </div>
+
         </div>
-
-      </div>
-
-      <!-- Change View -->
-      <div class="row" id="change-view">
-
-        <div class="col-md-4">
-          <p>Select to View</p>
-        </div>
-
-        <div class="col-md-1" id="check-view">
-          <button (click)="showCheckedQuestions()" class="default-button"><img src="assets/checkblack.png" width="30"
-              height="30" alt="check"></button>
-        </div>
-
-        <div class="col-md-1" id="delete-view">
-          <button (click)="showDeletedQuestions()" class="default-button"><img src="assets/trashcan.png" width="30"
-              height="30" alt="delete"></button>
-        </div>
-
-
-        <!-- Question View-->
-        <div class="col-md-2" id="back-view" class="default-button">
-          <button (click)="showNormalQuestions()">View All</button>
-        </div>
-
       </div>
     </div>
   </div>
-</div>
+</app-sidebar>
 
 <!-- Question Modal -->
 <ng-template #qModal let-modal>
@@ -264,6 +280,7 @@
           Submit
         </button>
       </div>
+
     </form>
 
   </div>
@@ -303,6 +320,89 @@
         Submit
       </button>
     </form>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+
+<!-- Question List Modal -->
+<ng-template #QLModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Questions</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body" id="modal-list">
+
+    <!-- Question Item -->
+    <div *ngFor="let question of questions" class="row question question-item">
+      <!-- Question -->
+      <div class="col-md-10">
+
+        <!-- Content -->
+        <div class="row">
+          <div class="col-md-2">
+            <button class="default-button question-index" *ngIf="question.index < 10">Q0{{question.index}}</button>
+            <button class="default-button question-index" *ngIf="question.index >= 10">Q{{question.index}}</button>
+          </div>
+          <div class="col-md-10">
+            <p class="truncate-question question-content">{{question.content}}</p>
+          </div>
+        </div>
+
+        <!-- Status -->
+        <div class="row">
+          <!-- Duration -->
+          <div class="col-md-2 question-duration">
+            <p *ngIf="question.duration <= 1" class="truncate">
+              <img src="assets/clock.png" width="25" height="25" alt="clock">Now
+
+              <p *ngIf="question.duration > 1" class="truncate">
+                <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
+          </div>
+
+          <!-- Answers -->
+          <div class="col-md-2">
+            <button (click)="openAModal(aModal)" class="truncate default-button" id="answer-button">
+              <img src="assets/answer.png" width="20" height="20" alt="answer">
+              {{question.nbrAnswers}}
+            </button>
+          </div>
+
+          <!-- Likes -->
+          <div class="col-md-2">
+            <p class="truncate" (click)="onLikeClick(question)">
+              <img src="assets/thumbup.png" width="20" height="20" alt="likes">
+              {{question.nbrLikes}}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vertical check/delete -->
+      <div class="col-md-2">
+
+        <!-- Check Button -->
+        <div class="row" id="check">
+          <button class="default-button" (click)="checkQuestion(question.index)">
+            <img src="assets/checkblack.png" width="30" height="30" alt="check">
+          </button>
+        </div>
+
+        <!-- Delete Button -->
+        <div class="row">
+          <button class="default-button" (click)="deleteQuestion(question.index)">
+            <img src="assets/trashcan.png" width="30" height="30" alt="delete">
+          </button>
+        </div>
+      </div>
+    </div>
 
   </div>
 

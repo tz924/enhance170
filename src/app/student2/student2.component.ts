@@ -4,12 +4,14 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { LocalStorageService } from 'ngx-webstorage';
 import { DataService } from '../data.service';
-import { Question, Lecture, Answer } from '../app.component';
+import { Question, Lecture, Answer, Course } from '../app.component';
+import { ReversePipe } from 'ngx-pipes';
 
 @Component({
   selector: 'app-student2',
   templateUrl: './student2.component.html',
-  styleUrls: ['./student2.component.css']
+  styleUrls: ['./student2.component.css'],
+  providers: [ReversePipe]
 })
 export class Student2Component implements OnInit {
   questions: Question[];
@@ -17,6 +19,7 @@ export class Student2Component implements OnInit {
   checked: Question[];
   deleted: Question[];
   lecture: Lecture;
+  course: Course;
 
   showQuestions: boolean;
   showChecked: boolean;
@@ -27,6 +30,7 @@ export class Student2Component implements OnInit {
   content: string;
   questionModal: NgbModalRef;
   answerModal: NgbModalRef;
+  listModal: NgbModalRef;
 
   searchText: string;
 
@@ -35,8 +39,10 @@ export class Student2Component implements OnInit {
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private storage: LocalStorageService,
-    private data: DataService) {
+    private data: DataService,
+    private reversePipe: ReversePipe) {
     this.createQuestionForm();
+    this.course = this.data.initCurrentCourse();
   }
 
   ngOnInit() {
@@ -61,6 +67,9 @@ export class Student2Component implements OnInit {
     this.storage.observe('questions').subscribe(e => {
       this.questions = this.storage.retrieve('questions');
     });
+
+    this.storage.observe('currentCourse')
+      .subscribe((course: Course) => this.course = course);
   }
 
   // Modal
@@ -70,6 +79,10 @@ export class Student2Component implements OnInit {
 
   openAModal(aModal) {
     this.answerModal = this.modalService.open(aModal, { centered: true });
+  }
+
+  openQLModal(QLModal) {
+    this.listModal = this.modalService.open(QLModal, { centered: true, size: 'lg', backdrop: 'static' });
   }
 
   onLikeClick(question: Question) {
@@ -138,7 +151,7 @@ export class Student2Component implements OnInit {
   onQuestionSubmit(content: string) {
     this.feedbackService.questionSubmitted.emit(content);
 
-    this.questions.push({
+    this.questions.unshift({
       index: this.questions.length + 1,
       content: content,
       duration: 0,

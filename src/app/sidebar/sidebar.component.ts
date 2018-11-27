@@ -20,8 +20,18 @@ export class SidebarComponent implements OnInit {
   size: number;
   courseModal: NgbModalRef;
 
+  // For highlighting
+  selectedIndex: number;
+
+  // Add Course
+  subject: string;
+  number: string;
+  capacity: number;
+
+
   constructor(private app: AppComponent,
     private storage: LocalStorageService,
+    private modalService: NgbModal,
     private data: DataService) { }
 
   ngOnInit() {
@@ -43,14 +53,35 @@ export class SidebarComponent implements OnInit {
   }
 
   // Change the course
-  onCourseClick(course: Course) {
+  onCourseClick(course: Course, index: number) {
     // Update course
+    this.selectedIndex = index;
     this.currentCourse = course;
     this.storage.store('currentCourse', this.currentCourse);
   }
 
-  onCourseSubmit() {
-    this.courses.push({ name: 'CSE 100', size: 50 });
-    this.data.updateCourses(this.courses);
+  onCourseSubmit(subject: string, number: string, capacity: number) {
+    const newCourse = { name: subject + ' ' + number, size: capacity };
+    let unique = true;
+
+    // Make Sure it's unique
+    this.courses.forEach(course => {
+      if (course.name === newCourse.name) {
+        unique = false;
+      }
+    });
+
+    if (unique) {
+      this.courses.push(newCourse);
+      this.data.updateCourses(this.courses);
+    } else {
+      alert('You already have that course');
+    }
+    this.courseModal.dismiss();
+  }
+
+  // Modal
+  openCModal(cModal) {
+    this.courseModal = this.modalService.open(cModal, { centered: true });
   }
 }

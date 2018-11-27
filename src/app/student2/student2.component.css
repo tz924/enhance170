@@ -2,6 +2,7 @@
   min-width: 1200px;
   padding-top: 5vh;
   min-height: 80vh;
+  height: 100%;
   background-color: white;
 }
 
@@ -94,7 +95,6 @@ h1 {
   text-align: center;
 
 }
-
 
 .question-content {
   padding-left: 12px;
@@ -255,4 +255,20 @@ hr {
 .question-index {
   background: gray;
   font-weight: bold;
+}
+
+#modal-list .question-item {
+  text-align: center;
+  max-width: 90%;
+}
+
+#modal-list {
+  min-height: 30vh;
+  max-height: 60vh;
+  overflow-y: scroll;
+}
+
+.class-title {
+  font-style: bolder;
+  font-size: 24px;
 }

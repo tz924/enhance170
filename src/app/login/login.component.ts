@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
 
@@ -13,10 +14,13 @@ export class LoginComponent implements OnInit {
   password: string;
   userType: string;
 
-  constructor(private router: Router) {
-  }
+  constructor(
+    private router: Router,
+    private storage: LocalStorageService
+  ) { }
 
   ngOnInit() {
+    this.storage.clear();
   }
 
   onLogin() {

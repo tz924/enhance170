@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { NgPipesModule } from 'ngx-pipes';
 
 
 /* Component */
@@ -63,7 +64,8 @@ import { Student2Component } from './student2/student2.component';
     BrowserAnimationsModule, // For image animations
     ReactiveFormsModule,
     PdfViewerModule,
-    NgxWebstorageModule.forRoot()  // For local storage
+    NgxWebstorageModule.forRoot(),  // For local storage
+    NgPipesModule,
   ],
   /* Service Injection */
   providers: [],

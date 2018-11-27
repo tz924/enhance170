@@ -28,19 +28,24 @@
   margin-top: 30px;
 }
 
-.menu ul {
+.course-menu ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-.menu ul li {
+.course-menu ul li {
   border-bottom: 1px solid #f0f4f7;
   font-weight: bold;
 }
 
-.menu ul li:last-child {
+.course-menu ul li:last-child {
   border-bottom: none;
+}
+
+.course-menu li.active {
+  background-color: #123456 !important;
+  color: white;
 }
 
 /* For course */

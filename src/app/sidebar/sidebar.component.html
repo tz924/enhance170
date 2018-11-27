@@ -16,19 +16,64 @@
       <!-- END Sidebar Title -->
 
       <!-- Sidebar Menu -->
-      <div class="menu">
+      <div class="course-menu">
         <ul>
           <!-- Courses -->
-          <li *ngFor="let course of courses" (click)="onCourseClick(course)">{{course.name}}</li>
+          <li *ngFor="let course of courses; let i = index" (click)="onCourseClick(course)" [class.active]="i == selectedIndex">{{course.name}}</li>
         </ul>
-        <div id="add"><img (click)="onCourseSubmit()" src="assets/add.png"></div>
+        <div id="add"><img (click)="openCModal(cModal)" src="assets/add.png"></div>
       </div>
       <!-- Sidebar Menu -->
     </div>
   </div>
 
   <!-- Content -->
-  <div class="col-9">
-    <ng-content></ng-content>
+  <div class="col-9" id="main">
+    <ng-content>
+    </ng-content>
+
+    <!-- Question Modal -->
+    <ng-template #cModal let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Add Course</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body" id="course-modal">
+        <form (ngSubmit)="onCourseSubmit(subject, number, capacity)" class="form" id="course-form">
+
+          <!-- Couse Subject -->
+          <div class="form-group">
+            <label for="Subject">Course Subject</label>
+            <input type="text" class="form-control" [(ngModel)]="subject" name="subject" placeholder="CSE">
+          </div>
+
+          <!-- Course Number -->
+          <div class="form-group">
+            <label for="Number">Course #</label>
+            <input type="text" class="form-control" [(ngModel)]="number" name="number" placeholder="170">
+          </div>
+
+          <!-- Course Capacity -->
+          <div class="form-group">
+            <label for="Capacity">Course Capacity</label>
+            <input type="number" class="form-control" [(ngModel)]="capacity" name="capacity" placeholder="100">
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-success">Submit</button>
+
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+      </div>
+    </ng-template>
+    <!-- End Questions Modal -->
+
   </div>
 </div>
