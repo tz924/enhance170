@@ -581,6 +581,9 @@ MIT
 @angular/forms
 MIT
 
+ngx-webstorage
+MIT
+
 @ng-bootstrap/ng-bootstrap
 MIT
 The MIT License (MIT)
@@ -631,7 +634,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-ngx-webstorage
+ngx-pipes
 MIT
 
 ngx-webstorage-service
