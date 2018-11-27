@@ -88,6 +88,7 @@ export class SidebarComponent implements OnInit {
 
   // Handle add button
   showAdd(): boolean {
+    console.log(this.data.getUserType());
     return this.data.getUserType() !== 'student';
   }
 
