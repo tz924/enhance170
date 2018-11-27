@@ -33,6 +33,11 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    if (!this.userType) {
+      alert('Please select your user type!');
+      return;
+    }
+
     if (this.password === 'clear') {
       this.storage.clear();
     }
