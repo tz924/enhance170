@@ -1,6 +1,6 @@
 <div class="row">
 
-  <div class="col-3">
+  <div class="col-3 sidebar">
     <div class="center">
       <br />
       <!-- Profile Image -->
@@ -19,7 +19,7 @@
       <div class="course-menu">
         <ul>
           <!-- Courses -->
-          <li *ngFor="let course of courses; let i = index" (click)="onCourseClick(course)" [class.active]="i == selectedIndex">{{course.name}}</li>
+          <li *ngFor="let course of courses; let i = index" (click)="onCourseClick(course, i)" [class.active]="i == selectedIndex">{{course.name}}</li>
         </ul>
         <div id="add"><img (click)="openCModal(cModal)" src="assets/add.png"></div>
       </div>
@@ -28,7 +28,7 @@
   </div>
 
   <!-- Content -->
-  <div class="col-9" id="main">
+  <div class="col-9 main">
     <ng-content>
     </ng-content>
 

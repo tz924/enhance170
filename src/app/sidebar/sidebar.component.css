@@ -43,7 +43,7 @@
   border-bottom: none;
 }
 
-.course-menu li.active {
+.course-menu ul li.active {
   background-color: #123456 !important;
   color: white;
 }
@@ -62,4 +62,12 @@
   margin-top: 15px;
   width: 40px;
   height: 40px;
+}
+
+.sidebar {
+  padding-right: 0;
+}
+
+.main {
+  padding-left: 0;
 }

@@ -1,4 +1,4 @@
-import { Inject, Injectable, Component, OnInit } from '@angular/core';
+import { Injectable, Component, OnInit } from '@angular/core';
 import { AppComponent, Course } from '../app.component';
 import { LocalStorageService } from 'ngx-webstorage';
 import { DataService } from '../data.service';
@@ -56,6 +56,7 @@ export class SidebarComponent implements OnInit {
   onCourseClick(course: Course, index: number) {
     // Update course
     this.selectedIndex = index;
+    console.log(this.selectedIndex);
     this.currentCourse = course;
     this.storage.store('currentCourse', this.currentCourse);
   }
