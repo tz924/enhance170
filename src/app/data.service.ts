@@ -262,7 +262,7 @@ export class DataService {
 
   getUserType() {
     if (this.storage.retrieve('userType')) {
-      return this.storage.retrieve('userType').lower();
+      return this.storage.retrieve('userType').toLowerCase();
     }
     return this.storage.retrieve('userType');
   }
