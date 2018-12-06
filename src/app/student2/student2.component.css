@@ -160,7 +160,7 @@ h1 {
 #left {
   display: inline-flex;
   height: 60px;
-  margin-left: 3vw;
+  margin-left: 5vw;
 }
 
 #reduced {
@@ -306,4 +306,9 @@ hr {
 .confirm {
   align-items: center;
   text-align: center;
+}
+
+.new-question {
+  font-size: 18px;
+  font-weight: bolder;
 }

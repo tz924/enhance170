@@ -29,13 +29,6 @@
           </div>
         </div>
 
-        <!-- Question Button -->
-        <div class="inline" ngbTooltip="Ask a new question">
-          <button type="button" class="btn btn-primary" (click)="openQModal(qModal)">
-            <img id="reduced" src="assets/post.png">
-          </button>
-        </div>
-
       </div>
 
     </div>
@@ -233,21 +226,28 @@
                     <button (click)="showNormalQuestions()">Default</button>
                   </div> -->
 
-        <div class="col-md-1" id="back-view" class="default-button" ngbTooltip="View all questions">
+        <div class="col-1" id="back-view" class="default-button" ngbTooltip="View all questions">
           <fa-icon [icon]="['far', 'list-alt']" size="3x" (click)="showNormalQuestions()"></fa-icon>
         </div>
 
-        <div class=" col-md-1" id="check-view" ngbTooltip="View checked questions">
+        <div class=" col-1" id="check-view" ngbTooltip="View checked questions">
           <fa-icon [icon]="['fas', 'check']" size="3x" (click)="showCheckedQuestions()"></fa-icon>
         </div>
 
-        <div class="col-md-1" id="delete-view" ngbTooltip="View deleted questions">
+        <div class="col-1" id="delete-view" ngbTooltip="View deleted questions">
           <fa-icon [icon]="['far', 'trash-alt']" size="3x" (click)="showDeletedQuestions()"></fa-icon>
         </div>
 
         <!-- Sort By Likes -->
-        <div class="col-md-1" id="back-view">
+        <div class="col-3" id="back-view">
           <button class="btn btn-info" (click)="onSortClick()">Sort by Upvotes</button>
+        </div>
+
+        <!-- Question Button -->
+        <div class="col-2" ngbTooltip="Ask a new question">
+          <button type="button" class="btn btn-primary new-question" (click)="openQModal(qModal)">
+            <img id="reduced" src="assets/post.png"> New Question
+          </button>
         </div>
 
       </div>

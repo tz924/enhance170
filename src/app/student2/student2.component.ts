@@ -188,8 +188,13 @@ export class Student2Component implements OnInit {
   onQuestionSubmit(content: string) {
     this.feedbackService.questionSubmitted.emit(content);
 
+    let maxIndex = 0;
+    this.questions.forEach(question => {
+      if (question.index > maxIndex) { maxIndex = question.index; }
+    });
+
     this.questions.unshift({
-      index: this.questions.length + 1,
+      index: maxIndex + 1,
       content: content,
       duration: 0,
       nbrAnswers: 0,
