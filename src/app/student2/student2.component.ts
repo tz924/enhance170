@@ -108,8 +108,12 @@ export class Student2Component implements OnInit {
     }
   }
 
+  onSortClick() {
+    this.questions.sort((a, b) => (a.nbrLikes > b.nbrLikes) ? -1 : ((b.nbrLikes > a.nbrLikes) ? 1 : 0));
+  }
+
   showNormalQuestions() {
-    this.showQuestions = !this.showQuestions;
+    this.showQuestions = true;
     this.showChecked = false;
     this.showDeleted = false;
   }

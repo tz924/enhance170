@@ -6,12 +6,6 @@
   background-color: white;
 }
 
-.default-button {
-  padding: none;
-  background: none;
-  border: none;
-}
-
 .truncate {
   position: relative;
   width: 115%;
@@ -57,10 +51,24 @@
 }
 
 #questions {
-  padding: 0;
+  width: 96%;
+  padding: 0 2%;
+  max-height: 60vh;
+  overflow-y: scroll;
+}
+
+#moveTo {
+  max-width: 900px;
+  overflow-x: visible;
   margin-left: 2vw;
   margin-right: -2vw;
-  width: 900px;
+  margin-top: 1vh;
+}
+
+#change-view {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 0 3%;
 }
 
 .question {
@@ -77,14 +85,9 @@
   color: #36EA9E;
 }
 
-#change-view {
-  margin-top: 25px;
-  margin-bottom: 25px;
-}
-
 #back-view button {
-  min-height: 30px;
-  background: darkgray;
+  margin-top: 6px;
+  min-height: 40px;
   font-weight: bold;
 }
 
@@ -162,11 +165,6 @@ h1 {
 
 .inline {
   display: inline-flex;
-}
-
-#moveTo {
-  margin-top: 30px;
-  margin-left: 3vw;
 }
 
 hr {
@@ -272,4 +270,23 @@ hr {
 .class-title {
   font-style: bolder;
   font-size: 24px;
+}
+
+.check-icon {
+  padding-bottom: 8px;
+}
+
+.delete-icon {
+  padding-top: 8px;
+}
+
+.check-icon,
+.delete-icon {
+  padding-left: 12px;
+}
+
+#select-text {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
 }

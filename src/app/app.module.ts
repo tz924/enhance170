@@ -32,6 +32,11 @@ import { TaComponent } from './ta/ta.component';
 import { FilterPipe } from './filter.pipe';
 import { Student2Component } from './student2/student2.component';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faComments, faThumbsUp, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faTrashAlt, faListAlt } from '@fortawesome/free-regular-svg-icons';
+
 @NgModule({
   /* Component Injection */
   declarations: [
@@ -66,10 +71,15 @@ import { Student2Component } from './student2/student2.component';
     PdfViewerModule,
     NgxWebstorageModule.forRoot(),  // For local storage
     NgPipesModule,
+    FontAwesomeModule
   ],
   /* Service Injection */
   providers: [],
   /* Root Component */
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    library.add(faComments, faThumbsUp, faTrashAlt, faClock, faCheck, faListAlt);
+  }
+}
