@@ -12,11 +12,11 @@ import { DataService } from 'src/app/data.service';
 export class StartComponent implements OnInit {
 
   course: Course;
+  pdfLink: string;
 
   constructor(
     private data: DataService,
     private router: Router,
-    private app: AppComponent,
     private storage: LocalStorageService
   ) {
     this.course = this.storage.retrieve('currentCourse');
@@ -28,7 +28,8 @@ export class StartComponent implements OnInit {
     this.data.updateUserType('professor');
   }
 
-  onStart() {
+  onStart(link) {
+    this.storage.store('pdfLink', link);
     this.router.navigateByUrl('/professor');
   }
 

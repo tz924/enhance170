@@ -26,18 +26,22 @@
             <div class="col-8">
               <input type="file" class="form-control" name="file">
             </div>
+
+            <!-- File Link -->
+            <label class="col-4 col-form-label" for="pdf-link">PDF Link</label>
+            <div class="col-8">
+              <input type="url" [(ngModel)]="pdfLink" class="form-control" name="link">
+            </div>
+
           </div>
 
           <!-- Start Button -->
-          <button type="submit" class="btn btn-info" id="start-button" (click)="onStart()">Start</button>
+          <button type="submit" class="btn btn-info" id="start-button" (click)="onStart(pdfLink)">Start</button>
 
         </form>
       </div>
       <div class="col-2"></div>
     </div>
-
   </div>
-
-
 
 </app-sidebar>

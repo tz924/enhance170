@@ -52,6 +52,7 @@ export class ProfessorComponent implements OnInit {
   showChecked: boolean;
   showDeleted: boolean;
   questionState: string;
+  pdfSource: string;
 
   constructor(
     private feedbackService: FeedbackService,
@@ -80,6 +81,10 @@ export class ProfessorComponent implements OnInit {
     this.showChecked = false;
     this.showDeleted = false;
     this.questionState = 'move';
+
+    const link = this.storage.retrieve('pdfLink');
+    console.log(link);
+    this.pdfSource = link || 'assets/test.pdf';
 
     this.lecture = this.data.initLecture();
     this.currentCourse = this.data.initCurrentCourse();
