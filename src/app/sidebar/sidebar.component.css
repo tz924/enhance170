@@ -48,6 +48,11 @@
   color: white;
 }
 
+.course-menu ul li:hover {
+  background-color: #00B0FF;
+  color: white;
+}
+
 /* For course */
 .light-gray {
   background-color: #F1F1F1;

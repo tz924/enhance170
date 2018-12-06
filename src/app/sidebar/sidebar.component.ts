@@ -42,8 +42,11 @@ export class SidebarComponent implements OnInit {
 
     // Set up current course
     this.currentCourse = this.data.initCurrentCourse();
-
-    // console.log(this.currentCourse);
+    this.courses.forEach((course, index) => {
+      if (this.currentCourse.name === course.name) {
+        this.selectedIndex = index;
+      }
+    });
 
     this.storage.observe('courses')
       .subscribe(courses => this.courses = courses);
@@ -56,9 +59,13 @@ export class SidebarComponent implements OnInit {
   onCourseClick(course: Course, index: number) {
     // Update course
     this.selectedIndex = index;
-    console.log(this.selectedIndex);
     this.currentCourse = course;
     this.storage.store('currentCourse', this.currentCourse);
+  }
+
+  onCourseHoever(index: number) {
+    // Update course
+    // this.selectedIndex = index;
   }
 
   onCourseSubmit(subject: string, number: string, capacity: number) {
