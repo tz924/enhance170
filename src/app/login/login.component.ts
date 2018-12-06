@@ -61,14 +61,14 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/student-ui');
       } else {
 
-        // Randomized 50:50
-        const dice = Math.random();
-        if (dice >= 0.5) {
-          this.router.navigateByUrl('/student-ui');
-        } else {
-          this.router.navigateByUrl('/student');
-        }
-
+        // // Randomized 50:50
+        // const dice = Math.random();
+        // if (dice >= 0.5) {
+        //   this.router.navigateByUrl('/student-ui');
+        // } else {
+        //   this.router.navigateByUrl('/student');
+        // }
+        this.router.navigateByUrl('/student-ui');
       }
 
     } else if (this.userType === 'TA') {
