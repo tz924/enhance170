@@ -184,7 +184,7 @@ hr {
 
 /* Modal */
 .dark-modal .modal-content {
-  background-color: #292b2c;
+  background-color: hsl(200, 4%, 17%);
   color: white;
 }
 
@@ -193,7 +193,7 @@ hr {
 }
 
 .light-blue-backdrop {
-  background-color: #5cb3fd;
+  background-color: #abd3f5;
 }
 
 /* Modal */
@@ -254,8 +254,9 @@ hr {
 }
 
 .question-index {
-  background: gray;
-  font-weight: bold;
+  background: #f0ad4e;
+  color: black; 
+  font-weight: bold; 
 }
 
 #modal-list .question-item {
