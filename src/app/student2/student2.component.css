@@ -60,7 +60,7 @@
 #moveTo {
   max-width: 900px;
   overflow-x: visible;
-  margin-left: 2vw;
+  margin-left: 4vw;
   margin-right: -2vw;
   margin-top: 1vh;
 }
@@ -89,6 +89,11 @@
   margin-top: 6px;
   min-height: 40px;
   font-weight: bold;
+}
+
+#back-view,
+#check-view {
+  margin-right: 12px;
 }
 
 h1 {
