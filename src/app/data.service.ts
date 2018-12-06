@@ -44,7 +44,7 @@ export class DataService {
       nbrLikes: 3,
     },
     {
-      index: 3,
+      index: 4,
       content: 'What sort of consent form should we send out if we do \
       want to conduct an audio or video recording?',
       duration: 1,
@@ -52,7 +52,7 @@ export class DataService {
       nbrLikes: 3,
     },
     {
-      index: 4,
+      index: 5,
       content: 'Is the point of view only talking about the problems \
     or does it suggest some sort of broad solution?',
       duration: 1,
@@ -60,7 +60,7 @@ export class DataService {
       nbrLikes: 1,
     },
     {
-      index: 11,
+      index: 6,
       content: 'What are some strategies to finding a good team?',
       duration: 1,
       nbrAnswers: 1,

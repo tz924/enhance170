@@ -15,6 +15,7 @@ import { ReversePipe } from 'ngx-pipes';
 })
 export class Student2Component implements OnInit {
   questions: Question[];
+  liked: number[];
   answers: Answer[];
   checked: Question[];
   deleted: Question[];
@@ -51,6 +52,7 @@ export class Student2Component implements OnInit {
 
     // Initialize necessary objects
     this.questions = [];
+    this.liked = [];
     this.checked = [];
     this.deleted = [];
     this.showQuestions = true;
@@ -89,7 +91,10 @@ export class Student2Component implements OnInit {
   }
 
   onLikeClick(question: Question) {
-    question.nbrLikes++;
+    if (!this.liked.includes(question.index)) {
+      question.nbrLikes++;
+      this.liked.push(question.index);
+    }
   }
 
   showNormalQuestions() {
