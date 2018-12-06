@@ -295,3 +295,9 @@ hr {
   font-weight: bold;
   text-align: center;
 }
+
+.sure,
+.confirm {
+  align-items: center;
+  text-align: center;
+}

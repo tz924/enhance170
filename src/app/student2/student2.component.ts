@@ -37,7 +37,9 @@ export class Student2Component implements OnInit {
   content: string;
   questionModal: NgbModalRef;
   answerModal: NgbModalRef;
-  listModal: NgbModalRef;
+  deleteModal: NgbModalRef;
+
+  currentDelete: number;
 
   searchText: string;
 
@@ -97,10 +99,6 @@ export class Student2Component implements OnInit {
     this.answerModal = this.modalService.open(aModal, { centered: true });
   }
 
-  openQLModal(QLModal) {
-    this.listModal = this.modalService.open(QLModal, { centered: true, size: 'lg', backdrop: 'static' });
-  }
-
   onLikeClick(question: Question) {
     if (!this.liked.includes(question.index)) {
       question.nbrLikes++;
@@ -142,16 +140,24 @@ export class Student2Component implements OnInit {
     this.checked.push(question);
   }
 
-  deleteQuestion(index: number) {
+
+  deleteQuestion(index: number, dModal) {
+    this.currentDelete = index;
+    this.deleteModal = this.modalService.open(dModal, { centered: true, size: 'lg', backdrop: 'static' });
+  }
+
+  deleteQuestionConfirm(dModal) {
     let question: Question;
     for (let i = 0; i < this.questions.length; i++) {
-      if (this.questions[i].index === index) {
+      if (this.questions[i].index === this.currentDelete) {
         question = this.questions.splice(i, 1)[0];
         this.data.updateQuestions(this.questions);
       }
     }
 
     this.deleted.push(question);
+
+    this.deleteModal.dismiss();
   }
 
   onMoreClick() {

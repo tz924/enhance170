@@ -31,7 +31,7 @@
 
         <!-- Question Button -->
         <div class="inline">
-          <button type="button" class="btn btn-primary" (click)="openQModal(qModal)">
+          <button type="button" class="btn btn-primary" (click)="openQModal(qModal)" ngbTooltip="Ask a new question">
             <img id="reduced" src="assets/post.png">
           </button>
         </div>
@@ -56,8 +56,8 @@
               <!-- Content -->
               <div class="row">
                 <div class="col-md-2">
-                  <button class="default-button question-index" *ngIf="question.index < 10">Q0{{question.index}}</button>
-                  <button class="default-button question-index" *ngIf="question.index >= 10">Q{{question.index}}</button>
+                  <span class="question-index" *ngIf="question.index < 10">Q0{{question.index}}</span>
+                  <span class="question-index" *ngIf="question.index >= 10">Q{{question.index}}</span>
                 </div>
                 <div class="col-md-10">
                   <p class="truncate-question question-content">{{question.content}}</p>
@@ -106,8 +106,8 @@
 
               <!-- Delete Button -->
               <div class="row">
-                <fa-icon [icon]="['far', 'trash-alt']" size="2x" (click)="deleteQuestion(question.index)" ngbTooltip="Delete Question {{question.index}}"
-                  class="delete-icon"></fa-icon>
+                <fa-icon [icon]="['far', 'trash-alt']" size="2x" (click)="deleteQuestion(question.index,dModal)"
+                  ngbTooltip="Delete Question {{question.index}}" class="delete-icon"></fa-icon>
               </div>
 
             </div>
@@ -119,7 +119,7 @@
         <div *ngIf="showChecked" class="row">
 
           <!-- Question Item -->
-          <div *ngFor="let question of checked | slice:0:4 | filter: searchText" class="row question question-item">
+          <div *ngFor="let question of checked | filter: searchText" class="row question question-item">
 
             <!-- Question -->
             <div class="col-md-10">
@@ -127,8 +127,8 @@
               <!-- Content -->
               <div class="row">
                 <div class="col-md-2">
-                  <button class="default-button question-index" *ngIf="question.index < 10">Q0{{question.index}}</button>
-                  <button class="default-button question-index" *ngIf="question.index >= 10">Q{{question.index}}</button>
+                  <span class="question-index" *ngIf="question.index < 10">Q0{{question.index}}</span>
+                  <span class="question-index" *ngIf="question.index >= 10">Q{{question.index}}</span>
                 </div>
                 <div class="col-md-10">
                   <p class="truncate-question question-content">{{question.content}}</p>
@@ -149,32 +149,28 @@
 
                 <!-- Answers -->
                 <div class="col-md-2">
-                  <button (click)="openAModal(aModal)" class="truncate default-button" id="answer-button">
-                    <img src="assets/answer.png" width="20" height="20" alt="answer">
-                    {{question.nbrAnswers}}
-                  </button>
+                  <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate" (click)="openAModal(aModal)"
+                    ngbTooltip="View all {{question.nbrAnswers}} answers"></fa-icon>
+                  {{question.nbrAnswers}}
                 </div>
 
                 <!-- Likes -->
                 <div class="col-md-2">
-                  <span class="truncate like" (click)="onLikeClick(question)">
+                  <span class="truncate like">
                     <fa-icon [icon]="['fas', 'thumbs-up']" size="lg"></fa-icon>
                     {{question.nbrLikes}}
                   </span>
                 </div>
-
               </div>
             </div>
-
           </div>
-
         </div>
 
         <!-- Deleted List -->
         <div *ngIf="showDeleted" class="row">
 
           <!-- Question Item -->
-          <div *ngFor="let question of deleted | slice:0:4 | filter: searchText" class="row question question-item">
+          <div *ngFor="let question of deleted | filter: searchText" class="row question question-item">
 
             <!-- Question -->
             <div class="col-md-10">
@@ -182,8 +178,8 @@
               <!-- Content -->
               <div class="row">
                 <div class="col-md-2">
-                  <button class="default-button question-index" *ngIf="question.index < 10">Q0{{question.index}}</button>
-                  <button class="default-button question-index" *ngIf="question.index >= 10">Q{{question.index}}</button>
+                  <span class="default-button question-index" *ngIf="question.index < 10">Q0{{question.index}}</span>
+                  <span class="default-button question-index" *ngIf="question.index >= 10">Q{{question.index}}</span>
                 </div>
                 <div class="col-md-10">
                   <p class="truncate-question question-content">{{question.content}}</p>
@@ -204,15 +200,14 @@
 
                 <!-- Answers -->
                 <div class="col-md-2">
-                  <button (click)="openAModal(aModal)" class="truncate default-button" id="answer-button">
-                    <img src="assets/answer.png" width="20" height="20" alt="answer">
-                    {{question.nbrAnswers}}
-                  </button>
+                  <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate" (click)="openAModal(aModal)"
+                    ngbTooltip="View all {{question.nbrAnswers}} answers"></fa-icon>
+                  {{question.nbrAnswers}}
                 </div>
 
                 <!-- Likes -->
                 <div class="col-md-2">
-                  <span class="truncate like" (click)="onLikeClick(question)">
+                  <span class="truncate like">
                     <fa-icon [icon]="['fas', 'thumbs-up']" size="lg"></fa-icon>
                     {{question.nbrLikes}}
                   </span>
@@ -316,8 +311,8 @@
 
     <div *ngFor="let answer of answers | slice:0:4" class="row answer-item">
       <div class="col-md-2">
-        <button class="default-button" *ngIf="answer.index < 10">A0{{answer.index}}</button>
-        <button class="default-button" *ngIf="answer.index >= 10">A{{answer.index}}</button>
+        <span *ngIf="answer.index < 10">A0{{answer.index}}</span>
+        <span *ngIf="answer.index >= 10">A{{answer.index}}</span>
       </div>
       <div class="col-md-10">
         <p class="truncate-question answer-content">{{answer.content}}</p>
@@ -342,20 +337,24 @@
 </ng-template>
 
 
-<!-- Question List Modal -->
-<ng-template #DeleteModal let-modal>
+<!-- Delete Modal -->
+<ng-template #dModal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">Delete Question</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <h4 class="modal-title" id="modal-title">Question {{currentDelete}} Deletion</h4>
+    <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
 
   <div class="modal-body">
-    Are you sure?
+    <p><strong>Are you sure you want to delete this question?</strong></p>
+    <p>All information associated to this question will be permanently deleted.
+      <span class="text-danger">This operation can not be undone.</span>
+    </p>
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="deleteQuestionConfirm(dModal)">Ok</button>
   </div>
 </ng-template>
