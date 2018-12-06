@@ -85,7 +85,7 @@
 
                 <!-- Likes -->
                 <div class="col-md-2">
-                  <span class="truncate like" (click)="onLikeClick(question)">
+                  <span class="truncate" (click)="onLikeClick(question)">
                     <img src="assets/thumbup.png" width="20" height="20" alt="likes">
                     {{question.nbrLikes}}
                   </span>
@@ -99,14 +99,14 @@
 
               <!-- Check Button -->
               <div class="row" id="check">
-                <button class="default-button" (click)="checkQuestion(question.index)">
+                <button class="default-button" (click)="checkQuestion(question.index)" ngbTooltip="Checkoff this question">
                   <img src="assets/checkblack.png" width="30" height="30" alt="check">
                 </button>
               </div>
 
               <!-- Delete Button -->
               <div class="row">
-                <button class="default-button" (click)="deleteQuestion(question.index)">
+                <button class="default-button" (click)="deleteQuestion(question.index)" ngbTooltip="Delete this question">
                   <img src="assets/trashcan.png" width="30" height="30" alt="delete">
                 </button>
               </div>

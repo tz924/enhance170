@@ -52,7 +52,7 @@ import { Student2Component } from './student2/student2.component';
     PastComponent,
     TaComponent,
     FilterPipe,
-    Student2Component
+    Student2Component,
   ],
   /* Module Injection */
   imports: [

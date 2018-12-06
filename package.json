@@ -27,10 +27,12 @@
     "browserify-zlib": "^0.2.0",
     "core-js": "^2.5.4",
     "jquery": "^3.3.1",
-    "ng2-pdf-viewer": "^5.2.0",
+    "ng-animate": "^0.3.4",
+    "ng2-pdf-viewer": "^5.2.3",
     "ngx-pipes": "^2.3.6",
     "ngx-webstorage": "^3.0.0-beta.13",
     "ngx-webstorage-service": "^3.1.1",
+    "pdfjs-dist": "^2.0.943",
     "popper.js": "^1.14.3",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"

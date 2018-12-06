@@ -6,12 +6,17 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { DataService } from '../data.service';
 import { Question, Lecture, Answer, Course } from '../app.component';
 import { ReversePipe } from 'ngx-pipes';
+import { trigger, transition, useAnimation } from '@angular/animations';
+import { bounce } from 'ng-animate';
 
 @Component({
   selector: 'app-student2',
   templateUrl: './student2.component.html',
   styleUrls: ['./student2.component.css'],
-  providers: [ReversePipe]
+  providers: [ReversePipe],
+  animations: [
+    trigger('bounce', [transition('* => *', useAnimation(bounce))])
+  ]
 })
 export class Student2Component implements OnInit {
   questions: Question[];
@@ -21,6 +26,7 @@ export class Student2Component implements OnInit {
   deleted: Question[];
   lecture: Lecture;
   course: Course;
+  bounce: any;
 
   showQuestions: boolean;
   showChecked: boolean;
@@ -49,6 +55,7 @@ export class Student2Component implements OnInit {
     this.data.initCourses();
     this.course = this.data.initCurrentCourse();
     this.data.updateUserType('student');
+    this.bounce = true;
 
     // Initialize necessary objects
     this.questions = [];
@@ -75,6 +82,10 @@ export class Student2Component implements OnInit {
 
     this.storage.observe('currentCourse')
       .subscribe((course: Course) => this.course = course);
+  }
+
+  hover() {
+    this.bounce = !this.bounce;
   }
 
   // Modal
