@@ -5,7 +5,6 @@ import { FeedbackService } from '../feedback.service';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 import { LocalStorageService } from 'ngx-webstorage';
 import { DataService } from '../data.service';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-professor',
@@ -53,14 +52,11 @@ export class ProfessorComponent implements OnInit {
   showChecked: boolean;
   showDeleted: boolean;
   questionState: string;
-  pdfSource: string;
-  pdfUrl: SafeUrl;
 
   constructor(
     private feedbackService: FeedbackService,
     private data: DataService,
     private storage: LocalStorageService,
-    private sanitizer: DomSanitizer
   ) {
     this.feedbackService.questionSubmitted.subscribe(
       (question: string) => {
@@ -84,10 +80,6 @@ export class ProfessorComponent implements OnInit {
     this.showChecked = false;
     this.showDeleted = false;
     this.questionState = 'move';
-
-    const link = this.storage.retrieve('pdfLink');
-    console.log(link);
-    this.pdfSource = link || 'assets/test.pdf';
 
     this.lecture = this.data.initLecture();
     this.currentCourse = this.data.initCurrentCourse();

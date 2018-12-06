@@ -1,5 +1,5 @@
 /* Module */
-import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 // Custom Import Angular Module (In imports)
@@ -63,9 +63,9 @@ import { Student2Component } from './student2/student2.component';
     FormsModule,            // Forms data binding,
     BrowserAnimationsModule, // For image animations
     ReactiveFormsModule,
+    PdfViewerModule,
     NgxWebstorageModule.forRoot(),  // For local storage
     NgPipesModule,
-    PdfViewerModule,
   ],
   /* Service Injection */
   providers: [],
