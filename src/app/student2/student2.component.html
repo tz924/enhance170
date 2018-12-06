@@ -30,8 +30,8 @@
         </div>
 
         <!-- Question Button -->
-        <div class="inline">
-          <button type="button" class="btn btn-primary" (click)="openQModal(qModal)" ngbTooltip="Ask a new question">
+        <div class="inline" ngbTooltip="Ask a new question">
+          <button type="button" class="btn btn-primary" (click)="openQModal(qModal)">
             <img id="reduced" src="assets/post.png">
           </button>
         </div>
@@ -78,15 +78,14 @@
                 </div>
 
                 <!-- Answers -->
-                <div class="col-md-2">
-                  <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate" (click)="openAModal(aModal)"
-                    ngbTooltip="View all {{question.nbrAnswers}} answers"></fa-icon>
+                <div class="col-md-2" ngbTooltip="View all {{question.nbrAnswers}} answers">
+                  <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate" (click)="openAModal(aModal, question.nbrAnswers)"></fa-icon>
                   {{question.nbrAnswers}}
                 </div>
 
                 <!-- Likes -->
-                <div class="col-md-2">
-                  <span class="truncate" (click)="onLikeClick(question)" ngbTooltip="Upvote">
+                <div class="col-md-2" ngbTooltip="Upvote">
+                  <span class="truncate" (click)="onLikeClick(question)">
                     <fa-icon [icon]="['fas', 'thumbs-up']" size="lg" class="truncate"></fa-icon>
                     {{question.nbrLikes}}
                   </span>
@@ -149,7 +148,7 @@
 
                 <!-- Answers -->
                 <div class="col-md-2">
-                  <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate" (click)="openAModal(aModal)"
+                  <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate" (click)="openAModal(aModal, question.nbrAnswers)"
                     ngbTooltip="View all {{question.nbrAnswers}} answers"></fa-icon>
                   {{question.nbrAnswers}}
                 </div>
@@ -200,7 +199,7 @@
 
                 <!-- Answers -->
                 <div class="col-md-2">
-                  <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate" (click)="openAModal(aModal)"
+                  <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate" (click)="openAModal(aModal, question.nbrAnswers)"
                     ngbTooltip="View all {{question.nbrAnswers}} answers"></fa-icon>
                   {{question.nbrAnswers}}
                 </div>
@@ -234,16 +233,16 @@
                     <button (click)="showNormalQuestions()">Default</button>
                   </div> -->
 
-        <div class="col-md-1" id="back-view" class="default-button">
-          <fa-icon [icon]="['far', 'list-alt']" size="3x" (click)="showNormalQuestions()" ngbTooltip="View all questions"></fa-icon>
+        <div class="col-md-1" id="back-view" class="default-button" ngbTooltip="View all questions">
+          <fa-icon [icon]="['far', 'list-alt']" size="3x" (click)="showNormalQuestions()"></fa-icon>
         </div>
 
-        <div class=" col-md-1" id="check-view">
-          <fa-icon [icon]="['fas', 'check']" size="3x" (click)="showCheckedQuestions()" ngbTooltip="View checked questions"></fa-icon>
+        <div class=" col-md-1" id="check-view" ngbTooltip="View checked questions">
+          <fa-icon [icon]="['fas', 'check']" size="3x" (click)="showCheckedQuestions()"></fa-icon>
         </div>
 
-        <div class="col-md-1" id="delete-view">
-          <fa-icon [icon]="['far', 'trash-alt']" size="3x" (click)="showDeletedQuestions()" ngbTooltip="View deleted questions"></fa-icon>
+        <div class="col-md-1" id="delete-view" ngbTooltip="View deleted questions">
+          <fa-icon [icon]="['far', 'trash-alt']" size="3x" (click)="showDeletedQuestions()"></fa-icon>
         </div>
 
         <!-- Sort By Likes -->
@@ -307,9 +306,9 @@
     </button>
   </div>
 
-  <div class="modal-body" id="question-modal">
+  <div class="modal-body" id="answer-modal">
 
-    <div *ngFor="let answer of answers | slice:0:4" class="row answer-item">
+    <div *ngFor="let answer of answers" class="row answer-item">
       <div class="col-md-2">
         <span *ngIf="answer.index < 10">A0{{answer.index}}</span>
         <span *ngIf="answer.index >= 10">A{{answer.index}}</span>

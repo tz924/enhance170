@@ -95,7 +95,8 @@ export class Student2Component implements OnInit {
     this.questionModal = this.modalService.open(qModal, { centered: true });
   }
 
-  openAModal(aModal) {
+  openAModal(aModal, nbrAnswers) {
+    this.answers = this.data.getAnswers(nbrAnswers);
     this.answerModal = this.modalService.open(aModal, { centered: true });
   }
 
@@ -155,6 +156,13 @@ export class Student2Component implements OnInit {
       }
     }
 
+    // Reset liked
+    for (let i = 0; i < this.liked.length - 1; i++) {
+      if (this.liked[i] === this.currentDelete) {
+        this.liked.splice(i, 1);
+      }
+    }
+
     this.deleted.push(question);
 
     this.deleteModal.dismiss();
@@ -188,7 +196,6 @@ export class Student2Component implements OnInit {
       nbrLikes: 0
     });
     this.data.updateQuestions(this.questions);
-
     this.questionForm.reset();
     this.questionModal.close();
   }

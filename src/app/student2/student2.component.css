@@ -204,6 +204,12 @@ hr {
   text-align: center;
 }
 
+#answer-modal {
+  text-align: center;
+  max-height: 50vh;
+  overflow-y: scroll;
+}
+
 #question-modal form {
   margin: auto;
   width: 80%;

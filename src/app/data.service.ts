@@ -211,6 +211,21 @@ export class DataService {
     this.storage.store('answers', answers);
   }
 
+  getAnswers(nbrAnswers: number) {
+    const temp: Answer[] = [];
+    for (let i = 1; i <= nbrAnswers; i++) {
+      temp.push({
+        index: i,
+        content: 'The Last Answer" is a science-fiction short story by American writer Isaac Asimov.',
+        duration: Math.floor(Math.random()),
+        nbrLikes: Math.floor(Math.random()),
+      });
+    }
+    this.answers = temp;
+    this.storage.store('answers', this.answers);
+    return temp;
+  }
+
   // Special List
   initDeleted() {
     const deletedData = this.storage.retrieve('deleted');
