@@ -12,6 +12,7 @@ import { DataService } from 'src/app/data.service';
 export class StartComponent implements OnInit {
 
   course: Course;
+  pdfLink: string;
 
   constructor(
     private data: DataService,
@@ -28,7 +29,8 @@ export class StartComponent implements OnInit {
     this.data.updateUserType('professor');
   }
 
-  onStart() {
+  onStart(link) {
+    this.storage.store('pdfLink', link);
     this.router.navigateByUrl('/professor');
   }
 
