@@ -4,7 +4,7 @@
     <div class="center">
       <br />
       <!-- Profile Image -->
-      <div class="profile-img">
+      <div class="profile-img" ngbTooltip="View my profile">
         <img routerLink="/profile" src="assets/blueuser.png" alt="">
       </div>
       <!-- END Profile Image -->
@@ -19,7 +19,8 @@
       <div class="course-menu">
         <ul>
           <!-- Courses -->
-          <li *ngFor="let course of courses; let i = index" (mouseover)="onCourseHoever(i)" (mouseout)="onCourseOut()"  (click)="onCourseClick(course, i)" [class.active]="i == selectedIndex">{{course.name}}</li>
+          <li *ngFor="let course of courses; let i = index" (mouseover)="onCourseHoever(i)" (click)="onCourseClick(course, i)"
+            [class.active]="i == selectedIndex">{{course.name}}</li>
         </ul>
 
         <!-- Add Button -->
