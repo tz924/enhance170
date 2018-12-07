@@ -12,7 +12,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-8" id="left">
+      <div class="col-8" id="left">
 
         <div id="custom-search-input">
           <div class="col-11" id="streatch">
@@ -43,16 +43,17 @@
 
           <!-- Question Item -->
           <div *ngFor="let question of questions | filter: searchText" class="row question question-item">
+
             <!-- Question -->
-            <div class="col-md-10">
+            <div class="col-10">
 
               <!-- Content -->
               <div class="row">
-                <div class="col-md-2">
+                <div class="col-2">
                   <span class="question-index" *ngIf="question.index < 10">Q0{{question.index}}</span>
                   <span class="question-index" *ngIf="question.index >= 10">Q{{question.index}}</span>
                 </div>
-                <div class="col-md-10">
+                <div class="col-10">
                   <p class="truncate-question question-content">{{question.content}}</p>
                 </div>
               </div>
@@ -60,7 +61,7 @@
               <!-- Status -->
               <div class="row">
                 <!-- Duration -->
-                <div class="col-md-2 question-duration">
+                <div class="col-2 question-duration">
                   <p *ngIf="question.duration <= 1" class="truncate" ngbTooltip="{{question.duration}} minute ago">
                     <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>Now
                   </p>
@@ -71,13 +72,13 @@
                 </div>
 
                 <!-- Answers -->
-                <div class="col-md-2" ngbTooltip="View all {{question.nbrAnswers}} answers">
+                <div class="col-2" ngbTooltip="View all {{question.nbrAnswers}} answers">
                   <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate" (click)="openAModal(aModal, question.nbrAnswers)"></fa-icon>
-                  {{question.nbrAnswers}}
+                  <!-- {{question.nbrAnswers}} -->
                 </div>
 
                 <!-- Likes -->
-                <div class="col-md-2" ngbTooltip="Upvote">
+                <div class="col-2 question-like" ngbTooltip="Upvote">
                   <span class="truncate" (click)="onLikeClick(question)">
                     <fa-icon [icon]="['fas', 'thumbs-up']" size="lg" class="truncate"></fa-icon>
                     {{question.nbrLikes}}
@@ -88,7 +89,7 @@
             </div>
 
             <!-- Vertical check/delete -->
-            <div class="col-md-2">
+            <div class="col-2">
 
               <!-- Check Button -->
               <div class="row">
@@ -114,15 +115,15 @@
           <div *ngFor="let question of checked | filter: searchText" class="row question question-item">
 
             <!-- Question -->
-            <div class="col-md-10">
+            <div class="col-10">
 
               <!-- Content -->
               <div class="row">
-                <div class="col-md-2">
+                <div class="col-2">
                   <span class="question-index" *ngIf="question.index < 10">Q0{{question.index}}</span>
                   <span class="question-index" *ngIf="question.index >= 10">Q{{question.index}}</span>
                 </div>
-                <div class="col-md-10">
+                <div class="col-10">
                   <p class="truncate-question question-content">{{question.content}}</p>
                 </div>
               </div>
@@ -130,7 +131,7 @@
               <!-- Status -->
               <div class="row">
                 <!-- Duration -->
-                <div class="col-md-2 question-duration">
+                <div class="col-2 question-duration">
                   <p *ngIf="question.duration <= 1" class="truncate">
                     <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>Now
 
@@ -140,14 +141,14 @@
                 </div>
 
                 <!-- Answers -->
-                <div class="col-md-2">
+                <div class="col-2">
                   <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate" (click)="openAModal(aModal, question.nbrAnswers)"
                     ngbTooltip="View all {{question.nbrAnswers}} answers"></fa-icon>
                   {{question.nbrAnswers}}
                 </div>
 
                 <!-- Likes -->
-                <div class="col-md-2">
+                <div class="col-2">
                   <span class="truncate like">
                     <fa-icon [icon]="['fas', 'thumbs-up']" size="lg"></fa-icon>
                     {{question.nbrLikes}}
@@ -165,15 +166,15 @@
           <div *ngFor="let question of deleted | filter: searchText" class="row question question-item">
 
             <!-- Question -->
-            <div class="col-md-10">
+            <div class="col-10">
 
               <!-- Content -->
               <div class="row">
-                <div class="col-md-2">
+                <div class="col-2">
                   <span class="default-button question-index" *ngIf="question.index < 10">Q0{{question.index}}</span>
                   <span class="default-button question-index" *ngIf="question.index >= 10">Q{{question.index}}</span>
                 </div>
-                <div class="col-md-10">
+                <div class="col-10">
                   <p class="truncate-question question-content">{{question.content}}</p>
                 </div>
               </div>
@@ -181,7 +182,7 @@
               <!-- Status -->
               <div class="row">
                 <!-- Duration -->
-                <div class="col-md-2 question-duration">
+                <div class="col-2 question-duration">
                   <p *ngIf="question.duration <= 1" class="truncate">
                     <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>Now
 
@@ -191,14 +192,14 @@
                 </div>
 
                 <!-- Answers -->
-                <div class="col-md-2">
+                <div class="col-2">
                   <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate" (click)="openAModal(aModal, question.nbrAnswers)"
                     ngbTooltip="View all {{question.nbrAnswers}} answers"></fa-icon>
                   {{question.nbrAnswers}}
                 </div>
 
                 <!-- Likes -->
-                <div class="col-md-2">
+                <div class="col-2">
                   <span class="truncate like">
                     <fa-icon [icon]="['fas', 'thumbs-up']" size="lg"></fa-icon>
                     {{question.nbrLikes}}
@@ -222,7 +223,7 @@
         </div>
 
         <!-- Question View-->
-        <!-- <div class="col-md-1" id="back-view" class="default-button">
+        <!-- <div class="col-1" id="back-view" class="default-button">
                     <button (click)="showNormalQuestions()">Default</button>
                   </div> -->
 
@@ -309,18 +310,27 @@
   <div class="modal-body" id="answer-modal">
 
     <div *ngFor="let answer of answers" class="row answer-item">
-      <div class="col-md-2">
+      <div class="col-1">
         <span *ngIf="answer.index < 10">A0{{answer.index}}</span>
         <span *ngIf="answer.index >= 10">A{{answer.index}}</span>
       </div>
-      <div class="col-md-10">
+      <div class="col-9">
         <p class="truncate-question answer-content">{{answer.content}}</p>
       </div>
+
+      <!-- Likes -->
+      <div class="col-2 answer-like" ngbTooltip="Upvote">
+        <span class="truncate" (click)="onAnswerLikeClick(answer)">
+          <fa-icon [icon]="['fas', 'thumbs-up']" size="lg" class="truncate"></fa-icon>
+          {{answer.nbrLikes}}
+        </span>
+      </div>
+
     </div>
 
     <form (ngSubmit)="onAnswerSubmit(answerContent.value)" class="form-inline" id="answer-form">
 
-      <textarea class="form-control" [formControl]="answerContent" name="answerContent" placeholder="Question"></textarea>
+      <textarea class="form-control" [formControl]="answerContent" name="answerContent" placeholder="Your answer here"></textarea>
 
       <!-- Submit Button -->
       <button type="submit" class="btn btn-success">

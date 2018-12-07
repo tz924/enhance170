@@ -19,7 +19,7 @@
       <div class="course-menu">
         <ul>
           <!-- Courses -->
-          <li *ngFor="let course of courses; let i = index" (mouseover)="onCourseHover(i)" (mouseout)="onCourseOut()"  (click)="onCourseClick(course, i)" [class.active]="i == selectedIndex">{{course.name}}</li>
+          <li *ngFor="let course of courses; let i = index" (click)="onCourseClick(course, i)" [class.active]="i == selectedIndex">{{course.name}}</li>
         </ul>
 
         <!-- Add Button -->

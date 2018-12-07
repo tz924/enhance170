@@ -53,6 +53,7 @@ export class ProfessorComponent implements OnInit {
   showDeleted: boolean;
   questionState: string;
   pdfSource: string;
+  deleting: boolean;
 
   constructor(
     private feedbackService: FeedbackService,
@@ -61,7 +62,13 @@ export class ProfessorComponent implements OnInit {
   ) {
     this.feedbackService.questionSubmitted.subscribe(
       (question: string) => {
-        this.onNewQuestion();
+
+        if (!this.deleting) {
+          this.onNewQuestion();
+        } else {
+          this.deleting = false;
+        }
+
         this.questions.push({
           index: this.questions.length,
           content: question,
@@ -82,9 +89,11 @@ export class ProfessorComponent implements OnInit {
     this.showDeleted = false;
     this.questionState = 'move';
 
-    const link = this.storage.retrieve('pdfLink');
-    console.log(link);
-    this.pdfSource = link || 'assets/test.pdf';
+    if (this.storage.retrieve('pdfLink')) {
+      this.pdfSource = this.storage.retrieve('pdfLink');
+    } else {
+      this.pdfSource = 'assets/test.pdf';
+    }
 
     this.lecture = this.data.initLecture();
     this.currentCourse = this.data.initCurrentCourse();
@@ -95,7 +104,11 @@ export class ProfessorComponent implements OnInit {
     // Update local storage on Change
     this.storage.observe('questions').subscribe(e => {
       this.questions = this.storage.retrieve('questions');
-      this.onNewQuestion();
+      if (!this.deleting) {
+        this.onNewQuestion();
+      } else {
+        this.deleting = false;
+      }
     });
 
     this.storage.observe('deleted').subscribe(e => {
@@ -122,13 +135,13 @@ export class ProfessorComponent implements OnInit {
 
   deleteQuestion(index: number) {
     let question: Question;
+    this.deleting = true;
     for (let i = 0; i < this.questions.length; i++) {
       if (this.questions[i].index === index) {
         question = this.questions.splice(i, 1)[0];
         this.data.updateQuestions(this.questions);
       }
     }
-
     this.deleted.push(question);
     this.data.updateDeleted(this.deleted);
   }

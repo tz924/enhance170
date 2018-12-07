@@ -1,205 +1,214 @@
 <app-navigation></app-navigation>
 
-<div class="container">
+<app-sidebar>
+  <div class="container">
 
-  <h1>Questions</h1>
-  <div class="row">
-    <div class="col-md-8" id="left">
-
-      <div id="custom-search-input">
-        <div class="col-11" id="streatch">
-
-          <!-- Search Box -->
-          <input [(ngModel)]="searchText" type="text" class="search-query form-control" placeholder="Search Term" />
-
-          <span class="input-group-btn">
-            <button class="btn btn-danger" type="button">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-          </span>
-        </div>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-3">
+        <p class="class-title">{{course.name}} : {{course.size}} students</p>
       </div>
+      <h1>Questions</h1>
+    </div>
 
-      <!-- Question Button -->
-      <div class="inline">
-        <button type="button" class="btn btn-primary" (click)="openQModal(qModal)">
-          <img id="reduced" src="assets/post.png">
-        </button>
+    <div class="row">
+      <div class="col-8" id="left">
+
+        <div id="custom-search-input">
+          <div class="col-11" id="streatch">
+
+            <!-- Search Box -->
+            <input [(ngModel)]="searchText" type="text" class="search-query form-control" placeholder="Search Term" />
+
+            <span class="input-group-btn">
+              <button class="btn btn-danger" type="button">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
+
+          </div>
+        </div>
+
       </div>
 
     </div>
 
-  </div>
+    <!-- Questions -->
+    <div id="moveTo">
 
-  <!-- Questions -->
-  <div id="moveTo">
+      <div id="questions">
 
-    <div id="questions">
+        <!-- Question List -->
+        <div *ngIf="showQuestions" class="row">
 
-      <!-- Question List -->
-      <div *ngIf="showQuestions" class="row">
+          <!-- Question Item -->
+          <div *ngFor="let question of questions | filter: searchText" class="row question question-item">
+            <!-- Question -->
+            <div class="col-10">
 
-        <!-- Question Item -->
-        <div *ngFor="let question of questions | slice:0:4 | filter: searchText" class="row question question-item">
-          <!-- Question -->
-          <div class="col-md-10">
-
-            <!-- Content -->
-            <div class="row">
-              <div class="col-md-2">
-                <button class="default-button question-index" *ngIf="question.index < 10">Q0{{question.index}}</button>
-                <button class="default-button question-index" *ngIf="question.index >= 10">Q{{question.index}}</button>
+              <!-- Content -->
+              <div class="row">
+                <div class="col-2">
+                  <span class="question-index" *ngIf="question.index < 10">Q0{{question.index}}</span>
+                  <span class="question-index" *ngIf="question.index >= 10">Q{{question.index}}</span>
+                </div>
+                <div class="col-10">
+                  <p class="truncate-question question-content">{{question.content}}</p>
+                </div>
               </div>
-              <div class="col-md-10">
-                <p class="truncate-question question-content">{{question.content}}</p>
+
+              <!-- Status -->
+              <div class="row">
+                <!-- Duration -->
+                <div class="col-2 question-duration">
+                  <p *ngIf="question.duration <= 1" class="truncate" ngbTooltip="{{question.duration}} minute ago">
+                    <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>Now
+                  </p>
+
+                  <p *ngIf="question.duration > 1" class="truncate" ngbTooltip="{{question.duration}} minutes ago">
+                    <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>{{question.duration}}min
+                  </p>
+                </div>
+
+                <!-- Answers -->
+                <div class="col-2" ngbTooltip="View all {{question.nbrAnswers}} answers">
+                  <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate" (click)="openAModal(aModal, question.nbrAnswers)"></fa-icon>
+                  <!-- {{question.nbrAnswers}} -->
+                </div>
+
+                <!-- Likes -->
+                <div class="col-2 question-like" ngbTooltip="Upvote">
+                  <span class="truncate" (click)="onLikeClick(question)">
+                    <fa-icon [icon]="['fas', 'thumbs-up']" size="lg" class="truncate"></fa-icon>
+                    {{question.nbrLikes}}
+                  </span>
+                </div>
+
               </div>
             </div>
 
-            <!-- Status -->
-            <div class="row">
-              <!-- Duration -->
-              <div class="col-md-2 question-duration">
-                <p *ngIf="question.duration <= 1" class="truncate">
-                  <img src="assets/clock.png" width="25" height="25" alt="clock">Now
+            <!-- Vertical check/delete -->
+            <div class="col-2">
 
-                  <p *ngIf="question.duration > 1" class="truncate">
-                    <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
+              <!-- Check Button -->
+              <div class="row">
+                <fa-icon [icon]="['fas', 'check']" size="2x" (click)="checkQuestion(question.index)" ngbTooltip="Checkoff Question {{question.index}}"
+                  class="check-icon"></fa-icon>
               </div>
 
-              <!-- Answers -->
-              <div class="col-md-2">
-                <button (click)="openAModal(aModal)" class="truncate default-button" id="answer-button">
-                  <img src="assets/answer.png" width="20" height="20" alt="answer">
+              <!-- Delete Button -->
+              <div class="row">
+                <fa-icon [icon]="['far', 'trash-alt']" size="2x" (click)="deleteQuestion(question.index,dModal)"
+                  ngbTooltip="Delete Question {{question.index}}" class="delete-icon"></fa-icon>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Checked List -->
+        <div *ngIf="showChecked" class="row">
+
+          <!-- Question Item -->
+          <div *ngFor="let question of checked | filter: searchText" class="row question question-item">
+
+            <!-- Question -->
+            <div class="col-10">
+
+              <!-- Content -->
+              <div class="row">
+                <div class="col-2">
+                  <span class="question-index" *ngIf="question.index < 10">Q0{{question.index}}</span>
+                  <span class="question-index" *ngIf="question.index >= 10">Q{{question.index}}</span>
+                </div>
+                <div class="col-10">
+                  <p class="truncate-question question-content">{{question.content}}</p>
+                </div>
+              </div>
+
+              <!-- Status -->
+              <div class="row">
+                <!-- Duration -->
+                <div class="col-2 question-duration">
+                  <p *ngIf="question.duration <= 1" class="truncate">
+                    <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>Now
+
+                    <p *ngIf="question.duration > 1" class="truncate">
+                      <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>{{question.duration}}min
+                    </p>
+                </div>
+
+                <!-- Answers -->
+                <div class="col-2">
+                  <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate" (click)="openAModal(aModal, question.nbrAnswers)"
+                    ngbTooltip="View all {{question.nbrAnswers}} answers"></fa-icon>
                   {{question.nbrAnswers}}
-                </button>
+                </div>
+
+                <!-- Likes -->
+                <div class="col-2">
+                  <span class="truncate like">
+                    <fa-icon [icon]="['fas', 'thumbs-up']" size="lg"></fa-icon>
+                    {{question.nbrLikes}}
+                  </span>
+                </div>
               </div>
-
-              <!-- Likes -->
-              <div class="col-md-2">
-                <p class="truncate" (click)="onLikeClick(question)">
-                  <img src="assets/thumbup.png" width="20" height="20" alt="likes">
-                  {{question.nbrLikes}}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Vertical check/delete -->
-          <div class="col-md-2">
-
-            <!-- Check Button -->
-            <div class="row" id="check">
-              <button class="default-button" (click)="checkQuestion(question.index)">
-                <img src="assets/checkblack.png" width="30" height="30" alt="check">
-              </button>
-            </div>
-
-            <!-- Delete Button -->
-            <div class="row">
-              <button class="default-button" (click)="deleteQuestion(question.index)">
-                <img src="assets/trashcan.png" width="30" height="30" alt="delete">
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Checked List -->
-      <div *ngIf="showChecked" class="row">
-
-        <!-- Question Item -->
-        <div *ngFor="let question of checked | slice:0:4" class="row question">
-
-          <!-- Question -->
-          <!-- Content -->
-          <div class="row">
-            <div class="col-md-2">
-              <button *ngIf="question.index < 10" class="default-button question-index">Q0{{question.index}}</button>
-              <button *ngIf="question.index >= 10" class="default-button question-index">Q{{question.index}}</button>
-            </div>
-            <div class="col-md-10">
-              <p class="truncate-question">{{question.content}}</p>
-            </div>
-
-          </div>
-
-          <!-- Status -->
-          <div class="row status">
-            <!-- Duration -->
-            <div class="col-md-2">
-              <p *ngIf="question.duration <= 1" class="truncate">
-                <img src="assets/clock.png" width="25" height="25" alt="clock">Now
-
-                <p *ngIf="question.duration > 1" class="truncate">
-                  <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
-            </div>
-
-            <!-- Answers -->
-            <div class="col-md-2">
-              <p class="truncate">
-                <img src="assets/answer.png" width="20" height="20" alt="answer">
-                {{question.nbrAnswers}}
-              </p>
-            </div>
-
-            <!-- Likes -->
-            <div class="col-md-2">
-              <p class="truncate" (click)="onLikeClick(question)">
-                <img src="assets/thumbup.png" width="20" height="20" alt="likes">
-                {{question.nbrLikes}}
-              </p>
             </div>
           </div>
         </div>
 
-      </div>
+        <!-- Deleted List -->
+        <div *ngIf="showDeleted" class="row">
 
-      <!-- Deleted List -->
-      <div *ngIf="showDeleted" class="row">
+          <!-- Question Item -->
+          <div *ngFor="let question of deleted | filter: searchText" class="row question question-item">
 
-        <!-- Question Item -->
-        <div *ngFor="let question of deleted | slice:0:4" class="row question">
+            <!-- Question -->
+            <div class="col-10">
 
-          <!-- Question -->
-          <!-- Content -->
-          <div class="row">
-            <div class="col-md-2">
-              <button *ngIf="question.index < 10" class="default-button question-index">Q0{{question.index}}</button>
-              <button *ngIf="question.index >= 10" class="default-button question-index">Q{{question.index}}</button>
-            </div>
-            <div class="col-md-10">
-              <p class="truncate-question">{{question.content}}</p>
+              <!-- Content -->
+              <div class="row">
+                <div class="col-2">
+                  <span class="default-button question-index" *ngIf="question.index < 10">Q0{{question.index}}</span>
+                  <span class="default-button question-index" *ngIf="question.index >= 10">Q{{question.index}}</span>
+                </div>
+                <div class="col-10">
+                  <p class="truncate-question question-content">{{question.content}}</p>
+                </div>
+              </div>
+
+              <!-- Status -->
+              <div class="row">
+                <!-- Duration -->
+                <div class="col-2 question-duration">
+                  <p *ngIf="question.duration <= 1" class="truncate">
+                    <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>Now
+
+                    <p *ngIf="question.duration > 1" class="truncate">
+                      <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>{{question.duration}}min
+                    </p>
+                </div>
+
+                <!-- Answers -->
+                <div class="col-2">
+                  <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate" (click)="openAModal(aModal, question.nbrAnswers)"
+                    ngbTooltip="View all {{question.nbrAnswers}} answers"></fa-icon>
+                  {{question.nbrAnswers}}
+                </div>
+
+                <!-- Likes -->
+                <div class="col-2">
+                  <span class="truncate like">
+                    <fa-icon [icon]="['fas', 'thumbs-up']" size="lg"></fa-icon>
+                    {{question.nbrLikes}}
+                  </span>
+                </div>
+              </div>
             </div>
 
           </div>
 
-          <!-- Status -->
-          <div class="row status">
-            <!-- Duration -->
-            <div class="col-md-2">
-              <p *ngIf="question.duration <= 1" class="truncate">
-                <img src="assets/clock.png" width="25" height="25" alt="clock">Now
-
-                <p *ngIf="question.duration > 1" class="truncate">
-                  <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
-            </div>
-
-            <!-- Answers -->
-            <div class="col-md-2">
-              <p class="truncate">
-                <img src="assets/answer.png" width="20" height="20" alt="answer">
-                {{question.nbrAnswers}}
-              </p>
-            </div>
-
-            <!-- Likes -->
-            <div class="col-md-2">
-              <p class="truncate" (click)="onLikeClick(question)">
-                <img src="assets/thumbup.png" width="20" height="20" alt="likes">
-                {{question.nbrLikes}}
-              </p>
-            </div>
-          </div>
         </div>
 
       </div>
@@ -207,30 +216,45 @@
       <!-- Change View -->
       <div class="row" id="change-view">
 
-        <div class="col-md-4">
+        <div class="col-2" id="select-text">
+          <!-- <fa-icon [icon]="['fas', 'thumbsUp']" size="lg"></fa-icon> -->
           <p>Select to View</p>
         </div>
 
-        <div class="col-md-1" id="check-view">
-          <button (click)="showCheckedQuestions()" class="default-button"><img src="assets/checkblack.png" width="30"
-              height="30" alt="check"></button>
-        </div>
-
-        <div class="col-md-1" id="delete-view">
-          <button (click)="showDeletedQuestions()" class="default-button"><img src="assets/trashcan.png" width="30"
-              height="30" alt="delete"></button>
-        </div>
-
-
         <!-- Question View-->
-        <div class="col-md-2" id="back-view" class="default-button">
-          <button (click)="showNormalQuestions()">View All</button>
+        <!-- <div class="col-1" id="back-view" class="default-button">
+                    <button (click)="showNormalQuestions()">Default</button>
+                  </div> -->
+
+        <div class="col-1" id="back-view" class="default-button" ngbTooltip="View all questions">
+          <fa-icon [icon]="['far', 'list-alt']" size="3x" (click)="showNormalQuestions()"></fa-icon>
+        </div>
+
+        <div class=" col-1" id="check-view" ngbTooltip="View checked questions">
+          <fa-icon [icon]="['fas', 'check']" size="3x" (click)="showCheckedQuestions()"></fa-icon>
+        </div>
+
+        <div class="col-1" id="delete-view" ngbTooltip="View deleted questions">
+          <fa-icon [icon]="['far', 'trash-alt']" size="3x" (click)="showDeletedQuestions()"></fa-icon>
+        </div>
+
+        <!-- Sort By Likes -->
+        <div class="col-3" id="back-view">
+          <button class="btn btn-info" (click)="onSortClick()">Sort by Upvotes</button>
+        </div>
+
+        <!-- Question Button -->
+        <div class="col-2" ngbTooltip="Ask a new question">
+          <button type="button" class="btn btn-primary new-question" (click)="openQModal(qModal)">
+            <img id="reduced" src="assets/post.png"> New Question
+          </button>
         </div>
 
       </div>
+
     </div>
   </div>
-</div>
+</app-sidebar>
 
 <!-- Question Modal -->
 <ng-template #qModal let-modal>
@@ -263,6 +287,7 @@
           Submit
         </button>
       </div>
+
     </form>
 
   </div>
@@ -281,21 +306,32 @@
     </button>
   </div>
 
-  <div class="modal-body" id="question-modal">
+  <div class="modal-body" id="answer-modal">
 
-    <div *ngFor="let answer of answers | slice:0:4" class="row answer-item">
-      <div class="col-md-2">
-        <button class="default-button" *ngIf="answer.index < 10">A0{{answer.index}}</button>
-        <button class="default-button" *ngIf="answer.index >= 10">A{{answer.index}}</button>
+    <div *ngFor="let answer of answers" class="row answer-item">
+      <div class="col-1">
+        <span *ngIf="answer.index < 10">A0{{answer.index}}</span>
+        <span *ngIf="answer.index >= 10">A{{answer.index}}</span>
       </div>
-      <div class="col-md-10">
+      <div class="col-9">
         <p class="truncate-question answer-content">{{answer.content}}</p>
       </div>
+
+      <!-- Likes -->
+      <div class="col-2 answer-like" ngbTooltip="Upvote">
+        <span class="truncate" (click)="onAnswerLikeClick(answer)">
+          <fa-icon [icon]="['fas', 'thumbs-up']" size="lg" class="truncate"></fa-icon>
+          {{answer.nbrLikes}}
+        </span>
+      </div>
+
     </div>
+
+
 
     <form (ngSubmit)="onAnswerSubmit(answerContent.value)" class="form-inline" id="answer-form">
 
-      <textarea class="form-control" [formControl]="answerContent" name="answerContent" placeholder="Question"></textarea>
+      <textarea class="form-control" [formControl]="answerContent" name="answerContent" placeholder="Your answer here"></textarea>
 
       <!-- Submit Button -->
       <button type="submit" class="btn btn-success">
@@ -307,5 +343,28 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+
+<!-- Delete Modal -->
+<ng-template #dModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Question {{currentDelete}} Deletion</h4>
+    <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <p><strong>Are you sure you want to delete this question?</strong></p>
+    <p>All information associated to this question will be permanently deleted.
+      <span class="text-danger">This operation can not be undone.</span>
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="deleteQuestionConfirm(dModal)">Ok</button>
   </div>
 </ng-template>

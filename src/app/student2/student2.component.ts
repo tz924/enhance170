@@ -205,6 +205,10 @@ export class Student2Component implements OnInit {
     this.questionModal.close();
   }
 
+  onAnswerLikeClick(answer: Answer) {
+    answer.nbrLikes++;
+  }
+
   onAnswerSubmit(answerContent: string) {
     this.answers.push({
       index: this.answers.length + 1,

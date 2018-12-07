@@ -264,8 +264,8 @@ hr {
 
 .question-index {
   background: #f0ad4e;
-  color: black; 
-  font-weight: bold; 
+  color: black;
+  font-weight: bold;
 }
 
 #modal-list .question-item {
@@ -312,4 +312,15 @@ hr {
 .new-question {
   font-size: 18px;
   font-weight: bolder;
+}
+
+.answer-like {
+  padding-top: 12px;
+}
+
+.question-like fa-icon:hover,
+.answer-like fa-icon:hover {
+  color: green;
+  text-shadow: 1px 1px 1px #ccc;
+  opacity: 50%;
 }

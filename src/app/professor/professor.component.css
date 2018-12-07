@@ -66,12 +66,17 @@
   display: block;
 }
 
+#hand-div:hover img {
+  opacity: 0.6;
+}
+
 #hand-div button {
   margin: auto;
   display: block;
 }
 
 #questions {
+  position: relative;
   padding: 0;
   margin-left: 2vw;
   margin-right: -2vw;
@@ -135,7 +140,7 @@ input {
 
 #done {
   background: green;
-  margin: 30px;
+  margin: 2vh;
   min-height: 50px;
   min-width: 75px;
 }
@@ -169,4 +174,13 @@ pdf-viewer {
 .container {
   height: 100%;
   max-height: 100vh;
+}
+
+.question-content:hover {
+  background: lightgray;
+}
+
+.questions-containter {
+  height: 55vh;
+  overflow-y: scroll;
 }

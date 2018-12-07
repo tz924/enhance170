@@ -51,87 +51,79 @@
       </div><!-- End Hand -->
 
       <!-- Question List -->
-      <div *ngIf="showQs" class="row">
+      <div *ngIf="showQs" class="row questions-containter">
 
         <!-- Question Item -->
-        <div *ngFor="let question of questions | slice:0:4" class="row question" (click)="onQuestionClick()">
+        <div *ngFor="let question of questions" class="row question" (click)="onQuestionClick()">
 
           <!-- Question -->
           <div class="col-10">
 
-            <!-- Content Row -->
-            <div class="row question-content">
-
-              <div class="col-2 content-index">
-                <button *ngIf="question.index < 10" class="question-index">Q0{{question.index}}</button>
-                <button *ngIf="question.index >= 10" class="question-index">Q{{question.index}}</button>
+            <!-- Content -->
+            <div class="row">
+              <div class="col-2">
+                <span class="question-index" *ngIf="question.index < 10">Q0{{question.index}}</span>
+                <span class="question-index" *ngIf="question.index >= 10">Q{{question.index}}</span>
               </div>
-
-              <div class="col-10 content-box">
-                <button type="button" class="btn btn-outline-secondary truncate" placement="left" [ngbPopover]="question.content"
-                  popoverTitle="Question {{question.index}}">{{question.content}}</button>
+              <div class="col-10 question-content" [ngbPopover]="question.content" popoverTitle="Question {{question.index}}"
+                data-container="body" placement="left">
+                <p class="truncate-question question-content">{{question.content}}</p>
               </div>
-
-            </div><!-- End Content Row -->
+            </div>
 
             <!-- Status -->
             <div class="row">
-
               <!-- Duration -->
-              <div class="col-4">
-                <p *ngIf="question.duration <= 1" class="truncate">
-                  <img src="assets/clock.png" width="25" height="25" alt="clock">Now
+              <div class="col-4 question-duration">
+                <p *ngIf="question.duration <= 1" class="truncate" ngbTooltip="{{question.duration}} minute ago">
+                  <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>Now
+                </p>
 
-                  <p *ngIf="question.duration > 1" class="truncate">
-                    <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
+                <p *ngIf="question.duration > 1" class="truncate" ngbTooltip="{{question.duration}} minutes ago">
+                  <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>{{question.duration}}min
+                </p>
               </div>
 
               <!-- Answers -->
-              <div class="col-4">
-                <p class="truncate">
-                  <img src="assets/answer.png" width="20" height="20" alt="answer">
-                  {{question.nbrAnswers}}
-                </p>
+              <div class="col-4" ngbTooltip="{{question.nbrAnswers}} answers">
+                <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate"></fa-icon>
+                <!-- {{question.nbrAnswers}} -->
               </div>
 
               <!-- Likes -->
-              <div class="col-4">
-                <p class="truncate" (click)="onLikeClick(question)">
-                  <img src="assets/thumbup.png" width="20" height="20" alt="likes">
+              <div class="col-4 question-like" ngbTooltip="Upvote">
+                <span class="truncate" (click)="onLikeClick(question)">
+                  <fa-icon [icon]="['fas', 'thumbs-up']" size="lg" class="truncate"></fa-icon>
                   {{question.nbrLikes}}
-                </p>
+                </span>
               </div>
 
-            </div><!-- End Status Row -->
-
-            <hr>
+            </div>
           </div>
 
           <!-- Vertical check/delete -->
           <div class="col-2">
 
             <!-- Check Button -->
-            <div class="row" id="check">
-              <button (click)="checkQuestion(question.index)">
-                <img src="assets/checkblack.png" width="30" height="30" alt="check">
-              </button>
+            <div class="row">
+              <fa-icon [icon]="['fas', 'check']" size="2x" (click)="checkQuestion(question.index)" ngbTooltip="Checkoff Question {{question.index}}"
+                class="check-icon"></fa-icon>
             </div>
 
             <!-- Delete Button -->
             <div class="row">
-              <button (click)="deleteQuestion(question.index)">
-                <img src="assets/trashcan.png" width="30" height="30" alt="delete">
-              </button>
+              <fa-icon [icon]="['far', 'trash-alt']" size="2x" (click)="deleteQuestion(question.index)" ngbTooltip="Delete Question {{question.index}}"
+                class="delete-icon"></fa-icon>
             </div>
 
           </div>
 
         </div>
 
-        <!-- More -->
+        <!-- More
         <div class="row mx-auto">
           <button id="more" (click)="onMoreClick()">More</button>
-        </div>
+        </div> -->
 
       </div><!-- End Question List -->
 
@@ -144,50 +136,46 @@
           <!-- Question -->
           <div class="col-11">
 
-            <!-- Content Row -->
-            <div class="row question-content">
-
-              <div class="col-2 content-index">
-                <button *ngIf="question.index < 10" class="question-index">Q0{{question.index}}</button>
-                <button *ngIf="question.index >= 10" class="question-index">Q{{question.index}}</button>
+            <!-- Content -->
+            <div class="row">
+              <div class="col-2">
+                <span class="question-index" *ngIf="question.index < 10">Q0{{question.index}}</span>
+                <span class="question-index" *ngIf="question.index >= 10">Q{{question.index}}</span>
               </div>
-
-              <div class="col-10 content-box">
-                <button type="button" class="btn btn-outline-secondary truncate" placement="left" [ngbPopover]="question.content"
-                  popoverTitle="Question {{question.index}}">{{question.content}}</button>
+              <div class="col-10 question-content" [ngbPopover]="question.content" popoverTitle="Question {{question.index}}"
+                placement="left">
+                <p class="truncate-question question-content">{{question.content}}</p>
               </div>
-
-            </div><!-- End Content Row -->
+            </div>
 
             <!-- Status -->
             <div class="row">
-
               <!-- Duration -->
-              <div class="col-4">
-                <p *ngIf="question.duration <= 1" class="truncate">
-                  <img src="assets/clock.png" width="25" height="25" alt="clock">Now
+              <div class="col-4 question-duration">
+                <p *ngIf="question.duration <= 1" class="truncate" ngbTooltip="{{question.duration}} minute ago">
+                  <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>Now
+                </p>
 
-                  <p *ngIf="question.duration > 1" class="truncate">
-                    <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
+                <p *ngIf="question.duration > 1" class="truncate" ngbTooltip="{{question.duration}} minutes ago">
+                  <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>{{question.duration}}min
+                </p>
               </div>
 
               <!-- Answers -->
-              <div class="col-4">
-                <p class="truncate">
-                  <img src="assets/answer.png" width="20" height="20" alt="answer">
-                  {{question.nbrAnswers}}
-                </p>
+              <div class="col-4" ngbTooltip="{{question.nbrAnswers}} answers">
+                <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate"></fa-icon>
+                <!-- {{question.nbrAnswers}} -->
               </div>
 
               <!-- Likes -->
-              <div class="col-4">
-                <p class="truncate" (click)="onLikeClick(question)">
-                  <img src="assets/thumbup.png" width="20" height="20" alt="likes">
+              <div class="col-4 question-like" ngbTooltip="Upvote">
+                <span class="truncate" (click)="onLikeClick(question)">
+                  <fa-icon [icon]="['fas', 'thumbs-up']" size="lg" class="truncate"></fa-icon>
                   {{question.nbrLikes}}
-                </p>
+                </span>
               </div>
 
-            </div><!-- End Status Row -->
+            </div>
 
             <hr>
           </div>
@@ -205,50 +193,46 @@
           <!-- Question -->
           <div class="col-11">
 
-            <!-- Content Row -->
-            <div class="row question-content">
-
-              <div class="col-2 content-index">
-                <button *ngIf="question.index < 10" class="question-index">Q0{{question.index}}</button>
-                <button *ngIf="question.index >= 10" class="question-index">Q{{question.index}}</button>
+            <!-- Content -->
+            <div class="row">
+              <div class="col-2">
+                <span class="question-index" *ngIf="question.index < 10">Q0{{question.index}}</span>
+                <span class="question-index" *ngIf="question.index >= 10">Q{{question.index}}</span>
               </div>
-
-              <div class="col-10 content-box">
-                <button type="button" class="btn btn-outline-secondary truncate" placement="left" [ngbPopover]="question.content"
-                  popoverTitle="Question {{question.index}}">{{question.content}}</button>
+              <div class="col-10 question-content" [ngbPopover]="question.content" popoverTitle="Question {{question.index}}"
+                popoverClass="my-custom-class" placement="left">
+                <p class="truncate-question question-content">{{question.content}}</p>
               </div>
-
-            </div><!-- End Content Row -->
+            </div>
 
             <!-- Status -->
             <div class="row">
-
               <!-- Duration -->
-              <div class="col-4">
-                <p *ngIf="question.duration <= 1" class="truncate">
-                  <img src="assets/clock.png" width="25" height="25" alt="clock">Now
+              <div class="col-4 question-duration">
+                <p *ngIf="question.duration <= 1" class="truncate" ngbTooltip="{{question.duration}} minute ago">
+                  <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>Now
+                </p>
 
-                  <p *ngIf="question.duration > 1" class="truncate">
-                    <img src="assets/clock.png" width="25" height="25" alt="clock">{{question.duration}}</p>
+                <p *ngIf="question.duration > 1" class="truncate" ngbTooltip="{{question.duration}} minutes ago">
+                  <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>{{question.duration}}min
+                </p>
               </div>
 
               <!-- Answers -->
-              <div class="col-4">
-                <p class="truncate">
-                  <img src="assets/answer.png" width="20" height="20" alt="answer">
-                  {{question.nbrAnswers}}
-                </p>
+              <div class="col-4" ngbTooltip="{{question.nbrAnswers}} answers">
+                <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate"></fa-icon>
+                <!-- {{question.nbrAnswers}} -->
               </div>
 
               <!-- Likes -->
-              <div class="col-4">
-                <p class="truncate" (click)="onLikeClick(question)">
-                  <img src="assets/thumbup.png" width="20" height="20" alt="likes">
+              <div class="col-4 question-like" ngbTooltip="Upvote">
+                <span class="truncate" (click)="onLikeClick(question)">
+                  <fa-icon [icon]="['fas', 'thumbs-up']" size="lg" class="truncate"></fa-icon>
                   {{question.nbrLikes}}
-                </p>
+                </span>
               </div>
 
-            </div><!-- End Status Row -->
+            </div>
 
             <hr>
           </div>
@@ -265,18 +249,19 @@
           <p>Select View</p>
         </div>
 
-        <div class="col-2" id="check-view">
-          <button (click)="showCheckedQuestions()"><img src="assets/checkblack.png" width="30" height="30" alt="check"></button>
-        </div>
-
-        <div class="col-2" id="delete-view">
-          <button (click)="showDeletedQuestions()"><img src="assets/trashcan.png" width="30" height="30" alt="delete"></button>
-        </div>
-
         <!-- Question View-->
-        <div class="col-2" id="back-view">
-          <button (click)="showQuestions()">View All</button>
+        <div class="col-3" id="back-view" class="default-button" ngbTooltip="View all questions">
+          <fa-icon [icon]="['far', 'list-alt']" size="3x" (click)="showQuestions()"></fa-icon>
         </div>
+
+        <div class=" col-3" id="check-view" ngbTooltip="View checked questions">
+          <fa-icon [icon]="['fas', 'check']" size="3x" (click)="showCheckedQuestions()"></fa-icon>
+        </div>
+
+        <div class="col-3" id="delete-view" ngbTooltip="View deleted questions">
+          <fa-icon [icon]="['far', 'trash-alt']" size="3x" (click)="showDeletedQuestions()"></fa-icon>
+        </div>
+
       </div><!-- End Change View -->
 
     </div><!-- End Questions -->
