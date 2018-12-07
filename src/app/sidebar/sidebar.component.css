@@ -23,7 +23,7 @@
 
 .title {
   margin-top: 20px;
-  color: #5a7391;
+  color: #3d5674;
   font-size: 28px;
   font-weight: 600;
   margin-bottom: 7px;
@@ -54,7 +54,7 @@
 }
 
 .course-menu ul li:hover {
-  background-color: #00B0FF;
+  background-color: rgb(71, 140, 175);
   color: white;
   cursor: pointer;
 }

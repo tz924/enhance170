@@ -140,3 +140,8 @@
   margin-top: 15px;
   height: 30px;
 }
+
+.button {
+  padding: 40px;
+  align-content: center; 
+}
