@@ -75,23 +75,23 @@
             <div class="row">
               <!-- Duration -->
               <div class="col-4 question-duration">
-                <p *ngIf="question.duration <= 1" class="truncate" ngbTooltip="{{question.duration}} minute ago">
+                <p *ngIf="question.duration <= 1" class="truncate" data-container="body" ngbTooltip="{{question.duration}} minute ago">
                   <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>Now
                 </p>
 
-                <p *ngIf="question.duration > 1" class="truncate" ngbTooltip="{{question.duration}} minutes ago">
+                <p *ngIf="question.duration > 1" class="truncate" data-container="body" ngbTooltip="{{question.duration}} minutes ago">
                   <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>{{question.duration}}min
                 </p>
               </div>
 
               <!-- Answers -->
-              <div class="col-4" ngbTooltip="{{question.nbrAnswers}} answers">
+              <div class="col-4" data-container="body" ngbTooltip="{{question.nbrAnswers}} answers">
                 <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate"></fa-icon>
                 <!-- {{question.nbrAnswers}} -->
               </div>
 
               <!-- Likes -->
-              <div class="col-4 question-like" ngbTooltip="Upvote">
+              <div class="col-4 question-like" data-container="body" ngbTooltip="Upvote">
                 <span class="truncate" (click)="onLikeClick(question)">
                   <fa-icon [icon]="['fas', 'thumbs-up']" size="lg" class="truncate"></fa-icon>
                   {{question.nbrLikes}}
@@ -106,13 +106,13 @@
 
             <!-- Check Button -->
             <div class="row">
-              <fa-icon [icon]="['fas', 'check']" size="2x" (click)="checkQuestion(question.index)" ngbTooltip="Checkoff Question {{question.index}}"
+              <fa-icon [icon]="['fas', 'check']" size="2x" (click)="checkQuestion(question.index)" data-container="body" ngbTooltip="Checkoff Question {{question.index}}"
                 class="check-icon"></fa-icon>
             </div>
 
             <!-- Delete Button -->
             <div class="row">
-              <fa-icon [icon]="['far', 'trash-alt']" size="2x" (click)="deleteQuestion(question.index)" ngbTooltip="Delete Question {{question.index}}"
+              <fa-icon [icon]="['far', 'trash-alt']" size="2x" (click)="deleteQuestion(question.index)" data-container="body"ngbTooltip="Delete Question {{question.index}}"
                 class="delete-icon"></fa-icon>
             </div>
 
@@ -152,23 +152,23 @@
             <div class="row">
               <!-- Duration -->
               <div class="col-4 question-duration">
-                <p *ngIf="question.duration <= 1" class="truncate" ngbTooltip="{{question.duration}} minute ago">
+                <p *ngIf="question.duration <= 1" class="truncate" data-container="body"ngbTooltip="{{question.duration}} minute ago">
                   <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>Now
                 </p>
 
-                <p *ngIf="question.duration > 1" class="truncate" ngbTooltip="{{question.duration}} minutes ago">
+                <p *ngIf="question.duration > 1" class="truncate" data-container="body"ngbTooltip="{{question.duration}} minutes ago">
                   <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>{{question.duration}}min
                 </p>
               </div>
 
               <!-- Answers -->
-              <div class="col-4" ngbTooltip="{{question.nbrAnswers}} answers">
+              <div class="col-4" data-container="body"ngbTooltip="{{question.nbrAnswers}} answers">
                 <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate"></fa-icon>
                 <!-- {{question.nbrAnswers}} -->
               </div>
 
               <!-- Likes -->
-              <div class="col-4 question-like" ngbTooltip="Upvote">
+              <div class="col-4 question-like" data-container="body"ngbTooltip="Upvote">
                 <span class="truncate" (click)="onLikeClick(question)">
                   <fa-icon [icon]="['fas', 'thumbs-up']" size="lg" class="truncate"></fa-icon>
                   {{question.nbrLikes}}
@@ -209,23 +209,23 @@
             <div class="row">
               <!-- Duration -->
               <div class="col-4 question-duration">
-                <p *ngIf="question.duration <= 1" class="truncate" ngbTooltip="{{question.duration}} minute ago">
+                <p *ngIf="question.duration <= 1" class="truncate" data-container="body" ngbTooltip="{{question.duration}} minute ago">
                   <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>Now
                 </p>
 
-                <p *ngIf="question.duration > 1" class="truncate" ngbTooltip="{{question.duration}} minutes ago">
+                <p *ngIf="question.duration > 1" class="truncate" data-container="body" ngbTooltip="{{question.duration}} minutes ago">
                   <fa-icon [icon]="['far', 'clock']" size="lg"></fa-icon>{{question.duration}}min
                 </p>
               </div>
 
               <!-- Answers -->
-              <div class="col-4" ngbTooltip="{{question.nbrAnswers}} answers">
+              <div class="col-4" data-container="body" ngbTooltip="{{question.nbrAnswers}} answers">
                 <fa-icon [icon]="['fas', 'comments']" size="lg" class="truncate"></fa-icon>
                 <!-- {{question.nbrAnswers}} -->
               </div>
 
               <!-- Likes -->
-              <div class="col-4 question-like" ngbTooltip="Upvote">
+              <div class="col-4 question-like" data-container="body" ngbTooltip="Upvote">
                 <span class="truncate" (click)="onLikeClick(question)">
                   <fa-icon [icon]="['fas', 'thumbs-up']" size="lg" class="truncate"></fa-icon>
                   {{question.nbrLikes}}
@@ -250,15 +250,15 @@
         </div>
 
         <!-- Question View-->
-        <div class="col-3" id="back-view" class="default-button" ngbTooltip="View all questions">
+        <div class="col-3" id="back-view" class="default-button" data-container="body" ngbTooltip="View all questions">
           <fa-icon [icon]="['far', 'list-alt']" size="3x" (click)="showQuestions()"></fa-icon>
         </div>
 
-        <div class=" col-3" id="check-view" ngbTooltip="View checked questions">
+        <div class=" col-3" id="check-view" data-container="body" ngbTooltip="View checked questions">
           <fa-icon [icon]="['fas', 'check']" size="3x" (click)="showCheckedQuestions()"></fa-icon>
         </div>
 
-        <div class="col-3" id="delete-view" ngbTooltip="View deleted questions">
+        <div class="col-3" id="delete-view" data-container="body" ngbTooltip="View deleted questions">
           <fa-icon [icon]="['far', 'trash-alt']" size="3x" (click)="showDeletedQuestions()"></fa-icon>
         </div>
 

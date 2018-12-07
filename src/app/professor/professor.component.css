@@ -97,7 +97,7 @@
 }
 
 #change-view {
-  margin-top: 50px;
+  margin-top: 5vh;
 }
 
 #back-view button {
@@ -181,6 +181,6 @@ pdf-viewer {
 }
 
 .questions-containter {
-  height: 55vh;
+  height: 60vh;
   overflow-y: scroll;
 }
