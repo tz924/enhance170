@@ -24,7 +24,7 @@ body {
 footer {
   position: relative;
   max-width: 1400px;
-  background-color: teal;
+  background-color: rgb(73, 73, 73);
   color: white;
   text-align: center;
   padding: auto;
